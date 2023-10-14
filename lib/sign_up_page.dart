@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer' as devtools show log;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -6,24 +7,24 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mboacare/register.dart';
 import 'colors.dart';
-import 'dashboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class SignUpPage extends StatefulWidget {
-  const SignUpPage({Key? key});
+  const SignUpPage({super.key});
 
   @override
-  _SignUpPageState createState() => _SignUpPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
 class _SignUpPageState extends State<SignUpPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  TextEditingController _nameController =
+  final TextEditingController _nameController =
       TextEditingController(); // New controller for Name
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   String _registrationStatus = '';
   bool _isPasswordVisible = false;
   bool _isConfirmPasswordVisible = false;
@@ -48,12 +49,12 @@ class _SignUpPageState extends State<SignUpPage> {
           .get();
       if (documentSnapshot.exists) {
         apiKeySG = documentSnapshot.get(fieldName);
-        print(apiKeySG);
+        devtools.log(apiKeySG);
       } else {
-        print('Document not found');
+        devtools.log('Document not found');
       }
     } catch (error) {
-      print('Error fetching data: $error');
+      devtools.log('Error fetching data: $error');
     }
   }
 
@@ -107,9 +108,9 @@ The Mboacare Team
     );
 
     if (response.statusCode == 202) {
-      print('Email sent successfully');
+      devtools.log('Email sent successfully');
     } else {
-      print('Failed to send email. Status code: ${response.statusCode}');
+      devtools.log('Failed to send email. Status code: ${response.statusCode}');
     }
   }
 
@@ -140,13 +141,14 @@ The Mboacare Team
         setState(() {
           _registrationStatus = 'Registration successful';
         });
-
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => RegisterPage(),
-          ),
-        );
+        if (mounted) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const RegisterPage(),
+            ),
+          );
+        }
       }
     } catch (e) {
       setState(() {
@@ -155,23 +157,10 @@ The Mboacare Team
     }
   }
 
-  void _togglePasswordVisibility() {
-    setState(() {
-      _isPasswordVisible = !_isPasswordVisible;
-    });
-  }
-
-  void _toggleConfirmPasswordVisibility() {
-    // Add this function
-    setState(() {
-      _isConfirmPasswordVisible = !_isConfirmPasswordVisible;
-    });
-  }
-
   Future<void> _signUpWithGoogle() async {
-    GoogleSignIn _googleSignIn = GoogleSignIn();
+    GoogleSignIn googleSignIn = GoogleSignIn();
     try {
-      var result = await _googleSignIn.signIn();
+      var result = await googleSignIn.signIn();
       if (result == null) {
         return;
       }
@@ -193,16 +182,17 @@ The Mboacare Team
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setBool('isSignedIn', true);
         prefs.setString('email', user.email ?? "");
-
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => RegisterPage(),
-          ),
-        );
+        if (mounted) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const RegisterPage(),
+            ),
+          );
+        }
       }
     } catch (error) {
-      print(error);
+      devtools.log(error.toString());
     }
   }
 
@@ -223,8 +213,8 @@ The Mboacare Team
                   'lib/assests/images/logo.png',
                   width: 125,
                 ),
-                SizedBox(height: 10),
-                Text(
+                const SizedBox(height: 10),
+                const Text(
                   ' Create an account',
                   style: TextStyle(
                     fontSize: 22,
@@ -338,8 +328,8 @@ The Mboacare Team
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
                           child: TextField(
                             controller: _passwordController,
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.symmetric(
+                            decoration: const InputDecoration(
+                              contentPadding: EdgeInsets.symmetric(
                                 vertical: 8.0,
                               ),
                               hintText: 'Enter your password',
@@ -402,8 +392,8 @@ The Mboacare Team
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
                           child: TextField(
                             controller: _confirmPasswordController,
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.symmetric(
+                            decoration: const InputDecoration(
+                              contentPadding: EdgeInsets.symmetric(
                                 vertical: 8.0,
                               ),
                               hintText: 'Confirm your password',
