@@ -4,7 +4,7 @@ import 'colors.dart';
 class ProfilePage extends StatelessWidget {
   final String userName;
 
-  ProfilePage({required this.userName, Key? key}) : super(key: key);
+  const ProfilePage({required this.userName, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class ProfilePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               radius: 50,
               backgroundColor: AppColors.primaryColor,
               child: Icon(
@@ -22,28 +22,28 @@ class ProfilePage extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               'Hi, $userName!',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: AppColors.primaryColor,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
                 // Implement the logout functionality here
                 // For example, you can use FirebaseAuth.instance.signOut() for Firebase authentication
               },
               style: ElevatedButton.styleFrom(
-                primary: AppColors.buttonColor,
+                backgroundColor: AppColors.buttonColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              child: Text(
+              child: const Text(
                 'Logout',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
