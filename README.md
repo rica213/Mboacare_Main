@@ -1,7 +1,7 @@
 # Outreachy December 2023 to March 2024 Applicants
 
 
-This repository is dedicated to tracking the progress of our project for the internship. We will be using it to report on our project and keep a record of our work.
+This repository is dedicated to tracking the progress of our project for the contriution phase. We will be using it to report on our project and keep a record of our work.
 
 # mboacare
 The app we are designing is named "**mboacare.**" This name is derived from a combination of "Mboalab," which is the name of the organization we are interning for, and "care," representing the focus of the app on medical facilities and healthcare services.
@@ -20,30 +20,35 @@ But here's the best part: our app goes beyond the boundaries of a single hospita
 
 ## Getting Started 🚀
 
-1. Clone the repository: `git clone https://github.com/your-username/your-project.git`
+## Prerequisites
+1. Install flutter and any preffered code editor
+2. Have a basic knowledge of firebase.
+
+## Installation Guide
+1. Forked the repository `https://github.com/Mboalab/Mboacare_Main`
 2. Navigate to the project directory: `cd your-project`
-3. Install dependencies: `flutter pub get`
+3. Clone the forked repository: `git clone https://github.com/$username/Mboacare_Main.git`
+4. Install dependencies with the following command: `flutter pub get`
 
 ## Usage
-To run the application, use the following command: 
+To run the application, use the following command: `flutter run`
+
+## Technologies Used
+[Flutter](https://flutter.dev/)- Framework
+[Dart](https://dart.dev/)- Language
+[Firebase](https://firebase.google.com/)- Database and Authenticaion.
+
+
+## Contributing
+ To contribute to this project, please follow these steps:
+1. Fork and clone the repository.
+2. Create a new branch for your feature((git checkout -b feature/AmazingFeature))
+3. Make your changes and commit them.((git commit -m 'Add some AmazingFeature'))
+4. Push to the Branch (git push origin feature/AmazingFeature)
+5. Submit a pull request, providing a clear description of your changes.
 
 # Progress so far:
 
-**Completed Milestones:**
-1. Implemented the splash screen for a smooth app launch.
-2. Enabled user authentication via Google accounts.
-3. Created registration functionality for account creation.
-4. Designed and developed the main dashboard with search, notifications, and filter tabs.
-5. Crafted comprehensive hospital profiles with contact details, services, specialties, and reviews.
-6. Integrated social media links to follow Mboalab on LinkedIn.
-
-**Recent Enhancements:**
-1. Expanded the login page with new fields: Name, Username, Email Address, Password, and Confirm Password.
-2. Added Gmail authentication to verify email addresses securely.
-3. Activated the search bar functionality for easy navigation.
-4. Working on user prompts to encourage registration and contact interactions.
-5. Ensured the app's design aligns perfectly with the Figma prototype.
-6. Thoroughly tested all existing features and shared screenshots.
 
 **Extra Features:**
 - We used a third-party API service (SendGrid) to send personalized emails to both users and hospitals. Welcome emails for successful user registrations and validation emails for hospitals post-registration. 
