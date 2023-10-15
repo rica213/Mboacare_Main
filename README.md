@@ -1,15 +1,19 @@
 # Outreachy December 2023 to March 2024 Applicants
-<<<<<<< HEAD
+
 
 <p align="center">
   <a href="" rel="noopener">
- <img src="https://github.com/mercyjae/Mboacare_Main/assets/83911888/7da75047-56da-424a-b20d-18fdf3c6c0e5" alt="Project logo"></a>
+ <img src="https://github.com/mercyjae/Mboacare_Main/assets/83911888/7da75047-56da-424a-b20d-18fdf3c6c0e5" alt="Project logo", ></a>
 </p>
-<h3 align="center">Project Title</h3>
-
-![logo](https://github.com/mercyjae/Mboacare_Main/assets/83911888/7da75047-56da-424a-b20d-18fdf3c6c0e5)
+<h5 align="center">Mboacare</h5>
 
 
+
+
+
+
+                                      **Project's Tagline:**
+**Project's Tagline:**
 This repository is dedicated to tracking the progress of our project for the contribution phase. We will be using it to report on our project and keep a record of our work.
 
 
@@ -49,25 +53,24 @@ But here's the best part: our app goes beyond the boundaries of a single hospita
 
 ## Installation Guide
 - Navigate to the project directory: `cd your-project`
-- Clone the repository: `git clone https://github.com/Mboacare_Main.git`
+- Clone the repository:
+    ````
+     git clone https://github.com/Mboacare_Main.git
+    ````  
  
 
 ## 🎈 Usage <a name="usage"></a>
 - Install Flutter Dependencies:
-
-Run the flutter pub get command to fetch and install the Flutter project's dependencies:
+  - Run the flutter pub get command to fetch and install the Flutter project's dependencies:
     ````
-    $ flutter pub get
-    ````
-    
+     flutter pub get
+    ````    
 - Run the Project:
-
-To run the Flutter project, use the flutter run command:
+  - To run the Flutter project, use the flutter run command:
     ````
-    $ flutter run
+     flutter run
     ````
-
-
+   
 ## ⛏️ Built With <a name = "tech_stack"></a>
 - [Flutter](https://flutter.dev/) - Framework
 
@@ -85,7 +88,7 @@ To run the Flutter project, use the flutter run command:
 - Check out a new branch based and name it to what you intend to do:
   - Example:
     ````
-    $ git checkout -b BRANCH_NAME
+     git checkout -b BRANCH_NAME
     ````
     
   - Use one branch per fix / feature
@@ -95,16 +98,73 @@ To run the Flutter project, use the flutter run command:
   - Commit to the forked repository
   - Example:
     ````
-    $ git commit -am 'Add some fooBar'
+     git commit -am 'Add some fooBar'
     ````
 - Push to the branch
   - Example:
     ````
-    $ git push origin BRANCH_NAME
+     git push origin BRANCH_NAME
     ````
 - Make a pull request
   - Submit a pull request, providing a clear description of your changes.
+    
+  ## Build an APK🚀
+-  Enter cd [project]
+- Run: flutter build apk --split-per-abi
+(The flutter build command defaults to --release.)
   
+This command results in three APK files:
+
+- [project]/build/app/outputs/apk/release/app-armeabi-v7a-release.apk
+- [project]/build/app/outputs/apk/release/app-arm64-v8a-release.apk
+- [project]/build/app/outputs/apk/release/app-x86_64-release.apk
+  
+Removing the `--split-per-abi` flag results in a fat APK that contains your code compiled for all the target ABIs. Such APKs are larger in size than their split counterparts, causing the user to download native binaries that are not applicable to their device’s architecture.
+
+## Install APK on Android Device
+Load one of the *.apk files listed above. Which file to load depends on what kind of processor is running on your device.
+
+# Design Guide
+
+## Overview
+ This guide outlines the design principles, patterns, and guidelines that shape the visual and interactive experience of our app. Adhering to these principles will ensure a consistent and aesthetically pleasing user interface.
+
+## Typography
+### Font Family
+- **Primary Font:** [Inter]
+- **Secondary Font:** [Font Name]
+
+### Font Sizes
+- **Heading 1:** [Size]
+- **Heading 2:** [Size]
+- **Heading 3:** [Size]
+- **Body Text:** [Size]
+
+### Font Styles
+- **Heading Styles:** [Font Style]
+- **Body Text Styles:** [Font Style]
+
+### Flutter Implementation
+Text(
+  "Sample Text",
+  style: TextStyle(
+    fontSize: [Size],
+    fontFamily: [Font Name],
+    fontWeight: [Font Weight],
+  ),
+)
+###  Color Scheme
+Primary Colors
+Primary Color: [Color]
+Secondary Color: [Color]
+### Background and Text Colors
+Background Color: [Color]
+Text Color: [Color]
+Secondary Text Color: [Color]
+###Component Colors
+Button Color: [Color]
+Link Color: [Color]
+Alert Color: [Color]
 # Progress so far:
 
 
