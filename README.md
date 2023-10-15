@@ -1,12 +1,8 @@
 # Outreachy December 2023 to March 2024 Applicants
-
-<p align="center">
-  <a href="" rel="noopener">
- <img src="https://i.imgur.com/AZ2iWek.png" alt="Project logo"></a>
-</p>
-<h3 align="center">Project Title</h3>
+![logo](https://github.com/mercyjae/Mboacare_Main/assets/83911888/7da75047-56da-424a-b20d-18fdf3c6c0e5)
 
 This repository is dedicated to tracking the progress of our project for the contribution phase. We will be using it to report on our project and keep a record of our work.
+
 
 # mboacare
 The app we are designing is named "**mboacare.**" This name is derived from a combination of "Mboalab," which is the name of the organization we are interning for, and "care," representing the focus of the app on medical facilities and healthcare services.
@@ -55,7 +51,7 @@ Run the flutter pub get command to fetch and install the Flutter project's depen
     $ flutter pub get
     ````
     
-Run the Project:
+- Run the Project:
 
 To run the Flutter project, use the flutter run command:
 ````
