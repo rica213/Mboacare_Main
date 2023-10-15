@@ -1,4 +1,5 @@
-# Outreachy_May_2023-August_2023-Internships
+# Outreachy December 2023 to March 2024 Applicants
+
 
 This repository is dedicated to tracking the progress of our project for the internship. We will be using it to report on our project and keep a record of our work.
 
@@ -17,6 +18,14 @@ It's a game-changer in terms of usability and convenience. Just a few clicks and
 
 But here's the best part: our app goes beyond the boundaries of a single hospital or location. We are focused on providing a global healthcare experience. You can explore healthcare facilities from different parts of the world, compare their services, and make informed decisions. Whether you are planning a trip abroad or searching for the best healthcare options locally, our app has got you covered. And it's not just for patients! Healthcare facilities can also register and showcase their services on our platform, giving them the opportunity to reach a global audience.
 
+## Getting Started 🚀
+
+1. Clone the repository: `git clone https://github.com/your-username/your-project.git`
+2. Navigate to the project directory: `cd your-project`
+3. Install dependencies: `flutter pub get`
+
+## Usage
+To run the application, use the following command: 
 
 # Progress so far:
 
@@ -64,6 +73,20 @@ But here's the best part: our app goes beyond the boundaries of a single hospita
 
 # Project Contributors:
 
-- [Anisha](https://github.com/AnishaSingh0118)
-- [Deborah](https://github.com/dearlydebbie)
-
+- [Akshaya Madhuri](https://github.com/akshayamadhuri)
+- [Anuoluwapo Famakinwa](https://github.com/mercyjae)
+- [Carla Ejemeh Inya-Agha](https://github.com/Sparklinglily)
+- [Earl-Millen Toh Akwe](https://github.com/akwe-afriitech)
+- [Ekemini Ikpe](https://github.com/Kemyikpe)
+- [Fonguong Edrick](https://github.com/fonguongedrick)
+- [Harry Che Ngwa](https://github.com/ngwa-harry)
+- [Ihimbru Kanyimi](https://github.com/Ihimbru-K)
+- [Clarielle Larissa](https://github.com/rica213)
+- [Morris Adonyo](https://github.com/kkmaurice)
+- [Ngobiri-Falyne-Chinaero](https://github.com/falyne)
+- [Nuibim Lewin](https://github.com/nlewin20)
+- [Nyong Godwill](https://github.com/godsakani)
+- [Ronald Ampurire](https://github.com/aprrrnl)
+- [Shola Eunice Bukola](https://github.com/bukky-eo)
+- [Tamnjong Larry Tabeh](https://github.com/larrytamnjong)
+- [Tunde Babatunde](https://github.com/cedarworth)
