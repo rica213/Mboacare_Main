@@ -54,31 +54,28 @@ Run the flutter pub get command to fetch and install the Flutter project's depen
 ````
     $ flutter pub get
     ````
+    
 Run the Project:
 
 To run the Flutter project, use the flutter run command:
-
 ````
     $ flutter run
     ````
 
 
 ## ⛏️ Built With <a name = "tech_stack"></a>
-[Flutter](https://flutter.dev/)- Framework
-[Dart](https://dart.dev/)- Language
-[Firebase](https://firebase.google.com/)- Database and Authenticaion.
+- [Flutter](https://flutter.dev/)- Framework
+
+- [Dart](https://dart.dev/)- Language
+- [Firebase](https://firebase.google.com/)- Database and Authenticaion.
 
 
 ## Contributing Guide 🚀
  To contribute to this project, please follow these steps:
-1. Fork and clone the repository.
-
-2. Create a new branch for your feature((git checkout -b feature/AmazingFeature))
-3. Make your changes and commit them commits' message styles .((git commit -m 'Add some AmazingFeature'))
-4. Push to the Branch (git push origin feature/AmazingFeature)
-5. Submit a pull request, providing a clear description of your changes.
 - Fork the repo
   - <https://github.com/Mboacare_Main.git>
+- Clone the forked repo.
+  - - <https://github.com/$username/Mboacare_Main.git>
 - Check out a new branch based and name it to what you intend to do:
   - Example:
     ````
@@ -100,7 +97,7 @@ To run the Flutter project, use the flutter run command:
     $ git push origin BRANCH_NAME
     ````
 - Make a pull request
-  - Make sure you send the PR to the <code>fooBar</code> branch
+  - Submit a pull request, providing a clear description of your changes.
   
 # Progress so far:
 
@@ -131,7 +128,7 @@ To run the Flutter project, use the flutter run command:
 *"Our progress is on track, and the collaboration between design and development is really paying off.*
 
 
-## ✍️ Authors <a name = "authors"></a>:
+## ✍️ Contributors <a name = "contributors"></a>:
 
 - [Akshaya Madhuri](https://github.com/akshayamadhuri)
 - [Anuoluwapo Famakinwa](https://github.com/mercyjae)
