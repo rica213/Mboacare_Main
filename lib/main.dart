@@ -20,7 +20,7 @@ void main() async {
       ChangeNotifierProvider(create: (_) => SignUpProvider()),
       // Add other providers here if needed.
     ],
-    child: MyApp(),
+    child: const MyApp(),
   ));
 }
 
@@ -52,14 +52,14 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // Add supported locales and localizations delegates
-      supportedLocales: [
+      supportedLocales: const [
         Locale('en', 'US'), // English
         Locale('hi', 'IN'), // Hindi
         Locale('es', 'ES'), // Spanish
         Locale('fr', 'FR'), // French
         // Add more locales here for other languages
       ],
-      localizationsDelegates: [
+      localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -73,7 +73,7 @@ class MyApp extends StatelessWidget {
         }
         return supportedLocales.first;
       },
-      home: SplashScreen(),
+      home: const SplashScreen(),
     ); //MaterialApp
   }
 }
