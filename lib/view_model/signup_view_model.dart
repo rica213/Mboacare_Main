@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer' as devtools show log;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,7 +12,7 @@ import '../utils/validations.dart';
 
 class SignUpProvider extends ChangeNotifier {
 
-  HospitalProvider() {
+  SignUpProvider() {
     fetchApiKey();
   }
 
@@ -78,11 +79,14 @@ class SignUpProvider extends ChangeNotifier {
       if (documentSnapshot.exists) {
         apiKeySG = documentSnapshot.get(fieldName);
         debugPrint(apiKeySG);
+        devtools.log(apiKeySG);
       } else {
         debugPrint('Document not found');
+        devtools.log('Document not found');
       }
     } catch (error) {
       debugPrint('Error fetching data: $error');
+      devtools.log('Error fetching data: $error');
     }
   }
 
@@ -168,8 +172,6 @@ The Mboacare Team
 
         registrationStatus = 'Registration successful';
         notifyListeners();
-
-        // You should navigate or handle the next steps here
       }
     } catch (error) {
       if (error is FirebaseAuthException) {
