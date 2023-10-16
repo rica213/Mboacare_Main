@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mboacare/colors.dart';
 import 'package:mboacare/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:mboacare/view_model/signup_view_model.dart';
 import 'package:provider/provider.dart';
 import 'hospital_provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -15,6 +17,7 @@ void main() async {
     providers: [
       ChangeNotifierProvider(create: (_) => HospitalProvider()),
       ChangeNotifierProvider(create: (_) => LocaleProvider()),
+      ChangeNotifierProvider(create: (_) => SignUpProvider()),
       // Add other providers here if needed.
     ],
     child: MyApp(),
@@ -45,7 +48,7 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
         useMaterial3: true,
       ),
       // Add supported locales and localizations delegates

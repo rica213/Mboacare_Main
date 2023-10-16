@@ -1,13 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mboacare/login.dart';
-import 'package:mboacare/register.dart';
+import 'package:mboacare/signUpPage.dart';
 import 'colors.dart';
 import 'settings.dart';
 import 'profile.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'hospitaldashboard.dart';
-import 'login.dart';
 
 class DashboardScreen extends StatefulWidget {
   final String userName;
@@ -153,8 +152,8 @@ class DashboardContent extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const LoginScreen(
-                                    title: 'mboacare',
+                              builder: (context) => const SignUpPage(
+                                    //title: 'mboacare',
                                   )));
                     },
                     style: ElevatedButton.styleFrom(

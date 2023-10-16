@@ -4,7 +4,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'signUpPage.dart';
 import 'register.dart';
-import 'dashboard.dart';
 import 'colors.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -206,7 +205,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 decoration: BoxDecoration(
                   border: Border.all(
                     width: 1.0,
-                    color: AppColors.email,
+                    color: AppColors.greenColor,
                   ),
                   borderRadius: BorderRadius.circular(8.0),
                 ),
