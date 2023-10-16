@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="" rel="noopener">
- <img src="https://i.imgur.com/AZ2iWek.png" alt="Project logo"></a>
+ <img src="https://github.com/mercyjae/Mboacare_Main/assets/83911888/7da75047-56da-424a-b20d-18fdf3c6c0e5" alt="Project logo"></a>
 </p>
 <h3 align="center">Project Title</h3>
 
@@ -36,38 +36,39 @@ But here's the best part: our app goes beyond the boundaries of a single hospita
 ## Getting Started 🚀
 
 ## Prerequisites
-1. Flutter and dart SDK 
-2. Any preffered IDE(integrated development environment)
-3. Android Emulator or Physical Device (for Android development):
-4. iOS Simulator or Physical Device (for iOS development):
-4. Basic knowledge of firebase.
+- Flutter and dart SDK 
+- Any preffered IDE(integrated development environment)
+- Android Emulator or Physical Device (for Android development):
+- iOS Simulator or Physical Device (for iOS development):
+- Basic knowledge of firebase.
 
 ## Installation Guide
-1. Navigate to the project directory: `cd your-project`
-2. Clone the repository: `git clone https://github.com/Mboacare_Main.git`
-4. 
+- Navigate to the project directory: `cd your-project`
+- Clone the repository: `git clone https://github.com/Mboacare_Main.git`
+ 
 
 ## 🎈 Usage <a name="usage"></a>
 - Install Flutter Dependencies:
 
 Run the flutter pub get command to fetch and install the Flutter project's dependencies:
-````
+    ````
     $ flutter pub get
     ````
     
-Run the Project:
+- Run the Project:
 
 To run the Flutter project, use the flutter run command:
-````
+    ````
     $ flutter run
     ````
 
 
 ## ⛏️ Built With <a name = "tech_stack"></a>
-- [Flutter](https://flutter.dev/)- Framework
+- [Flutter](https://flutter.dev/) - Framework
 
-- [Dart](https://dart.dev/)- Language
-- [Firebase](https://firebase.google.com/)- Database and Authenticaion.
+- [Dart](https://dart.dev/) - Language
+
+- [Firebase](https://firebase.google.com/) - Database and Authenticaion.
 
 
 ## Contributing Guide 🚀
