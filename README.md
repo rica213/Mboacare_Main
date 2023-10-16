@@ -1,12 +1,27 @@
 # Outreachy December 2023 to March 2024 Applicants
 
+<p align="center">
+  <a href="" rel="noopener">
+ <img src="https://i.imgur.com/AZ2iWek.png" alt="Project logo"></a>
+</p>
+<h3 align="center">Project Title</h3>
 
-This repository is dedicated to tracking the progress of our project for the contriution phase. We will be using it to report on our project and keep a record of our work.
+This repository is dedicated to tracking the progress of our project for the contribution phase. We will be using it to report on our project and keep a record of our work.
 
 # mboacare
 The app we are designing is named "**mboacare.**" This name is derived from a combination of "Mboalab," which is the name of the organization we are interning for, and "care," representing the focus of the app on medical facilities and healthcare services.
 
+
+## 🧐 Problem Statement <a name = "problem_statement"></a>
+In the ever-evolving landscape of global healthcare, the ability to efficiently connect medical facilities and provide accessible healthcare services remains a persistent challenge. Patients often face hurdles in locating suitable medical facilities, while hospitals struggle to refer patients to appropriate specialized centers. As a result, there is a significant need for a robust platform that bridges the gap in healthcare connectivity.
+
+
+## 💡 Idea / Solution <a name = "idea"></a>
+The "Mboacare" project seeks to address these challenges by providing a comprehensive platform where hospitals can efficiently register their facilities, enabling seamless patient referrals and empowering patients to easily locate and access the healthcare services they require. This project aims to revolutionize healthcare connectivity, making it more accessible and efficient on a global scale.
+
 **Project's Tagline:** ""Your health, Simplified!"
+
+
 
 # Project's Aim:
 
@@ -21,32 +36,72 @@ But here's the best part: our app goes beyond the boundaries of a single hospita
 ## Getting Started 🚀
 
 ## Prerequisites
-1. Install flutter and any preffered code editor
-2. Have a basic knowledge of firebase.
+1. Flutter and dart SDK 
+2. Any preffered IDE(integrated development environment)
+3. Android Emulator or Physical Device (for Android development):
+4. iOS Simulator or Physical Device (for iOS development):
+4. Basic knowledge of firebase.
 
 ## Installation Guide
-1. Forked the repository `https://github.com/Mboalab/Mboacare_Main`
-2. Navigate to the project directory: `cd your-project`
-3. Clone the forked repository: `git clone https://github.com/$username/Mboacare_Main.git`
-4. Install dependencies with the following command: `flutter pub get`
+1. Navigate to the project directory: `cd your-project`
+2. Clone the repository: `git clone https://github.com/Mboacare_Main.git`
+4. 
 
-## Usage
-To run the application, use the following command: `flutter run`
+## 🎈 Usage <a name="usage"></a>
+- Install Flutter Dependencies:
 
-## Technologies Used
+Run the flutter pub get command to fetch and install the Flutter project's dependencies:
+````
+    $ flutter pub get
+    ````
+Run the Project:
+
+To run the Flutter project, use the flutter run command:
+
+````
+    $ flutter run
+    ````
+
+
+## ⛏️ Built With <a name = "tech_stack"></a>
 [Flutter](https://flutter.dev/)- Framework
 [Dart](https://dart.dev/)- Language
 [Firebase](https://firebase.google.com/)- Database and Authenticaion.
 
 
-## Contributing
+## Contributing Guide 🚀
  To contribute to this project, please follow these steps:
 1. Fork and clone the repository.
+
 2. Create a new branch for your feature((git checkout -b feature/AmazingFeature))
-3. Make your changes and commit them.((git commit -m 'Add some AmazingFeature'))
+3. Make your changes and commit them commits' message styles .((git commit -m 'Add some AmazingFeature'))
 4. Push to the Branch (git push origin feature/AmazingFeature)
 5. Submit a pull request, providing a clear description of your changes.
-
+- Fork the repo
+  - <https://github.com/Mboacare_Main.git>
+- Check out a new branch based and name it to what you intend to do:
+  - Example:
+    ````
+    $ git checkout -b BRANCH_NAME
+    ````
+    
+  - Use one branch per fix / feature
+- Commit your changes
+  - Please provide a git message that explains what you've done
+  - Please make sure your commits follow the [conventions](https://gist.github.com/robertpainsi/b632364184e70900af4ab688decf6f53#file-commit-message-guidelines-md)
+  - Commit to the forked repository
+  - Example:
+    ````
+    $ git commit -am 'Add some fooBar'
+    ````
+- Push to the branch
+  - Example:
+    ````
+    $ git push origin BRANCH_NAME
+    ````
+- Make a pull request
+  - Make sure you send the PR to the <code>fooBar</code> branch
+  
 # Progress so far:
 
 
@@ -74,9 +129,9 @@ To run the application, use the following command: `flutter run`
 - Community Forum: Create a platform for users to engage in discussions, ask questions, and share healthcare-related information.
 
 *"Our progress is on track, and the collaboration between design and development is really paying off.*
-**Moreover, we've successfully wrapped up the basic MVP, and achieved our Outreachy's internship milestone. Additionally, we've provided suggestions for future engagement, as the project remains open for collaborations. We're excited to welcome additional contributions, let's support open source spirit. ✌"**
 
-# Project Contributors:
+
+## ✍️ Authors <a name = "authors"></a>:
 
 - [Akshaya Madhuri](https://github.com/akshayamadhuri)
 - [Anuoluwapo Famakinwa](https://github.com/mercyjae)
