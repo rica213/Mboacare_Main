@@ -1,23 +1,10 @@
 # Outreachy December 2023 to March 2024 Applicants
-
-
-<p align="center">
-  <a href="" rel="noopener">
- <img src="https://github.com/mercyjae/Mboacare_Main/assets/83911888/7da75047-56da-424a-b20d-18fdf3c6c0e5" alt="Project logo", ></a>
-</p>
-<h5 align="center">Mboacare</h5>
-
-
-
-
-
-
-                                      **Project's Tagline:**
+![logo2](https://github.com/mercyjae/Mboacare_Main/assets/83911888/8e2fc5b7-c741-4dd4-a397-6e18aba0ee79)     
 **Project's Tagline:**
 This repository is dedicated to tracking the progress of our project for the contribution phase. We will be using it to report on our project and keep a record of our work.
 
 
-# mboacare
+# Mboacare
 The app we are developing is named "**mboacare.**" This name is derived from a combination of "Mboalab," which is the name of the organization we are contributing for, and "care," representing the focus of the app on medical facilities and healthcare services.
 
 
@@ -63,17 +50,9 @@ But here's the best part: our app goes beyond the boundaries of a single hospita
 - Install Flutter Dependencies:
   - Run the flutter pub get command to fetch and install the Flutter project's dependencies:
     ````
-<<<<<<< HEAD
-    $ flutter pub get
-    ````
-     - Example:
-    ````
-    $ git checkout -b BRANCH_NAME
-    ````
-=======
      flutter pub get
-    ````    
->>>>>>> bc2455598b1d28ab7ba3fd9d4210c3b29760a8a2
+    ````
+   
 - Run the Project:
   - To run the Flutter project, use the flutter run command:
     ````
@@ -141,13 +120,13 @@ Load one of the *.apk files listed above. Which file to load depends on what kin
 - Hospital Registration
   - Hospital can signup by filling a form which consist of their the contact details, services, facilities,hospital size, hospital type(pulic/private), bed capacity, hospital ownership and image.
 - Main Dashboard
- - The hospital dashboard shows a list of all the hospitals with the service offered, facilities present, name, address and images .
+  - The hospital dashboard shows a list of all the hospitals with the service offered, facilities present, name, address and images .
 - Social Media Integration
- - User can join the mboalab community on Likendin
+  - User can join the mboalab community on Likendin
 - Hospital Profiles
   - It provides information about each hospital e.g address, phone number, email facilities available, service offered etc.
 - Search Functionality
- - Users are able to search for names of hospital.
+  - Users are able to search for names of hospital.
 - Filtering and Sorting
   - Hospitals are filtered based on the services and facilities.
 
@@ -168,9 +147,10 @@ Load one of the *.apk files listed above. Which file to load depends on what kin
 
 - Widgets and Components:
   - Use descriptive names for custom widgets and components.
-  - Break complex widgets into smaller, reusable components.  
-- Linte Rules:
- - Do not ```//ignore for file: $lint_rule``` lint rules in your code.
+  - Break complex widgets into smaller, reusable components.
+    
+- Lint Rules:
+  - Do not ```//ignore for file: $lint_rule``` lint rules in your code.
 
 - Error Handling:
   - Properly handle exceptions and errors in your code.
