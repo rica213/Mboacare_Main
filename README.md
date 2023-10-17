@@ -1,5 +1,5 @@
 # Outreachy December 2023 to March 2024 Applicants
-<<<<<<< HEAD
+
 
 <p align="center">
   <a href="" rel="noopener">
@@ -14,19 +14,19 @@ This repository is dedicated to tracking the progress of our project for the con
 
 
 # mboacare
-The app we are designing is named "**mboacare.**" This name is derived from a combination of "Mboalab," which is the name of the organization we are interning for, and "care," representing the focus of the app on medical facilities and healthcare services.
+The app we are developing is named "**mboacare.**" This name is derived from a combination of "Mboalab," which is the name of the organization we are contributing for, and "care," representing the focus of the app on medical facilities and healthcare services.
 
 
 ## 🧐 Problem Statement <a name = "problem_statement"></a>
-In the ever-evolving landscape of global healthcare, the ability to efficiently connect medical facilities and provide accessible healthcare services remains a persistent challenge. Patients often face hurdles in locating suitable medical facilities, while hospitals struggle to refer patients to appropriate specialized centers. As a result, there is a significant need for a robust platform that bridges the gap in healthcare connectivity.
+"In the global world of healthcare, the ability to efficiently connect medical facilities and provide accessible healthcare services remains a persistent challenge which cause mortality in the society. Patients often face challenges in locating hospital with medical facilities to treat a particular disease/illness, while hospitals struggle to refer patients to appropriate specialized centers. As a result, there is a significant need for a  platform that bridges the gap in healthcare connectivity.
 
 
-## 💡 Idea / Solution <a name = "idea"></a>
-The "Mboacare" project seeks to address these challenges by providing a comprehensive platform where hospitals can efficiently register their facilities, enabling seamless patient referrals and empowering patients to easily locate and access the healthcare services they require. This project aims to revolutionize healthcare connectivity, making it more accessible and efficient on a global scale.
+## 💡 Solution <a name = "idea"></a>
+The "Mboacare" project seeks to address these challenges by providing an app where hospitals can register their facilities, enabling seamless patient referrals and empowering patients to easily locate and access the healthcare services they require. Its primary goal is to improve healthcare connectivity.
+ This project aims to revolutionize healthcare connectivity, making it more accessible and reducing mortality rate.
+
 
 **Project's Tagline:** ""Your health, Simplified!"
-
-
 
 # Project's Aim:
 
@@ -59,7 +59,10 @@ Run the flutter pub get command to fetch and install the Flutter project's depen
     ````
     $ flutter pub get
     ````
-    
+     - Example:
+    ````
+    $ git checkout -b BRANCH_NAME
+    ````
 - Run the Project:
 
 To run the Flutter project, use the flutter run command:
@@ -105,7 +108,54 @@ To run the Flutter project, use the flutter run command:
 - Make a pull request
   - Submit a pull request, providing a clear description of your changes.
   
-# Progress so far:
+# Features:
+
+- Splash Screen
+  - The splash screen gives a good user experience.
+- User Authentication
+  - User can create account, log in and reset their forgotten password.
+- Hospital Registration
+  - Hospital can signup by filling a form which consist of their the contact details, services, facilities,hospital size, hospital type(pulic/private), bed capacity, hospital ownership and image.
+- Main Dashboard
+ - The hospital dashboard shows a list of all the hospitals with the service offered, facilities present, name, address and images .
+- Social Media Integration
+ - User can join the mboalab community on Likendin
+- Hospital Profiles
+  - It provides information about each hospital e.g address, phone number, email facilities available, service offered etc.
+- Search Functionality
+ - Users are able to search for names of hospital.
+- Filtering and Sorting
+  - Hospitals are filtered based on the services and facilities.
+
+  
+
+# Coding Guidelines
+
+
+- Naming Conventions:
+  - Use camelCase for variable and function names.
+  - Use PascalCase for class, mixin, enum and extension names.
+  - Use UPPER_CASE for constants.
+  - Maintain consistent naming, formatting, and code organization across the project.
+
+- File and Directory Structure:
+  - Organize your project files and directories logically, grouping related    code together.
+  - Use clear and meaningful names for directories and files.
+
+- Widgets and Components:
+  - Use descriptive names for custom widgets and components.
+  - Break complex widgets into smaller, reusable components.  
+- Linte Rules:
+ - Do not ```//ignore for file: $lint_rule``` lint rules in your code.
+
+- Error Handling:
+  - Properly handle exceptions and errors in your code.
+  - Avoid using generic error handling statements when more specific ones are appropriate.
+
+
+
+
+### Design Guidelines
 
 
 **Extra Features:**
@@ -136,20 +186,5 @@ To run the Flutter project, use the flutter run command:
 
 ## ✍️ Contributors <a name = "contributors"></a>:
 
-- [Akshaya Madhuri](https://github.com/akshayamadhuri)
-- [Anuoluwapo Famakinwa](https://github.com/mercyjae)
-- [Carla Ejemeh Inya-Agha](https://github.com/Sparklinglily)
-- [Earl-Millen Toh Akwe](https://github.com/akwe-afriitech)
-- [Ekemini Ikpe](https://github.com/Kemyikpe)
-- [Fonguong Edrick](https://github.com/fonguongedrick)
-- [Harry Che Ngwa](https://github.com/ngwa-harry)
-- [Ihimbru Kanyimi](https://github.com/Ihimbru-K)
-- [Clarielle Larissa](https://github.com/rica213)
-- [Morris Adonyo](https://github.com/kkmaurice)
-- [Ngobiri-Falyne-Chinaero](https://github.com/falyne)
-- [Nuibim Lewin](https://github.com/nlewin20)
-- [Nyong Godwill](https://github.com/godsakani)
-- [Ronald Ampurire](https://github.com/aprrrnl)
-- [Shola Eunice Bukola](https://github.com/bukky-eo)
-- [Tamnjong Larry Tabeh](https://github.com/larrytamnjong)
-- [Tunde Babatunde](https://github.com/cedarworth)
+- [Anisha](https://github.com/AnishaSingh0118)
+- [Deborah](https://github.com/dearlydebbie)
