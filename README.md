@@ -1,15 +1,13 @@
 # Outreachy December 2023 to March 2024 Applicants
-![logo2](https://github.com/mercyjae/Mboacare_Main/assets/83911888/8e2fc5b7-c741-4dd4-a397-6e18aba0ee79)     
-**Project's Tagline:**
+![logo2](https://github.com/mercyjae/Mboacare_Main/assets/83911888/8e2fc5b7-c741-4dd4-a397-6e18aba0ee79)   
+
 This repository is dedicated to tracking the progress of our project for the contribution phase. We will be using it to report on our project and keep a record of our work.
 
 
-# Mboacare
-The app we are developing is named "**mboacare.**" This name is derived from a combination of "Mboalab," which is the name of the organization we are contributing for, and "care," representing the focus of the app on medical facilities and healthcare services.
-
+# Mboacare: Create a platform to link-up medical facilities globally:
 
 ## 🧐 Problem Statement <a name = "problem_statement"></a>
-"In the global world of healthcare, the ability to efficiently connect medical facilities and provide accessible healthcare services remains a persistent challenge which cause mortality in the society. Patients often face challenges in locating hospital with medical facilities to treat a particular disease/illness, while hospitals struggle to refer patients to appropriate specialized centers. As a result, there is a significant need for a  platform that bridges the gap in healthcare connectivity.
+"In the global world of healthcare, the ability to  connect medical facilities and provide accessible healthcare services remains a persistent challenge which cause mortality in the society. Patients often face challenges in locating hospital with medical facilities to treat a particular disease/illness, while hospitals struggle to refer patients to appropriate specialized centers. As a result, there is a significant need for a  platform that bridges the gap in healthcare connectivity.
 
 
 ## 💡 Solution <a name = "idea"></a>
@@ -18,16 +16,6 @@ The "Mboacare" project seeks to address these challenges by providing an app whe
 
 
 **Project's Tagline:** ""Your health, Simplified!"
-
-# Project's Aim:
-
-## Create a platform to link-up medical facilities globally:
-
-Our aim is to develop a platform that allows users to easily find and connect with medical facilities around the world. You're on the hunt for top-notch healthcare recommendations, whether you're in your own state or in a whole different country. You just want an easy-peasy way to find hospitals that offer a wide range of healthcare services, from regular to specialized facilities. No more wasting hours on Google and clicking through a gazillion hospital websites. That's where our super awesome app swoops in.
-
-It's a game-changer in terms of usability and convenience. Just a few clicks and you can access a comprehensive list of hospitals, filter them according to your specific needs, and even contact them with ease.
-
-But here's the best part: our app goes beyond the boundaries of a single hospital or location. We are focused on providing a global healthcare experience. You can explore healthcare facilities from different parts of the world, compare their services, and make informed decisions. Whether you are planning a trip abroad or searching for the best healthcare options locally, our app has got you covered. And it's not just for patients! Healthcare facilities can also register and showcase their services on our platform, giving them the opportunity to reach a global audience.
 
 ## Getting Started 🚀
 
@@ -131,9 +119,7 @@ Load one of the *.apk files listed above. Which file to load depends on what kin
   - Hospitals are filtered based on the services and facilities.
 
   
-
 # Coding Guidelines
-
 
 - Naming Conventions:
   - Use camelCase for variable and function names.
@@ -158,23 +144,45 @@ Load one of the *.apk files listed above. Which file to load depends on what kin
 
 ### Design Guidelines
 
+### Font Family
+- *Primary Font:* Inter
 
-**Extra Features:**
-- We used a third-party API service (SendGrid) to send personalized emails to both users and hospitals. Welcome emails for successful user registrations and validation emails for hospitals post-registration. 
-- We've incorporated Firebase authentication, making it easy for users to log in with email and Google accounts. Our app also utilizes additional Firebase Authentication features such as email verification and password reset for users' convenience.
-- We chose Firebase Cloud Firestore to effectively manage our database. This helped us easily create, read, update, and delete data.
-- We also made use of Firebase Storage, a service in the cloud, to safely store and retrieve user-uploaded content, such as pictures, videos, and files.
+###  Color Scheme
+
+- Primary Color: Color(0xFF07470A)
+- Secondary Color: Color(0xFF106517)
+
+### Background and Text Colors
+- Background Color: Color(0xFFFFFFFF)
+- Text Color: Color(0xFF106517)
+- Secondary Text Color: Color(0xFF000000)
+
+### Component Colors
+- Button Color: Color(0xFF106517);
+- Alert Color: Color(0xFF000000)
+- Icon Color: Color(0xFF106517)
+
+
+### Flutter Implementation
+Text(
+  "Sample Text",
+  style: TextStyle(
+    fontSize:20
+    fontFamily:'Inter'
+    fontWeight: FontWeight.w900,
+    color: Color(0xFF106517)
+  ),
+)
+
+
 
 # **What's Ahead: Future Features:**
-**Anisha's suggestions:**
 - AI recommendations: Personalized hospital suggestions on the dashboard.
 - Bookmark feature: Save and organize facilities on hospital details page for easy access.
 - Dark mode: Enable dark mode in settings.
 - Track history: Save booked appointment records.
 - Refer: Share users' medical history.
 - Geolocation: Search and view medical facilities, get directions based on location.(Google Map)
-
-**Deborah's suggestions:**
 - Telemedicine Integration: Incorporate telemedicine capabilities, allowing users to have virtual consultations with doctors.
 - Real-Time Availability: Display real-time availability of appointments, allowing users to book slots instantly.
 - Ratings and Reviews: Implement a robust rating and review system for users to share their experiences and help others make informed decisions.
