@@ -19,7 +19,6 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<SignUpProvider>(context);
@@ -96,10 +95,10 @@ class _SignUpPageState extends State<SignUpPage> {
                 EditTextForm(
                     hintText: "Enter your email",
                     onChanged: (value) {
-                       setState(() {
+                      setState(() {
                         provider.setEmail(value);
                         provider.validRegister();
-                       });
+                      });
                     },
                     controller: provider.emailController),
                 SizedBox(height: AppFontSizes.fontSize20),
@@ -172,7 +171,18 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 SizedBox(height: AppFontSizes.fontSize18),
                 AppButton(
-                  onPressed: provider.signUpWithEmailAndPassword,
+                  onPressed: () {
+                    provider.signUpWithEmailAndPassword(
+                      onSuccessNavigate: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const RegisterPage(),
+                          ),
+                        );
+                      }
+                    );
+                  },
                   title: "Register",
                   enabled: provider.isValidRegister,
                   //model.isValidRegister

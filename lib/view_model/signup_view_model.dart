@@ -11,7 +11,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/validations.dart';
 
 class SignUpProvider extends ChangeNotifier {
-
   SignUpProvider() {
     fetchApiKey();
   }
@@ -30,8 +29,7 @@ class SignUpProvider extends ChangeNotifier {
   String confirmPassword = "";
   bool isValidRegister = false;
 
-  final String documentId =
-      'aeac9fSTIeI6UD0OywSj';
+  final String documentId = 'aeac9fSTIeI6UD0OywSj';
   final String collectionName = 'sendgrid';
   final String fieldName = 'apiKey';
   String apiKeySG = '';
@@ -63,10 +61,8 @@ class SignUpProvider extends ChangeNotifier {
         passwordHasMinLength(password) && passwordHasSpecialCharacter(password);
     final arePasswordsMatching = confirmPassword == password;
 
-    isValidRegister = isNameFilled &&
-        isValidEmail &&
-        isPasswordValid &&
-        arePasswordsMatching;
+    isValidRegister =
+        isNameFilled && isValidEmail && isPasswordValid && arePasswordsMatching;
     notifyListeners();
   }
 
@@ -102,10 +98,7 @@ class SignUpProvider extends ChangeNotifier {
       'personalizations': [
         {
           'to': [
-            {
-              'email': recipientEmail,
-              'name': recipientName
-            },
+            {'email': recipientEmail, 'name': recipientName},
           ],
           'subject': 'Welcome to Mboacare!',
         },
@@ -146,7 +139,8 @@ The Mboacare Team
     }
   }
 
-  Future<void> signUpWithEmailAndPassword() async {
+  Future<void> signUpWithEmailAndPassword(
+      {Function()? onSuccessNavigate}) async {
     try {
       final String password = passwordController.text;
       final String confirmPassword = confirmPasswordController.text;
@@ -171,15 +165,20 @@ The Mboacare Team
         sendWelcomeEmail(emailController.text, nameController.text.trim());
 
         registrationStatus = 'Registration successful';
+        //Handle navigation to RegisterPage
+        onSuccessNavigate!();
+
         notifyListeners();
       }
     } catch (error) {
       if (error is FirebaseAuthException) {
         // Handle specific FirebaseAuthException types
         if (error.code == 'email-already-in-use') {
-          registrationStatus = "Registration failed: ${error.message.toString()}";
+          registrationStatus =
+              "Registration failed: ${error.message.toString()}";
         } else if (error.code == 'weak-password') {
-          registrationStatus = "Registration failed: ${error.message.toString()}";
+          registrationStatus =
+              "Registration failed: ${error.message.toString()}";
         } else {
           registrationStatus = 'Registration failed: ${error.toString()}';
         }
