@@ -55,11 +55,11 @@ class SignUpProvider extends ChangeNotifier {
   }
 
   void validRegister() {
-    final isNameFilled = name.isNotEmpty;
-    final isValidEmail = isValidEmails(email);
+    final isNameFilled = name.trim().isNotEmpty;
+    final isValidEmail = isValidEmails(email.trim());
     final isPasswordValid =
-        passwordHasMinLength(password) && passwordHasSpecialCharacter(password);
-    final arePasswordsMatching = confirmPassword == password;
+        passwordHasMinLength(password.trim()) && passwordHasSpecialCharacter(password.trim());
+    final arePasswordsMatching = confirmPassword.trim() == password.trim();
 
     isValidRegister =
         isNameFilled && isValidEmail && isPasswordValid && arePasswordsMatching;
@@ -162,7 +162,7 @@ The Mboacare Team
       if (user != null) {
         await user.updateDisplayName(nameController.text.trim());
 
-        sendWelcomeEmail(emailController.text, nameController.text.trim());
+        sendWelcomeEmail(emailController.text.trim(), nameController.text.trim());
 
         registrationStatus = 'Registration successful';
         //Handle navigation to RegisterPage
