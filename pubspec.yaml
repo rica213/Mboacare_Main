@@ -102,8 +102,8 @@ flutter:
     - lib/assests/icons/selected_hospital.svg
     - lib/assests/icons/unselected_blog.svg
     - lib/assests/icons/selected_blog.svg
-    - lib/assests/icons/unselected_profile.svg
-    - lib/assests/icons/selected_profile.svg
+    - lib/assests/icons/unselected_user.svg
+    - lib/assests/icons/selected_user.svg
     - lib/assests/icons/unselected_home.svg
     - lib/assests/icons/selected_home.svg
     - lib/assests/icons/notification.svg

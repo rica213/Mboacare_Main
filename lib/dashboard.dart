@@ -89,11 +89,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
           currentIndex: _currentIndex,
           onTap: _onTabTapped,
           selectedItemColor: AppColors.buttonColor,
-          unselectedItemColor: Colors.black,
+          unselectedItemColor: AppColors.grey,
+          selectedLabelStyle:
+              TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+          unselectedLabelStyle:
+              TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
           items: [
             BottomNavigationBarItem(
                 icon: SvgPicture.asset(
-                  'lib/assets/icons/unselected_home.svg',
+                  'lib/assests/icons/unselected_home.svg',
                 ),
                 label: 'Home',
                 activeIcon: SvgPicture.asset(
@@ -102,7 +106,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             BottomNavigationBarItem(
                 icon: SvgPicture.asset(
                     'lib/assests/icons/unselected_hospital.svg'),
-                label: 'Blogs',
+                label: 'Hospitals',
                 activeIcon: SvgPicture.asset(
                   'lib/assests/icons/selected_hospital.svg',
                 )),
@@ -116,11 +120,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 )),
             BottomNavigationBarItem(
                 icon: SvgPicture.asset(
-                  'lib/assests/icons/unselected_profile.svg',
+                  'lib/assests/icons/unselected_user.svg',
                 ),
-                label: 'Menu',
+                label: 'Account',
                 activeIcon: SvgPicture.asset(
-                  'lib/assests/icons/selected_profile.svg',
+                  'lib/assests/icons/selected_user.svg',
                 )),
           ],
         ),
@@ -198,7 +202,7 @@ class _DashboardContentState extends State<DashboardContent> {
                     height: 20,
                   ),
                   Text(
-                    'Timothy Godfrey',
+                    'Janet Dolittle',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -208,7 +212,7 @@ class _DashboardContentState extends State<DashboardContent> {
                     height: 5,
                   ),
                   Text(
-                    'timgodfrey@yahoo.com',
+                    'janetdolittle@mail.com',
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
@@ -250,6 +254,10 @@ class _DashboardContentState extends State<DashboardContent> {
                   setState(() {
                     selectedIndex = 0;
                   });
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => DashboardContent()));
                 },
               ),
             ),
@@ -277,6 +285,12 @@ class _DashboardContentState extends State<DashboardContent> {
                   setState(() {
                     selectedIndex = 1;
                   });
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SettingsPage(
+                                context: context,
+                              )));
                 },
               ),
             ),
@@ -304,6 +318,10 @@ class _DashboardContentState extends State<DashboardContent> {
                   setState(() {
                     selectedIndex = 2;
                   });
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => HospitalDashboard()));
                 },
               ),
             ),
