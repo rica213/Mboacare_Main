@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:mboacare/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'sign_up_page.dart';
 import 'register.dart';
@@ -158,33 +159,36 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: 120,
               ),
               const SizedBox(height: 12),
-              const Text(
-                'Welcome back',
-                style: TextStyle(
+               Text(
+                AppStrings.welcome,
+                style: const TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                   color: AppColors.primaryColor,
                 ),
               ),
               const SizedBox(height: 14),
-              const Text(
-                'Welcome back! Please enter your details.',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.signInButtonColor,
+               Text(
+                AppStrings.details,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.greenColor,
                 ),
               ),
               const SizedBox(height: 20),
-              const Align(
+               Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
-                    padding: EdgeInsets.only(left: 1),
+                    padding: const EdgeInsets.only(left: 1),
                     child: Text(
-                      'Email *',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.textColor2),
+                      AppStrings.email,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                          fontFamily: 'Inter',
+                          color: AppColors.greenColor),
                     ),
                   )),
               const SizedBox(height: 10),
@@ -198,31 +202,36 @@ class _LoginScreenState extends State<LoginScreen> {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 1.0),
+                  padding:  const EdgeInsets.symmetric(horizontal: 1.0),
                   child: TextField(
                     controller: _emailController,
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(
+                    decoration:  InputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(
                         vertical: 8.0,
                         horizontal: 10.0,
                       ),
-                      hintText: 'Enter your email',
-                      labelStyle: TextStyle(color: AppColors.primaryColor),
+                      hintText: AppStrings.enter,
+                      labelStyle: const TextStyle(color: AppColors.hintTextColor,
+                        fontSize: 16,
+                        fontFamily: 'Inter',
+                        fontWeight: FontWeight.w400,),
                       border: InputBorder.none,
                     ),
                   ),
                 ),
               ),
               const SizedBox(height: 20),
-              const Align(
+               Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
-                    padding: EdgeInsets.only(left: 4),
+                    padding: const EdgeInsets.only(left: 4),
                     child: Text(
-                      'Password *',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.textColor2),
+                      AppStrings.password,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                          fontFamily: 'Inter',
+                          color: AppColors.greenColor),
                     ),
                   )),
               const SizedBox(height: 10),
@@ -244,9 +253,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         vertical: 8.0,
                         horizontal: 10.0,
                       ),
-                      hintText: 'Enter your password',
+                      hintText: AppStrings.enterPassword,
                       labelStyle:
-                          const TextStyle(color: AppColors.primaryColor),
+                          const TextStyle(color: AppColors.hintTextColor,
+                            fontSize: 16,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w400,),
                       border: InputBorder.none,
                       suffixIcon: GestureDetector(
                         onTap: () {
@@ -266,7 +278,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 14),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -281,11 +293,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         activeColor: Colors.green,
                       ),
-                      const Text(
-                        "Remember Me",
-                        style: TextStyle(
-                          color: AppColors.textColor2,
-                          fontWeight: FontWeight.bold,
+                      Text(
+                        AppStrings.remember,
+                        style: const TextStyle(
+                            color: AppColors.signInButtonColor,
+                            fontSize: 14,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w500,
                         ),
                       ),
                     ],
@@ -299,11 +313,13 @@ class _LoginScreenState extends State<LoginScreen> {
                             "Please enter your email to reset the password.");
                       }
                     },
-                    child: const Text(
-                      "Forgot password",
-                      style: TextStyle(
-                        color: AppColors.textColor2,
-                        fontWeight: FontWeight.bold,
+                    child:  Text(
+                      AppStrings.forgot,
+                      style: const TextStyle(
+                          color: AppColors.signInButtonColor,
+                          fontSize: 14,
+                          fontFamily: 'Inter',
+                          fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
@@ -321,11 +337,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   minimumSize: const Size(340, 45),
                 ),
-                child: const Text(
-                  "Login with Email",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                child: Text(
+                  AppStrings.sign,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'Inter',
+                    color: AppColors.navbar,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
@@ -342,24 +360,51 @@ class _LoginScreenState extends State<LoginScreen> {
                   minimumSize: const Size(340, 45),
                 ),
                 icon: Image.asset(
-                  'lib/assests/images/google-icon.png',
+                  AppImages.googleIcon,
                   height: 32,
                   width: 32,
                 ),
-                label: const Text(
-                  "Login with Google",
-                  style: TextStyle(
-                    color: AppColors.primaryColor,
+                label:Text(
+                  AppStrings.signIn,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.greenColor,
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 10),
               TextButton(
                 onPressed: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (_) => const SignUpPage()));
                 },
-                child: const Text("Don't have an account? Sign up"),
+                  child:RichText(
+                    text:  TextSpan(
+                      children: [
+                        TextSpan(
+                            text: AppStrings.account,
+                          style: const TextStyle(
+                            color: Colors.green,
+                              fontSize: 14,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w400
+                          )
+                        ),
+                        TextSpan(
+                          text: AppStrings.signUp,
+                          style: const TextStyle(
+                            color: Colors.green,
+                              fontSize: 14,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w600// Set the color for "Sign up"
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+
               ),
             ],
           ),

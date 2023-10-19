@@ -837,7 +837,6 @@ The Mboacare Team
             ),
           );
         }
-
         // Clear the form fields and selected image after successful submission
         _formKey.currentState!.reset();
         setState(() {
