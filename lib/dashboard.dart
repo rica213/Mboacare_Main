@@ -151,7 +151,12 @@ class _DashboardContentState extends State<DashboardContent> {
           height: 60,
         ),
         centerTitle: true,
-        actions: [SvgPicture.asset('lib/assests/icons/notification.svg')],
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: SvgPicture.asset('lib/assests/icons/notification.svg'),
+          )
+        ],
         leading: Builder(
           builder: (context) {
             return GestureDetector(
@@ -159,7 +164,7 @@ class _DashboardContentState extends State<DashboardContent> {
                   Scaffold.of(context).openDrawer();
                 },
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(left: 10),
                   child: SvgPicture.asset(
                     'lib/assests/icons/menu.svg',
                     width: 20,
@@ -173,6 +178,9 @@ class _DashboardContentState extends State<DashboardContent> {
         child: ListView(
           //   padding: EdgeInsets.zero,
           children: [
+            SizedBox(
+              height: 10,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
@@ -187,28 +195,36 @@ class _DashboardContentState extends State<DashboardContent> {
                     height: 100,
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   Text(
                     'Timothy Godfrey',
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
+                  ),
+                  SizedBox(
+                    height: 5,
                   ),
                   Text(
                     'timgodfrey@yahoo.com',
                     style: TextStyle(
-                      fontSize: 11,
-                      fontWeight: FontWeight.w600,
-                      // color: AppColor.blackGrey,
-                    ),
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.grey),
                   ),
                 ],
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 10,
+            ),
+            Divider(
+              color: AppColors.grey100,
+            ),
+            SizedBox(
+              height: 10,
             ),
             Container(
               height: 50,
@@ -217,10 +233,11 @@ class _DashboardContentState extends State<DashboardContent> {
                   borderRadius: BorderRadius.circular(10),
                   color: selectedIndex == 0
                       ? AppColors.buttonColor
-                      : Colors.white),
+                      : Colors.transparent),
               child: ListTile(
                 leading: SvgPicture.asset(
                   'lib/assests/icons/home.svg',
+                  color: selectedIndex == 0 ? Colors.white : Colors.black,
                 ),
                 title: Text(
                   'Home',
@@ -243,10 +260,11 @@ class _DashboardContentState extends State<DashboardContent> {
                   borderRadius: BorderRadius.circular(10),
                   color: selectedIndex == 1
                       ? AppColors.buttonColor
-                      : Colors.white),
+                      : Colors.transparent),
               child: ListTile(
                 leading: SvgPicture.asset(
                   'lib/assests/icons/blog.svg',
+                  color: selectedIndex == 1 ? Colors.white : Colors.black,
                 ),
                 title: Text(
                   'Blog',
@@ -269,9 +287,12 @@ class _DashboardContentState extends State<DashboardContent> {
                   borderRadius: BorderRadius.circular(10),
                   color: selectedIndex == 2
                       ? AppColors.buttonColor
-                      : Colors.white),
+                      : Colors.transparent),
               child: ListTile(
-                leading: SvgPicture.asset('lib/assests/icons/hospital.svg'),
+                leading: SvgPicture.asset(
+                  'lib/assests/icons/hospital.svg',
+                  color: selectedIndex == 2 ? Colors.white : Colors.black,
+                ),
                 title: Text(
                   'Hospital',
                   style: TextStyle(
@@ -288,9 +309,6 @@ class _DashboardContentState extends State<DashboardContent> {
             ),
           ],
         ),
-        //  Column(children: [
-        //   Image.asset('lib/assests/images/user.png')
-        // ],),
       ),
       body: SingleChildScrollView(
         child: Column(
