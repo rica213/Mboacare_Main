@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mboacare/login.dart';
 import 'colors.dart';
 import 'settings.dart';
@@ -51,7 +52,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   void _initializeScreens(BuildContext context) {
     _screens = [
-      const DashboardContent(),
+      DashboardContent(),
       const HospitalDashboard(),
       SettingsPage(context: context),
       ProfilePage(
@@ -76,119 +77,242 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(_screenTitles[_currentIndex]),
-      ),
+      // appBar: AppBar(
+      //   title: Text(_screenTitles[_currentIndex]),
+      // ),
       body: _screens[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: _onTabTapped,
-        selectedItemColor: AppColors.buttonColor,
-        unselectedItemColor: AppColors.navbar,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.local_hospital),
-            label: 'Hospital Dashbord',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
+      bottomNavigationBar: SizedBox(
+        height: 90,
+        child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: AppColors.registerCard,
+          currentIndex: _currentIndex,
+          onTap: _onTabTapped,
+          selectedItemColor: AppColors.buttonColor,
+          unselectedItemColor: Colors.black,
+          items: [
+            BottomNavigationBarItem(
+                icon: SvgPicture.asset(
+                  'lib/assets/icons/unselected_home.svg',
+                ),
+                label: 'Home',
+                activeIcon: SvgPicture.asset(
+                  'lib/assests/icons/selected_home.svg',
+                )),
+            BottomNavigationBarItem(
+                icon: SvgPicture.asset(
+                    'lib/assests/icons/unselected_hospital.svg'),
+                label: 'Blogs',
+                activeIcon: SvgPicture.asset(
+                  'lib/assests/icons/selected_hospital.svg',
+                )),
+            BottomNavigationBarItem(
+                icon: SvgPicture.asset(
+                  'lib/assests/icons/unselected_blog.svg',
+                ),
+                label: 'Blogs',
+                activeIcon: SvgPicture.asset(
+                  'lib/assests/icons/selected_blog.svg',
+                )),
+            BottomNavigationBarItem(
+                icon: SvgPicture.asset(
+                  'lib/assests/icons/unselected_profile.svg',
+                ),
+                label: 'Menu',
+                activeIcon: SvgPicture.asset(
+                  'lib/assests/icons/selected_profile.svg',
+                )),
+          ],
+        ),
       ),
     );
   }
 }
 
 class DashboardContent extends StatelessWidget {
-  const DashboardContent({super.key});
-
+  DashboardContent({super.key});
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _buildCard(),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Text(
-                    'Your Health, Simplified.',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Inter',
-                      color: AppColors.textColor2,
-                    ),
+    return Scaffold(
+      key: scaffoldKey,
+      appBar: AppBar(
+        backgroundColor: AppColors.registerCard,
+        title: Image.asset(
+          'lib/assests/images/logo.png',
+          width: 60,
+          height: 60,
+        ),
+        centerTitle: true,
+        actions: [SvgPicture.asset('lib/assests/icons/notification.svg')],
+        leading: Builder(
+          builder: (context) {
+            return GestureDetector(
+                onTap: () {
+                  Scaffold.of(context).openDrawer();
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SvgPicture.asset(
+                    'lib/assests/icons/menu.svg',
+                    width: 20,
                   ),
-                  const SizedBox(height: 10),
-                  const Text(
-                    'Discover a world of medical facilities at your fingertips with Mboacare. Connect globally, collaborate effortlessly, and improve healthcare outcomes. Join now and revolutionize the way medical professionals connect and deliver care.',
+                ));
+          },
+        ),
+      ),
+      drawer: Drawer(
+        backgroundColor: Colors.white,
+        child: ListView(
+          //   padding: EdgeInsets.zero,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Image.asset(
+                    'lib/assests/images/user.png',
+                    width: 100,
+                    height: 100,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Timothy Godfrey',
                     style: TextStyle(
                       fontSize: 16,
-                      fontFamily: 'Inter',
-                      color: AppColors.textColor2,
+                      fontWeight: FontWeight.bold,
                     ),
-                    textAlign: TextAlign.center,
                   ),
-                  const SizedBox(
-                      height: 20), // Add some space before the buttons
-                  ElevatedButton(
-                    onPressed: () {
-                      // Navigate to the RegisterPage
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const LoginScreen(
-                                    title: 'mboacare',
-                                  )));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white, backgroundColor: AppColors.cardbg,
-                      minimumSize: const Size(double.infinity, 50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14),
-                      ),
+                  Text(
+                    'timgodfrey@yahoo.com',
+                    style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w600,
+                      // color: AppColor.blackGrey,
                     ),
-                    child: const Text('Hospital Sign Up'),
-                  ),
-                  const SizedBox(
-                      height: 10), // Add some space between the buttons
-                  ElevatedButton(
-                    onPressed: () async {
-                      // Open the LinkedIn URL in the browser
-                      const url = 'https://www.linkedin.com/company/mboalab/';
-                      final Uri uri = Uri.parse(url);
-                      await launchUrl(uri);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.black, backgroundColor: Colors.white,
-                      minimumSize: const Size(double.infinity, 50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                    ),
-                    child: const Text('Join the Community'),
                   ),
                 ],
               ),
             ),
-          ),
-        ],
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              height: 50,
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: AppColors.buttonColor),
+              child: ListTile(
+                leading: SvgPicture.asset('lib/assests/icons/home.svg'),
+                title: const Text(
+                  'Page 1',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onTap: () {},
+              ),
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.train,
+              ),
+              title: const Text('Page 2'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+        //  Column(children: [
+        //   Image.asset('lib/assests/images/user.png')
+        // ],),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(height: 20),
+            _buildCard(),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      'Your Health, Simplified.',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Inter',
+                        color: AppColors.textColor2,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    const Text(
+                      'Discover a world of medical facilities at your fingertips with Mboacare. Connect globally, collaborate effortlessly, and improve healthcare outcomes. Join now and revolutionize the way medical professionals connect and deliver care.',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontFamily: 'Inter',
+                        color: AppColors.textColor2,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(
+                        height: 20), // Add some space before the buttons
+                    ElevatedButton(
+                      onPressed: () {
+                        // Navigate to the RegisterPage
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LoginScreen(
+                                      title: 'mboacare',
+                                    )));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: AppColors.cardbg,
+                        minimumSize: const Size(double.infinity, 50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                      ),
+                      child: const Text('Hospital Sign Up'),
+                    ),
+                    const SizedBox(
+                        height: 10), // Add some space between the buttons
+                    ElevatedButton(
+                      onPressed: () async {
+                        // Open the LinkedIn URL in the browser
+                        const url = 'https://www.linkedin.com/company/mboalab/';
+                        final Uri uri = Uri.parse(url);
+                        await launchUrl(uri);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.black,
+                        backgroundColor: Colors.white,
+                        minimumSize: const Size(double.infinity, 50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                      ),
+                      child: const Text('Join the Community'),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

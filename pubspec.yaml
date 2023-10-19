@@ -48,6 +48,7 @@ dependencies:
   google_maps_flutter: ^2.4.0
   intl: ^0.18.0
   http: ^1.1.0
+  flutter_svg: ^2.0.7
   
   
 
@@ -97,6 +98,18 @@ flutter:
     - lib/assests/images/spain.png
     - lib/assests/images/france.png
     - lib/assests/images/america.png
+    - lib/assests/icons/unselected_hospital.svg
+    - lib/assests/icons/selected_hospital.svg
+    - lib/assests/icons/unselected_blog.svg
+    - lib/assests/icons/selected_blog.svg
+    - lib/assests/icons/unselected_profile.svg
+    - lib/assests/icons/selected_profile.svg
+    - lib/assests/icons/unselected_home.svg
+    - lib/assests/icons/selected_home.svg
+    - lib/assests/icons/notification.svg
+    - lib/assests/icons/menu.svg
+    - lib/assests/icons/home.svg
+    - lib/assests/images/user.png
     
 
   #   - images/a_dot_ham.jpeg
