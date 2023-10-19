@@ -82,7 +82,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       // ),
       body: _screens[_currentIndex],
       bottomNavigationBar: SizedBox(
-        height: 90,
+        height: 70,
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           backgroundColor: AppColors.registerCard,
@@ -157,7 +157,7 @@ class _DashboardContentState extends State<DashboardContent> {
         centerTitle: true,
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 10),
+            padding: const EdgeInsets.only(right: 15),
             child: SvgPicture.asset('lib/assests/icons/notification.svg'),
           )
         ],
@@ -168,7 +168,7 @@ class _DashboardContentState extends State<DashboardContent> {
                   Scaffold.of(context).openDrawer();
                 },
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 10),
+                  padding: const EdgeInsets.only(left: 15),
                   child: SvgPicture.asset(
                     'lib/assests/icons/menu.svg',
                     width: 20,
@@ -275,7 +275,7 @@ class _DashboardContentState extends State<DashboardContent> {
                   color: selectedIndex == 1 ? Colors.white : Colors.black,
                 ),
                 title: Text(
-                  'Blog',
+                  'Blogs',
                   style: TextStyle(
                       color: selectedIndex == 1
                           ? Colors.white
@@ -308,7 +308,7 @@ class _DashboardContentState extends State<DashboardContent> {
                   color: selectedIndex == 2 ? Colors.white : Colors.black,
                 ),
                 title: Text(
-                  'Hospital',
+                  'Hospitals',
                   style: TextStyle(
                       color: selectedIndex == 2
                           ? Colors.white
