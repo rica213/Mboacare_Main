@@ -109,6 +109,8 @@ flutter:
     - lib/assests/icons/notification.svg
     - lib/assests/icons/menu.svg
     - lib/assests/icons/home.svg
+    - lib/assests/icons/blog.svg
+    - lib/assests/icons/hospital.svg
     - lib/assests/images/user.png
     
 

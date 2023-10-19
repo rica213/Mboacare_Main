@@ -129,9 +129,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 }
 
-class DashboardContent extends StatelessWidget {
+class DashboardContent extends StatefulWidget {
   DashboardContent({super.key});
+
+  @override
+  State<DashboardContent> createState() => _DashboardContentState();
+}
+
+class _DashboardContentState extends State<DashboardContent> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -208,24 +215,76 @@ class DashboardContent extends StatelessWidget {
               margin: EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: AppColors.buttonColor),
+                  color: selectedIndex == 0
+                      ? AppColors.buttonColor
+                      : Colors.white),
               child: ListTile(
-                leading: SvgPicture.asset('lib/assests/icons/home.svg'),
-                title: const Text(
-                  'Page 1',
-                  style: TextStyle(color: Colors.white),
+                leading: SvgPicture.asset(
+                  'lib/assests/icons/home.svg',
                 ),
-                onTap: () {},
+                title: Text(
+                  'Home',
+                  style: TextStyle(
+                      color: selectedIndex == 0
+                          ? Colors.white
+                          : AppColors.buttonColor),
+                ),
+                onTap: () {
+                  setState(() {
+                    selectedIndex = 0;
+                  });
+                },
               ),
             ),
-            ListTile(
-              leading: const Icon(
-                Icons.train,
+            Container(
+              height: 50,
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: selectedIndex == 1
+                      ? AppColors.buttonColor
+                      : Colors.white),
+              child: ListTile(
+                leading: SvgPicture.asset(
+                  'lib/assests/icons/blog.svg',
+                ),
+                title: Text(
+                  'Blog',
+                  style: TextStyle(
+                      color: selectedIndex == 1
+                          ? Colors.white
+                          : AppColors.buttonColor),
+                ),
+                onTap: () {
+                  setState(() {
+                    selectedIndex = 1;
+                  });
+                },
               ),
-              title: const Text('Page 2'),
-              onTap: () {
-                Navigator.pop(context);
-              },
+            ),
+            Container(
+              height: 50,
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: selectedIndex == 2
+                      ? AppColors.buttonColor
+                      : Colors.white),
+              child: ListTile(
+                leading: SvgPicture.asset('lib/assests/icons/hospital.svg'),
+                title: Text(
+                  'Hospital',
+                  style: TextStyle(
+                      color: selectedIndex == 2
+                          ? Colors.white
+                          : AppColors.buttonColor),
+                ),
+                onTap: () {
+                  setState(() {
+                    selectedIndex = 2;
+                  });
+                },
+              ),
             ),
           ],
         ),
