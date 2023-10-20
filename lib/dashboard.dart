@@ -1,12 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mboacare/login.dart';
-import 'package:mboacare/sign_up_page.dart';
 import 'colors.dart';
 import 'settings.dart';
-import 'profile.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'hospitaldashboard.dart';
+import 'user_profile_page.dart';
 
 class DashboardScreen extends StatefulWidget {
   final String userName;
@@ -55,9 +54,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       const DashboardContent(),
       const HospitalDashboard(),
       SettingsPage(context: context),
-      ProfilePage(
-        userName: widget.userName,
-      ),
+      SettingsPage(context: context),
     ];
   }
 
@@ -150,16 +147,22 @@ class DashboardContent extends StatelessWidget {
                       height: 20), // Add some space before the buttons
                   ElevatedButton(
                     onPressed: () {
+                      // // Navigate to the RegisterPage
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => const SignUpPage(
+                      //               //title: 'mboacare',
+                      //             )));
                       // Navigate to the RegisterPage
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const SignUpPage(
-                                    //title: 'mboacare',
-                                  )));
+                              builder: (context) => const ProfilePage()));
                     },
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white, backgroundColor: AppColors.cardbg,
+                      foregroundColor: Colors.white,
+                      backgroundColor: AppColors.cardbg,
                       minimumSize: const Size(double.infinity, 50),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14),
@@ -177,7 +180,8 @@ class DashboardContent extends StatelessWidget {
                       await launchUrl(uri);
                     },
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.black, backgroundColor: Colors.white,
+                      foregroundColor: Colors.black,
+                      backgroundColor: Colors.white,
                       minimumSize: const Size(double.infinity, 50),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14),
