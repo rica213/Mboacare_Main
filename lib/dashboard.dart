@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mboacare/login.dart';
+import 'package:mboacare/sign_up_page.dart';
 import 'colors.dart';
 import 'settings.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'hospitaldashboard.dart';
-import 'user_profile_page.dart';
 
 class DashboardScreen extends StatefulWidget {
   final String userName;
@@ -147,18 +147,13 @@ class DashboardContent extends StatelessWidget {
                       height: 20), // Add some space before the buttons
                   ElevatedButton(
                     onPressed: () {
-                      // // Navigate to the RegisterPage
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => const SignUpPage(
-                      //               //title: 'mboacare',
-                      //             )));
                       // Navigate to the RegisterPage
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const ProfilePage()));
+                              builder: (context) => const SignUpPage(
+                                  //title: 'mboacare',
+                                  )));
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
