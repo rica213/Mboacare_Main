@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../hospital_provider.dart';
-import '../l10n/app_localizations.dart';
-import '../locale_provider.dart';
+import 'hospital_provider.dart';
+import 'l10n/app_localizations.dart';
+import 'locale_provider.dart';
 
 class Language extends StatefulWidget {
   final BuildContext context;
