@@ -2,8 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mboacare/login.dart';
 import 'package:mboacare/register.dart';
+import 'package:mboacare/settingsPage/language.dart';
 import 'colors.dart';
-import 'settings.dart';
+import 'settingsPage/settings.dart';
 import 'profile.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'hospitaldashboard.dart';
@@ -55,7 +56,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     _screens = [
       DashboardContent(),
       HospitalDashboard(),
-      SettingsPage(context: context),
+      Language(context: context),
       ProfilePage(
         userName: widget.userName,
       ),

@@ -48,6 +48,7 @@ dependencies:
   google_maps_flutter: ^2.4.0
   intl: ^0.18.0
   http: ^1.1.0
+  iconsax: ^0.0.8
   
   
 
@@ -85,6 +86,7 @@ flutter:
     - lib/assests/images/google-icon.png
     - lib/assests/images/aiims.jpg
     - lib/assests/images/apollo.jpg
+    - lib/assests/images/lady.jpeg
     - lib/assests/images/CMC.jpg
     - lib/assests/images/Max.jpg
     - lib/assests/images/medanta.jpg
