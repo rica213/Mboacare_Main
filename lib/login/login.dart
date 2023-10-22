@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mboacare/login/signin_view_model.dart';
+import 'package:mboacare/login/signin_provider.dart';
 import 'package:mboacare/utils/constants.dart';
 import 'package:provider/provider.dart';
 import '../sign_up/sign_up_page.dart';

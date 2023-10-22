@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mboacare/login/login.dart';
 import 'package:mboacare/register.dart';
-import 'package:mboacare/sign_up/view_model/signup_view_model.dart';
+import 'package:mboacare/sign_up/view_model/signup_provider.dart';
 import 'package:mboacare/utils/constants.dart';
 import 'package:mboacare/utils/validations.dart';
 import 'package:mboacare/widgets/custom_btn.dart';
