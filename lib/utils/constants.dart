@@ -1,17 +1,23 @@
+import 'package:flutter/material.dart';
 
+import '../cache/sharedpreferences.dart';
+
+///Global variables
+final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
+final SharedPreference sharedPreference = SharedPreference();
 
 class AppStrings {
   static String welcome ="Welcome back";
   static String remember ="Remember Me";
   static String sign ="Sign in";
   static String signUp ="Sign up";
-  static String account ="Don't have an account?";
-  static String signIn ="Sign in with Google";
+  static String doNotHaveAccount ="Don't have an account? ";
+  static String signInWithGoogle ="Sign in with Google";
   static String forgot ="Forgot password";
   static String enterPassword ="Enter your password";
   static String email ="Email *";
   static String password ="Password *";
-  static String enter ="Enter your email";
+  static String enterEmail ="Enter your email";
   static String details ="Welcome back! Please enter your details.";
 
 }

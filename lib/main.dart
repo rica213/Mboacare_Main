@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:mboacare/colors.dart';
+import 'package:mboacare/sign_up/view_model/signup_view_model.dart';
 import 'package:mboacare/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:mboacare/view_model/signup_view_model.dart';
+import 'package:mboacare/utils/constants.dart';
 import 'package:provider/provider.dart';
 import 'hospital_provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'locale_provider.dart';
 import 'l10n/app_localizations.dart';
+import 'login/signin_view_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,6 +20,7 @@ void main() async {
       ChangeNotifierProvider(create: (_) => HospitalProvider()),
       ChangeNotifierProvider(create: (_) => LocaleProvider()),
       ChangeNotifierProvider(create: (_) => SignUpProvider()),
+      ChangeNotifierProvider(create: (_) => SignInProvider()),
       // Add other providers here if needed.
     ],
     child: const MyApp(),
@@ -51,6 +54,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
         useMaterial3: true,
       ),
+      scaffoldMessengerKey: scaffoldKey,
       // Add supported locales and localizations delegates
       supportedLocales: const [
         Locale('en', 'US'), // English
