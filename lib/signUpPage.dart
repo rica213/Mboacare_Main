@@ -9,7 +9,7 @@ import 'colors.dart';
 import 'dashboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:connectivity_plus/connectivity_plus.dart';
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key});
 
@@ -114,6 +114,11 @@ The Mboacare Team
   }
 
   void _signUpWithEmailAndPassword() async {
+    bool isConnected = await _checkConnectivity();
+    if (!isConnected) {
+      _showMessage("No internet connection. Please check your connection.");
+      return;
+    }
     try {
       final String password = _passwordController.text;
       final String confirmPassword = _confirmPasswordController.text;
@@ -169,6 +174,11 @@ The Mboacare Team
   }
 
   Future<void> _signUpWithGoogle() async {
+    bool isConnected = await _checkConnectivity();
+    if (!isConnected) {
+      _showMessage("No internet connection. Please check your connection.");
+      return;
+    }
     GoogleSignIn _googleSignIn = GoogleSignIn();
     try {
       var result = await _googleSignIn.signIn();
@@ -205,7 +215,29 @@ The Mboacare Team
       print(error);
     }
   }
-
+  Future<bool> _checkConnectivity() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    return connectivityResult != ConnectivityResult.none;
+  }
+   void _showMessage(String message) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Error'),
+        content: Text(message),
+        actions: <Widget>[
+          TextButton(
+            child: Text('OK'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
