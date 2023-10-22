@@ -77,12 +77,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text(_screenTitles[_currentIndex]),
-      // ),
       body: _screens[_currentIndex],
       bottomNavigationBar: SizedBox(
-        height: 70,
+        height: 80,
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           backgroundColor: AppColors.registerCard,
@@ -91,9 +88,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
           selectedItemColor: AppColors.buttonColor,
           unselectedItemColor: AppColors.grey,
           selectedLabelStyle:
-              TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+              const TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
           unselectedLabelStyle:
-              TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+              const TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
           items: [
             BottomNavigationBarItem(
                 icon: SvgPicture.asset(
@@ -102,6 +99,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 label: 'Home',
                 activeIcon: SvgPicture.asset(
                   'lib/assests/icons/selected_home.svg',
+                  width: 35,
+                  height: 35,
                 )),
             BottomNavigationBarItem(
                 icon: SvgPicture.asset(
@@ -109,6 +108,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 label: 'Hospitals',
                 activeIcon: SvgPicture.asset(
                   'lib/assests/icons/selected_hospital.svg',
+                  width: 35,
+                  height: 35,
                 )),
             BottomNavigationBarItem(
                 icon: SvgPicture.asset(
@@ -117,6 +118,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 label: 'Blogs',
                 activeIcon: SvgPicture.asset(
                   'lib/assests/icons/selected_blog.svg',
+                  width: 35,
+                  height: 35,
                 )),
             BottomNavigationBarItem(
                 icon: SvgPicture.asset(
@@ -125,6 +128,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 label: 'Account',
                 activeIcon: SvgPicture.asset(
                   'lib/assests/icons/selected_user.svg',
+                  width: 35,
+                  height: 35,
                 )),
           ],
         ),
@@ -180,38 +185,38 @@ class _DashboardContentState extends State<DashboardContent> {
       drawer: Drawer(
         backgroundColor: Colors.white,
         child: ListView(
-          //   padding: EdgeInsets.zero,
+          //  padding: EdgeInsets.zero,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Image.asset(
                     'lib/assests/images/user.png',
-                    width: 100,
-                    height: 100,
+                    width: 80,
+                    height: 80,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                  Text(
+                  const Text(
                     'Janet Dolittle',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
-                  Text(
+                  const Text(
                     'janetdolittle@mail.com',
                     style: TextStyle(
                         fontSize: 15,
@@ -221,18 +226,16 @@ class _DashboardContentState extends State<DashboardContent> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            Divider(
+            const Divider(
+              thickness: 1.5,
               color: AppColors.grey100,
-            ),
-            SizedBox(
-              height: 10,
             ),
             Container(
               height: 50,
-              margin: EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: selectedIndex == 0
@@ -246,9 +249,9 @@ class _DashboardContentState extends State<DashboardContent> {
                 title: Text(
                   'Home',
                   style: TextStyle(
-                      color: selectedIndex == 0
-                          ? Colors.white
-                          : AppColors.buttonColor),
+                      color: selectedIndex == 0 ? Colors.white : Colors.black,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16),
                 ),
                 onTap: () {
                   setState(() {
@@ -263,7 +266,7 @@ class _DashboardContentState extends State<DashboardContent> {
             ),
             Container(
               height: 50,
-              margin: EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: selectedIndex == 1
@@ -277,9 +280,9 @@ class _DashboardContentState extends State<DashboardContent> {
                 title: Text(
                   'Blogs',
                   style: TextStyle(
-                      color: selectedIndex == 1
-                          ? Colors.white
-                          : AppColors.buttonColor),
+                      color: selectedIndex == 1 ? Colors.white : Colors.black,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16),
                 ),
                 onTap: () {
                   setState(() {
@@ -296,7 +299,7 @@ class _DashboardContentState extends State<DashboardContent> {
             ),
             Container(
               height: 50,
-              margin: EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: selectedIndex == 2
@@ -310,9 +313,9 @@ class _DashboardContentState extends State<DashboardContent> {
                 title: Text(
                   'Hospitals',
                   style: TextStyle(
-                      color: selectedIndex == 2
-                          ? Colors.white
-                          : AppColors.buttonColor),
+                      color: selectedIndex == 2 ? Colors.white : Colors.black,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16),
                 ),
                 onTap: () {
                   setState(() {
@@ -321,10 +324,63 @@ class _DashboardContentState extends State<DashboardContent> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => HospitalDashboard()));
+                          builder: (context) => const HospitalDashboard()));
                 },
               ),
             ),
+            Container(
+              height: 50,
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: selectedIndex == 3
+                      ? AppColors.buttonColor
+                      : Colors.transparent),
+              child: ListTile(
+                leading: SvgPicture.asset(
+                  'lib/assests/icons/unselected_user.svg',
+                  color: selectedIndex == 3 ? Colors.white : Colors.black,
+                ),
+                title: Text(
+                  'Account',
+                  style: TextStyle(
+                      color: selectedIndex == 3 ? Colors.white : Colors.black,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16),
+                ),
+                onTap: () {
+                  setState(() {
+                    selectedIndex = 3;
+                  });
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HospitalDashboard()));
+                },
+              ),
+            ),
+            const SizedBox(
+              height: 180,
+            ),
+            const Divider(
+              color: AppColors.grey100,
+              thickness: 1.5,
+            ),
+            const Center(
+              child: Text(
+                'Mboacare',
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.grey),
+              ),
+            ),
+            const Center(
+              child: Text(
+                'v0.0.1',
+                style: TextStyle(fontSize: 18, color: AppColors.buttonColor),
+              ),
+            )
           ],
         ),
       ),
