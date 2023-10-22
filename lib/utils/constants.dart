@@ -18,6 +18,8 @@ class AppStrings {
   static String forgot ="Forgot password";
   static String enterPassword ="Enter your password";
   static String email ="Email *";
+  static String back ="Back";
+  static String information ="Hospital Information";
   static String password ="Password *";
   static String enterEmail ="Enter your email";
   static String details ="Welcome back! Please enter your details.";

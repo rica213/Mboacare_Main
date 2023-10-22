@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mboacare/login/signin_provider.dart';
 import 'package:mboacare/utils/constants.dart';
 import 'package:provider/provider.dart';
+import '../register/add_hopital.dart';
 import '../sign_up/sign_up_page.dart';
-import '../register.dart';
 import '../colors.dart';
 
 import '../widgets/custom_btn.dart';

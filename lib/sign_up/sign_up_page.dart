@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mboacare/login/login.dart';
-import 'package:mboacare/register.dart';
 import 'package:mboacare/sign_up/view_model/signup_provider.dart';
 import 'package:mboacare/utils/constants.dart';
 import 'package:mboacare/utils/validations.dart';
@@ -10,6 +9,7 @@ import 'package:mboacare/widgets/input_fields.dart';
 import 'package:mboacare/widgets/password_validation_view.dart';
 import 'package:provider/provider.dart';
 import '../colors.dart';
+import '../register/add_hopital.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});

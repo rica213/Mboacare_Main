@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mboacare/colors.dart';
+import 'package:mboacare/register/add_hospital_provider.dart';
 import 'package:mboacare/sign_up/view_model/signup_provider.dart';
 import 'package:mboacare/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -23,6 +24,7 @@ void main() async {
       ChangeNotifierProvider(create: (_) => LocaleProvider()),
       ChangeNotifierProvider(create: (_) => SignUpProvider()),
       ChangeNotifierProvider(create: (_) => SignInProvider()),
+      ChangeNotifierProvider(create: (_) => AddHospitalProvider()),
       ChangeNotifierProvider(
           create: (_) => UserDataProvider(TestData.getTestUser())),
       // Add other providers here if needed.
