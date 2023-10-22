@@ -4,6 +4,9 @@ import 'package:mboacare/sign_up/view_model/signup_view_model.dart';
 import 'package:mboacare/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mboacare/utils/constants.dart';
+import 'package:mboacare/user_provider.dart';
+import 'package:mboacare/user_test_data.dart';
+import 'package:mboacare/view_model/signup_view_model.dart';
 import 'package:provider/provider.dart';
 import 'hospital_provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -21,6 +24,8 @@ void main() async {
       ChangeNotifierProvider(create: (_) => LocaleProvider()),
       ChangeNotifierProvider(create: (_) => SignUpProvider()),
       ChangeNotifierProvider(create: (_) => SignInProvider()),
+      ChangeNotifierProvider(
+          create: (_) => UserDataProvider(TestData.getTestUser())),
       // Add other providers here if needed.
     ],
     child: const MyApp(),

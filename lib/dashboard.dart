@@ -4,7 +4,6 @@ import 'package:mboacare/login/login.dart';
 import 'package:mboacare/sign_up/sign_up_page.dart';
 import 'colors.dart';
 import 'settings.dart';
-import 'profile.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'hospitaldashboard.dart';
 
@@ -55,9 +54,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       const DashboardContent(),
       const HospitalDashboard(),
       SettingsPage(context: context),
-      ProfilePage(
-        userName: widget.userName,
-      ),
+      SettingsPage(context: context),
     ];
   }
 
@@ -155,11 +152,12 @@ class DashboardContent extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) => const SignUpPage(
-                                    //title: 'mboacare',
+                                  //title: 'mboacare',
                                   )));
                     },
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white, backgroundColor: AppColors.cardbg,
+                      foregroundColor: Colors.white,
+                      backgroundColor: AppColors.cardbg,
                       minimumSize: const Size(double.infinity, 50),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14),
@@ -177,7 +175,8 @@ class DashboardContent extends StatelessWidget {
                       await launchUrl(uri);
                     },
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.black, backgroundColor: Colors.white,
+                      foregroundColor: Colors.black,
+                      backgroundColor: Colors.white,
                       minimumSize: const Size(double.infinity, 50),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14),
