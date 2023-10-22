@@ -1021,30 +1021,6 @@ packages:
   vector_math:
     dependency: transitive
     description:
-      name: vector_graphics
-      sha256: b16dadf7eb610e20da044c141b4a0199a5e8082ca21daba68322756f953ce714
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.9"
-  vector_graphics_codec:
-    dependency: transitive
-    description:
-      name: vector_graphics_codec
-      sha256: a4b01403d5c613db115e30e71eca33f7e9e09f2d3c52c3fb84e16333ecddc539
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.9"
-  vector_graphics_compiler:
-    dependency: transitive
-    description:
-      name: vector_graphics_compiler
-      sha256: d26c0e2f237476426523eb25512e4c09fa27c6d33ed659a0e69d79e20b5dc47f
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.9"
-  vector_math:
-    dependency: transitive
-    description:
       name: vector_math
       sha256: "80b3257d1492ce4d091729e3a67a60407d227c27241d6927be0130c98e741803"
       url: "https://pub.dev"
