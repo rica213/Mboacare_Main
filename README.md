@@ -1,10 +1,8 @@
 # Outreachy December 2023 to March 2024 Applicants
-![logo2](https://github.com/mercyjae/Mboacare_Main/assets/83911888/8e2fc5b7-c741-4dd4-a397-6e18aba0ee79)   
+![logo2](https://github.com/mercyjae/Mboacare_Main/assets/83911888/8e2fc5b7-c741-4dd4-a397-6e18aba0ee79) 
+# Mboacare: Create a platform to link-up medical facilities globally:
 
 This repository is dedicated to tracking the progress of our project for the contribution phase. We will be using it to report on our project and keep a record of our work.
-
-
-# Mboacare: Create a platform to link-up medical facilities globally:
 
 ## 🧐 Problem Statement <a name = "problem_statement"></a>
 "In the global world of healthcare, the ability to  connect medical facilities and provide accessible healthcare services remains a persistent challenge which cause mortality in the society. Patients often face challenges in locating hospital with medical facilities to treat a particular disease/illness, while hospitals struggle to refer patients to appropriate specialized centers. As a result, there is a significant need for a  platform that bridges the gap in healthcare connectivity.
@@ -97,7 +95,7 @@ This command results in three APK files:
 Removing the `--split-per-abi` flag results in a fat APK that contains your code compiled for all the target ABIs. Such APKs are larger in size than their split counterparts, causing the user to download native binaries that are not applicable to their device’s architecture.
 
 ## Install APK on Android Device
-Load one of the *.apk files listed above. Which file to load depends on what kind of processor is running on your device.
+Load one of the `.apk` files listed above. Which file to load depends on what kind of processor is running on your device.
   
 # Features:
 
@@ -161,20 +159,6 @@ Load one of the *.apk files listed above. Which file to load depends on what kin
 - Button Color: Color(0xFF106517);
 - Alert Color: Color(0xFF000000)
 - Icon Color: Color(0xFF106517)
-
-
-### Flutter Implementation
-Text(
-  "Sample Text",
-  style: TextStyle(
-    fontSize:20
-    fontFamily:'Inter'
-    fontWeight: FontWeight.w900,
-    color: Color(0xFF106517)
-  ),
-)
-
-
 
 # **What's Ahead: Future Features:**
 - AI recommendations: Personalized hospital suggestions on the dashboard.

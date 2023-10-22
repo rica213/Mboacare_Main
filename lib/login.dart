@@ -193,7 +193,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 decoration: BoxDecoration(
                   border: Border.all(
                     width: 1.0,
-                    color: AppColors.email,
+                    color: AppColors.greenColor,
                   ),
                   borderRadius: BorderRadius.circular(8.0),
                 ),
