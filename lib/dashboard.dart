@@ -2,8 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mboacare/login/login.dart';
 import 'package:mboacare/sign_up/sign_up_page.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mboacare/login.dart';
+import 'package:mboacare/sign_up_page.dart';
+import 'package:mboacare/settingsPage/language.dart';
+import 'package:mboacare/user_profile_page.dart';
 import 'colors.dart';
-import 'settings.dart';
+import 'settingsPage/settings.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'hospitaldashboard.dart';
 
@@ -51,10 +56,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   void _initializeScreens(BuildContext context) {
     _screens = [
-      const DashboardContent(),
+      DashboardContent(),
       const HospitalDashboard(),
-      SettingsPage(context: context),
-      SettingsPage(context: context),
+      SettingsPage(),
+      ProfilePage(),
     ];
   }
 
@@ -74,121 +79,389 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(_screenTitles[_currentIndex]),
-      ),
       body: _screens[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: _onTabTapped,
-        selectedItemColor: AppColors.buttonColor,
-        unselectedItemColor: AppColors.navbar,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.local_hospital),
-            label: 'Hospital Dashbord',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
+      bottomNavigationBar: SizedBox(
+        height: 80,
+        child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: AppColors.registerCard,
+          currentIndex: _currentIndex,
+          onTap: _onTabTapped,
+          selectedItemColor: AppColors.buttonColor,
+          unselectedItemColor: AppColors.grey,
+          selectedLabelStyle:
+              const TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+          unselectedLabelStyle:
+              const TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+          items: [
+            BottomNavigationBarItem(
+                icon: SvgPicture.asset(
+                  'lib/assests/icons/unselected_home.svg',
+                ),
+                label: 'Home',
+                activeIcon: SvgPicture.asset(
+                  'lib/assests/icons/selected_home.svg',
+                  width: 35,
+                  height: 35,
+                )),
+            BottomNavigationBarItem(
+                icon: SvgPicture.asset(
+                    'lib/assests/icons/unselected_hospital.svg'),
+                label: 'Hospitals',
+                activeIcon: SvgPicture.asset(
+                  'lib/assests/icons/selected_hospital.svg',
+                  width: 35,
+                  height: 35,
+                )),
+            BottomNavigationBarItem(
+                icon: SvgPicture.asset(
+                  'lib/assests/icons/unselected_blog.svg',
+                ),
+                label: 'Blogs',
+                activeIcon: SvgPicture.asset(
+                  'lib/assests/icons/selected_blog.svg',
+                  width: 35,
+                  height: 35,
+                )),
+            BottomNavigationBarItem(
+                icon: SvgPicture.asset(
+                  'lib/assests/icons/unselected_user.svg',
+                ),
+                label: 'Account',
+                activeIcon: SvgPicture.asset(
+                  'lib/assests/icons/selected_user.svg',
+                  width: 35,
+                  height: 35,
+                )),
+          ],
+        ),
       ),
     );
   }
 }
 
-class DashboardContent extends StatelessWidget {
-  const DashboardContent({super.key});
+class DashboardContent extends StatefulWidget {
+  DashboardContent({super.key});
 
   @override
+  State<DashboardContent> createState() => _DashboardContentState();
+}
+
+class _DashboardContentState extends State<DashboardContent> {
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  int selectedIndex = 0;
+  @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _buildCard(),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
+    return Scaffold(
+      key: scaffoldKey,
+      appBar: AppBar(
+        backgroundColor: AppColors.registerCard,
+        title: Image.asset(
+          'lib/assests/images/logo.png',
+          width: 60,
+          height: 60,
+        ),
+        centerTitle: true,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 15),
+            child: SvgPicture.asset('lib/assests/icons/notification.svg'),
+          )
+        ],
+        leading: Builder(
+          builder: (context) {
+            return GestureDetector(
+                onTap: () {
+                  Scaffold.of(context).openDrawer();
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: SvgPicture.asset(
+                    'lib/assests/icons/menu.svg',
+                    width: 20,
+                  ),
+                ));
+          },
+        ),
+      ),
+      drawer: Drawer(
+        backgroundColor: Colors.white,
+        child: ListView(
+          //  padding: EdgeInsets.zero,
+          children: [
+            const SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Image.asset(
+                    'lib/assests/images/user.png',
+                    width: 80,
+                    height: 80,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   const Text(
-                    'Your Health, Simplified.',
+                    'Janet Dolittle',
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      fontFamily: 'Inter',
-                      color: AppColors.textColor2,
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(
+                    height: 5,
+                  ),
                   const Text(
-                    'Discover a world of medical facilities at your fingertips with Mboacare. Connect globally, collaborate effortlessly, and improve healthcare outcomes. Join now and revolutionize the way medical professionals connect and deliver care.',
+                    'janetdolittle@mail.com',
                     style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: 'Inter',
-                      color: AppColors.textColor2,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(
-                      height: 20), // Add some space before the buttons
-                  ElevatedButton(
-                    onPressed: () {
-                      // Navigate to the RegisterPage
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SignUpPage(
-                                  //title: 'mboacare',
-                                  )));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: AppColors.cardbg,
-                      minimumSize: const Size(double.infinity, 50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                    ),
-                    child: const Text('Hospital Sign Up'),
-                  ),
-                  const SizedBox(
-                      height: 10), // Add some space between the buttons
-                  ElevatedButton(
-                    onPressed: () async {
-                      // Open the LinkedIn URL in the browser
-                      const url = 'https://www.linkedin.com/company/mboalab/';
-                      final Uri uri = Uri.parse(url);
-                      await launchUrl(uri);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      backgroundColor: Colors.white,
-                      minimumSize: const Size(double.infinity, 50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                    ),
-                    child: const Text('Join the Community'),
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.grey),
                   ),
                 ],
               ),
             ),
-          ),
-        ],
+            const SizedBox(
+              height: 10,
+            ),
+            const Divider(
+              thickness: 1.5,
+              color: AppColors.grey100,
+            ),
+            Container(
+              height: 50,
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: selectedIndex == 0
+                      ? AppColors.buttonColor
+                      : Colors.transparent),
+              child: ListTile(
+                leading: SvgPicture.asset(
+                  'lib/assests/icons/home.svg',
+                  color: selectedIndex == 0 ? Colors.white : Colors.black,
+                ),
+                title: Text(
+                  'Home',
+                  style: TextStyle(
+                      color: selectedIndex == 0 ? Colors.white : Colors.black,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16),
+                ),
+                onTap: () {
+                  setState(() {
+                    selectedIndex = 0;
+                  });
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => DashboardContent()));
+                },
+              ),
+            ),
+            Container(
+              height: 50,
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: selectedIndex == 1
+                      ? AppColors.buttonColor
+                      : Colors.transparent),
+              child: ListTile(
+                leading: SvgPicture.asset(
+                  'lib/assests/icons/blog.svg',
+                  color: selectedIndex == 1 ? Colors.white : Colors.black,
+                ),
+                title: Text(
+                  'Blogs',
+                  style: TextStyle(
+                      color: selectedIndex == 1 ? Colors.white : Colors.black,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16),
+                ),
+                onTap: () {
+                  setState(() {
+                    selectedIndex = 1;
+                  });
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SettingsPage()));
+                },
+              ),
+            ),
+            Container(
+              height: 50,
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: selectedIndex == 2
+                      ? AppColors.buttonColor
+                      : Colors.transparent),
+              child: ListTile(
+                leading: SvgPicture.asset(
+                  'lib/assests/icons/hospital.svg',
+                  color: selectedIndex == 2 ? Colors.white : Colors.black,
+                ),
+                title: Text(
+                  'Hospitals',
+                  style: TextStyle(
+                      color: selectedIndex == 2 ? Colors.white : Colors.black,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16),
+                ),
+                onTap: () {
+                  setState(() {
+                    selectedIndex = 2;
+                  });
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HospitalDashboard()));
+                },
+              ),
+            ),
+            Container(
+              height: 50,
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: selectedIndex == 3
+                      ? AppColors.buttonColor
+                      : Colors.transparent),
+              child: ListTile(
+                leading: SvgPicture.asset(
+                  'lib/assests/icons/unselected_user.svg',
+                  color: selectedIndex == 3 ? Colors.white : Colors.black,
+                ),
+                title: Text(
+                  'Account',
+                  style: TextStyle(
+                      color: selectedIndex == 3 ? Colors.white : Colors.black,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16),
+                ),
+                onTap: () {
+                  setState(() {
+                    selectedIndex = 3;
+                  });
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HospitalDashboard()));
+                },
+              ),
+            ),
+            const SizedBox(
+              height: 180,
+            ),
+            const Divider(
+              color: AppColors.grey100,
+              thickness: 1.5,
+            ),
+            const Center(
+              child: Text(
+                'Mboacare',
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.grey),
+              ),
+            ),
+            const Center(
+              child: Text(
+                'v0.0.1',
+                style: TextStyle(fontSize: 18, color: AppColors.buttonColor),
+              ),
+            )
+          ],
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(height: 20),
+            _buildCard(),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      'Your Health, Simplified.',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Inter',
+                        color: AppColors.textColor2,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    const Text(
+                      'Discover a world of medical facilities at your fingertips with Mboacare. Connect globally, collaborate effortlessly, and improve healthcare outcomes. Join now and revolutionize the way medical professionals connect and deliver care.',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontFamily: 'Inter',
+                        color: AppColors.textColor2,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(
+                        height: 20), // Add some space before the buttons
+                    ElevatedButton(
+                      onPressed: () {
+                        // Navigate to the RegisterPage
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignUpPage(
+                                    //title: 'mboacare',
+                                    )));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: AppColors.cardbg,
+                        minimumSize: const Size(double.infinity, 50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                      ),
+                      child: const Text('Hospital Sign Up'),
+                    ),
+                    const SizedBox(
+                        height: 10), // Add some space between the buttons
+                    ElevatedButton(
+                      onPressed: () async {
+                        // Open the LinkedIn URL in the browser
+                        const url = 'https://www.linkedin.com/company/mboalab/';
+                        final Uri uri = Uri.parse(url);
+                        await launchUrl(uri);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.black,
+                        backgroundColor: Colors.white,
+                        minimumSize: const Size(double.infinity, 50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                      ),
+                      child: const Text('Join the Community'),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
