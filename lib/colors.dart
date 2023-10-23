@@ -12,8 +12,9 @@ class AppColors {
   static const Color greenColor = Color(0xFF106517);
   static const Color password = Color(0xFF106517);
   static const Color navbar = Color(0xFFECFDED);
-  static const Color text = Color(0xFF106517);
+  static const Color text = Color.fromARGB(255, 34, 212, 48);
   static const Color cardbg = Color(0xFF106517);
+  static const Color deleteColor = Colors.red;
   static const Color registerCard = Color(0xFFECFDED);
   static const Color textColor2 = Color(0xFF106517);
   static const Color grey = Color(0xFF565656);

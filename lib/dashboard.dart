@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mboacare/login.dart';
 import 'package:mboacare/sign_up_page.dart';
+import 'package:mboacare/settingsPage/language.dart';
+import 'package:mboacare/user_profile_page.dart';
 import 'colors.dart';
-import 'settings.dart';
-import 'profile.dart';
+import 'settingsPage/settings.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'hospitaldashboard.dart';
 
@@ -55,10 +56,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
     _screens = [
       DashboardContent(),
       const HospitalDashboard(),
-      SettingsPage(context: context),
-      ProfilePage(
-        userName: widget.userName,
-      ),
+      SettingsPage(),
+      ProfilePage(),
     ];
   }
 
@@ -359,16 +358,18 @@ class _DashboardContentState extends State<DashboardContent> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => const SignUpPage(
-                                    //title: 'mboacare',
+                                  //title: 'mboacare',
                                   )));
                     },
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white, backgroundColor: AppColors.cardbg,
+                      foregroundColor: Colors.white,
+                      backgroundColor: AppColors.cardbg,
                       minimumSize: const Size(double.infinity, 50),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14),
                       ),
                     ),
+
                     const SizedBox(height: 10),
                     const Text(
                       'Discover a world of medical facilities at your fingertips with Mboacare. Connect globally, collaborate effortlessly, and improve healthcare outcomes. Join now and revolutionize the way medical professionals connect and deliver care.',
@@ -376,6 +377,25 @@ class _DashboardContentState extends State<DashboardContent> {
                         fontSize: 16,
                         fontFamily: 'Inter',
                         color: AppColors.textColor2,
+
+                    child: const Text('Hospital Sign Up'),
+                  ),
+                  const SizedBox(
+                      height: 10), // Add some space between the buttons
+                  ElevatedButton(
+                    onPressed: () async {
+                      // Open the LinkedIn URL in the browser
+                      const url = 'https://www.linkedin.com/company/mboalab/';
+                      final Uri uri = Uri.parse(url);
+                      await launchUrl(uri);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.black,
+                      backgroundColor: Colors.white,
+                      minimumSize: const Size(double.infinity, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
+
                       ),
                       textAlign: TextAlign.center,
                     ),

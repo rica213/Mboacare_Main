@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:mboacare/l10n/app_localizations.dart';
+import 'package:mboacare/locale_provider.dart';
 import 'package:provider/provider.dart';
-import 'l10n/app_localizations.dart';
-import 'locale_provider.dart';
-import 'dart:developer' as devtools show log;
 
-class SettingsPage extends StatefulWidget {
+class Language extends StatefulWidget {
   final BuildContext context;
 
-  const SettingsPage({super.key, required this.context});
+  Language({required this.context});
   @override
-  State<SettingsPage> createState() => _SettingsPageState();
+  _LanguageState createState() => _LanguageState();
 }
 
-class _SettingsPageState extends State<SettingsPage> {
+class _LanguageState extends State<Language> {
   String _selectedLanguage = 'en'; // Default language is English (en)
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(''),
+        title: Text(''),
       ),
       body: SingleChildScrollView(
         // Wrap the entire Column with SingleChildScrollView
@@ -28,11 +27,11 @@ class _SettingsPageState extends State<SettingsPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Select Language:',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: 10),
               DropdownButton<String>(
                 value: _selectedLanguage,
                 onChanged: (String? newValue) {
@@ -52,8 +51,8 @@ class _SettingsPageState extends State<SettingsPage> {
                           width: 30,
                           height: 30,
                         ),
-                        const SizedBox(width: 10),
-                        const Text('English'),
+                        SizedBox(width: 10),
+                        Text('English'),
                       ],
                     ),
                   ),
@@ -66,8 +65,8 @@ class _SettingsPageState extends State<SettingsPage> {
                           width: 30,
                           height: 30,
                         ),
-                        const SizedBox(width: 10),
-                        const Text('हिन्दी'),
+                        SizedBox(width: 10),
+                        Text('हिन्दी'),
                       ],
                     ),
                   ),
@@ -80,8 +79,8 @@ class _SettingsPageState extends State<SettingsPage> {
                           width: 30,
                           height: 30,
                         ),
-                        const SizedBox(width: 10),
-                        const Text('Español'),
+                        SizedBox(width: 10),
+                        Text('Español'),
                       ],
                     ),
                   ),
@@ -94,8 +93,8 @@ class _SettingsPageState extends State<SettingsPage> {
                           width: 30,
                           height: 30,
                         ),
-                        const SizedBox(width: 10),
-                        const Text('Français'),
+                        SizedBox(width: 10),
+                        Text('Français'),
                       ],
                     ),
                   ),
@@ -112,7 +111,7 @@ class _SettingsPageState extends State<SettingsPage> {
   // Function to change the app's language
   // Function to change the app's language
   void _changeLanguage(BuildContext context, Locale locale) {
-    devtools.log("Changing language to: ${locale.languageCode}");
+    print("Changing language to: ${locale.languageCode}");
 
     setState(() {
       Provider.of<LocaleProvider>(context, listen: false).locale = locale;
