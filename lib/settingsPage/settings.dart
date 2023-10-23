@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:mboacare/colors.dart';
-import 'package:mboacare/settingsPage/settingsWidget.dart';
+import 'package:mboacare/settingsPage/settings_widget.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -11,8 +11,8 @@ class SettingsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 50,
-        actions: <Widget>[
-          const IconButton(
+        actions: const <Widget>[
+          IconButton(
               onPressed: null,
               icon: Icon(Iconsax.notification,
                   color: AppColors.textColor2, size: 30))
@@ -94,14 +94,14 @@ class SettingsPage extends StatelessWidget {
                 height: 20,
               ),
               SettingsPageListTiles(
-                  icon: Icon(
+                  icon: const Icon(
                     Iconsax.profile_add,
                     color: AppColors.textColor2,
                     size: 25,
                   ),
                   title: 'Account',
                   subtitle: 'Profile',
-                  trailingIcon: Icon(
+                  trailingIcon: const Icon(
                     Icons.arrow_forward_ios_outlined,
                   ),
                   onTap: () {
@@ -240,8 +240,8 @@ class DeleteAccountDialog extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: AppColors.deleteColor,
                     borderRadius: BorderRadius.circular(35)),
-                child: Center(
-                  child: const Text(
+                child: const Center(
+                  child: Text(
                     'Delete my account',
                     style: TextStyle(
                         fontSize: 15,

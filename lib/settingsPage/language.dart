@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:mboacare/l10n/app_localizations.dart';
 import 'package:mboacare/locale_provider.dart';
 import 'package:provider/provider.dart';
+import 'dart:developer' as devtools show log;
 
 class Language extends StatefulWidget {
   final BuildContext context;
 
-  Language({required this.context});
+  const Language({super.key, required this.context});
   @override
-  _LanguageState createState() => _LanguageState();
+  State<Language> createState() => _LanguageState();
 }
 
 class _LanguageState extends State<Language> {
@@ -18,7 +19,7 @@ class _LanguageState extends State<Language> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(''),
+        title: const Text(''),
       ),
       body: SingleChildScrollView(
         // Wrap the entire Column with SingleChildScrollView
@@ -27,11 +28,11 @@ class _LanguageState extends State<Language> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Select Language:',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               DropdownButton<String>(
                 value: _selectedLanguage,
                 onChanged: (String? newValue) {
@@ -51,8 +52,8 @@ class _LanguageState extends State<Language> {
                           width: 30,
                           height: 30,
                         ),
-                        SizedBox(width: 10),
-                        Text('English'),
+                        const SizedBox(width: 10),
+                        const Text('English'),
                       ],
                     ),
                   ),
@@ -65,8 +66,8 @@ class _LanguageState extends State<Language> {
                           width: 30,
                           height: 30,
                         ),
-                        SizedBox(width: 10),
-                        Text('हिन्दी'),
+                        const SizedBox(width: 10),
+                        const Text('हिन्दी'),
                       ],
                     ),
                   ),
@@ -79,8 +80,8 @@ class _LanguageState extends State<Language> {
                           width: 30,
                           height: 30,
                         ),
-                        SizedBox(width: 10),
-                        Text('Español'),
+                        const SizedBox(width: 10),
+                        const Text('Español'),
                       ],
                     ),
                   ),
@@ -93,8 +94,8 @@ class _LanguageState extends State<Language> {
                           width: 30,
                           height: 30,
                         ),
-                        SizedBox(width: 10),
-                        Text('Français'),
+                        const SizedBox(width: 10),
+                        const Text('Français'),
                       ],
                     ),
                   ),
@@ -111,7 +112,7 @@ class _LanguageState extends State<Language> {
   // Function to change the app's language
   // Function to change the app's language
   void _changeLanguage(BuildContext context, Locale locale) {
-    print("Changing language to: ${locale.languageCode}");
+    devtools.log("Changing language to: ${locale.languageCode}");
 
     setState(() {
       Provider.of<LocaleProvider>(context, listen: false).locale = locale;
