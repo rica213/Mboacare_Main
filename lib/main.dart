@@ -5,6 +5,7 @@ import 'package:mboacare/settingsPage/theme.dart';
 import 'package:mboacare/colors.dart';
 import 'package:mboacare/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:mboacare/user_profile_page.dart';
 import 'package:mboacare/user_provider.dart';
 import 'package:mboacare/user_test_data.dart';
 import 'package:mboacare/view_model/signup_view_model.dart';
@@ -66,6 +67,11 @@ class MyApp extends StatelessWidget {
         return supportedLocales.first;
       },
       home: const SplashScreen(),
+      routes: {
+        '/themeScreen': (context) => ThemeScreen(),
+        '/deleteDialog': (context) => DeleteAccountDialog(),
+        '/profilePage': (context) => ProfilePage(),
+      },
     ); //MaterialApp
   }
 }
