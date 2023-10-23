@@ -17,6 +17,8 @@ class AppColors {
   static const Color deleteColor = Colors.red;
   static const Color registerCard = Color(0xFFECFDED);
   static const Color textColor2 = Color(0xFF106517);
+  static const Color grey = Color(0xFF565656);
+  static const Color grey100 = Color(0xFFE6EAEE);
   static const Color hintTextColor = Color(0xFF547F58);
   static const Color borderColor = Color(0xFFCFD4DC);
 }
