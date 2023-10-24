@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mboacare/blog/blog_page.dart';
 import 'package:mboacare/settingsPage/settings.dart';
 import 'package:mboacare/settingsPage/theme.dart';
 import 'package:mboacare/colors.dart';
-import 'package:mboacare/splash.dart';
+// import 'package:mboacare/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mboacare/user_profile_page.dart';
 import 'package:mboacare/user_provider.dart';
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Mboacare',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
         useMaterial3: true,
@@ -65,11 +66,13 @@ class MyApp extends StatelessWidget {
         }
         return supportedLocales.first;
       },
-      home: const SplashScreen(),
+      //home: const SplashScreen(),
+      home: const BlogPage(),
       routes: {
         '/themeScreen': (context) => const ThemeScreen(),
         '/deleteDialog': (context) => const DeleteAccountDialog(),
         '/profilePage': (context) => const ProfilePage(),
+        '/blogPage' : (context) => const BlogPage(),
       },
     ); //MaterialApp
   }
