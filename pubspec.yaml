@@ -41,13 +41,18 @@ dependencies:
   flutter_form_builder: ^9.1.0
   image_picker: ^0.8.4+2
   file_picker: ^4.0.0
-  provider: ^5.0.0-nullsafety.5
+  provider: ^6.0.5
   cloud_firestore: ^4.8.4
   firebase_storage: ^11.2.5
   flutter_localization: ^0.1.13
   google_maps_flutter: ^2.4.0
   intl: ^0.18.0
   http: ^1.1.0
+  flutter_svg: ^2.0.7
+  iconsax: ^0.0.8
+  google_fonts: ^6.1.0
+  
+
   connectivity_plus: ^5.0.1
   
   
@@ -57,6 +62,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   shared_preferences: ^2.2.0
+  flutter_localizations:
+    sdk: flutter
+  cached_network_image: ^3.3.0
 
 dev_dependencies:
   flutter_test:
@@ -86,6 +94,7 @@ flutter:
     - lib/assests/images/google-icon.png
     - lib/assests/images/aiims.jpg
     - lib/assests/images/apollo.jpg
+    - lib/assests/images/lady.jpeg
     - lib/assests/images/CMC.jpg
     - lib/assests/images/Max.jpg
     - lib/assests/images/medanta.jpg
@@ -96,6 +105,20 @@ flutter:
     - lib/assests/images/spain.png
     - lib/assests/images/france.png
     - lib/assests/images/america.png
+    - lib/assests/icons/unselected_hospital.svg
+    - lib/assests/icons/selected_hospital.svg
+    - lib/assests/icons/unselected_blog.svg
+    - lib/assests/icons/selected_blog.svg
+    - lib/assests/icons/unselected_user.svg
+    - lib/assests/icons/selected_user.svg
+    - lib/assests/icons/unselected_home.svg
+    - lib/assests/icons/selected_home.svg
+    - lib/assests/icons/notification.svg
+    - lib/assests/icons/menu.svg
+    - lib/assests/icons/home.svg
+    - lib/assests/icons/blog.svg
+    - lib/assests/icons/hospital.svg
+    - lib/assests/images/user.png
     
 
   #   - images/a_dot_ham.jpeg

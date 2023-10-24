@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:mboacare/l10n/app_localizations.dart';
+import 'package:mboacare/locale_provider.dart';
 import 'package:provider/provider.dart';
-import 'hospital_provider.dart';
-import 'l10n/app_localizations.dart';
-import 'locale_provider.dart';
 
-class SettingsPage extends StatefulWidget {
+class Language extends StatefulWidget {
   final BuildContext context;
 
-  SettingsPage({required this.context});
+  Language({required this.context});
   @override
-  _SettingsPageState createState() => _SettingsPageState();
+  _LanguageState createState() => _LanguageState();
 }
 
-class _SettingsPageState extends State<SettingsPage> {
+class _LanguageState extends State<Language> {
   String _selectedLanguage = 'en'; // Default language is English (en)
 
   @override
