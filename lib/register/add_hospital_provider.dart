@@ -10,4 +10,5 @@ class AddHospitalProvider extends ChangeNotifier{
   final hospitalTypeController = TextEditingController();
   final hospitalSizeController = TextEditingController();
   final hospitalOwnerShipController = TextEditingController();
+  final nameController = TextEditingController();
 }

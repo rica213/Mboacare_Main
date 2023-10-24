@@ -262,29 +262,27 @@ The Mboacare Team
                 SizedBox(
                   child: Column(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              AppStrings.information,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            AppStrings.information,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
                             ),
-                            const Divider( // Add a Divider widget below the text
-                              color: Color(0xFF106517), // Set the color of the line
-                              thickness: 2.0, // Set the thickness of the line
-                            ),
-                            // Add additional form fields or content here
-                          ],
-                        ),
+                          ),
+                          const Divider( // Add a Divider widget below the text
+                            color: Color(0xFF106517), // Set the color of the line
+                            thickness: 2.0, // Set the thickness of the line
+                          ),
+                          // Add additional form fields or content here
+                        ],
                       ),
                     ],
                   ),
                 ),
+                const SizedBox(height: 30,),
                 Align(
                     alignment: Alignment.centerLeft,
                     child: Padding(
@@ -302,13 +300,14 @@ The Mboacare Team
                 EditTextForm(
                     hintText: "Enter name",
                     onChanged: (value) {
+
                       // setState(() {
                       //   provider.setName(value);
                       //   provider.validRegister();
                       // });
                     },
-                    controller: provider.addressController),
-                SizedBox(
+                    controller: provider.nameController),
+                const SizedBox(
                   height: 10,
                 ),
                 Align(
@@ -801,33 +800,100 @@ The Mboacare Team
                 // ),
 
                 // Radio buttons for Hospital Size
-                _buildChoiceChipForm(
-                  title: 'Hospital Size *',
-                  name: 'hospitalSize',
-                  options: ['Small', 'Medium', 'Large'],
-                  onChanged: (value) => _hospitalSize = value,
-                ),
-
-                // Radio buttons for Hospital Ownership
-                _buildChoiceChipForm(
-                  title: 'Hospital Ownership',
-                  name: 'hospitalOwnership',
-                  options: ['Individual', 'Corporate', 'Government'],
-                  onChanged: (value) => _hospitalOwnership = value,
-                ),
+                // _buildChoiceChipForm(
+                //   title: 'Hospital Size *',
+                //   name: 'hospitalSize',
+                //   options: ['Small', 'Medium', 'Large'],
+                //   onChanged: (value) => _hospitalSize = value,
+                // ),
+                //
+                // // Radio buttons for Hospital Ownership
+                // _buildChoiceChipForm(
+                //   title: 'Hospital Ownership',
+                //   name: 'hospitalOwnership',
+                //   options: ['Individual', 'Corporate', 'Government'],
+                //   onChanged: (value) => _hospitalOwnership = value,
+                // ),
 
                 const SizedBox(height: 20),
 
-                TextButton(
-                  onPressed: _pickImage,
-                  child: const Text(
-                    'Select Image (Optional)',
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 16,
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right:20,left: 20),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: 120,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10), // Adjust the radius as needed
+                          border: Border.all(
+                            color: Colors.green,
+                          ),
+                        ),
+                        child:Stack(
+                          children: [
+                            Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 50),
+                                child: InkWell(
+                                  onTap: _pickImage, // Replace with your desired function
+                                  child: Image.asset(
+                                    AppImages.image,
+                                    width: 30,
+                                  ),
+                                ),
+                              ),
+                            ),
+                             Align(
+                              alignment: Alignment.center,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                   Text(
+                                    AppStrings.uploadImage,
+                                    style: const TextStyle(
+                                      color: Color(0xFF565656),
+                                      fontSize: 14,
+                                      fontFamily: 'Inter',
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  Text(
+                                    AppStrings.photoType,
+                                    style: const TextStyle(
+                                      color: Color(0xFF565656),
+                                      fontSize: 12,
+                                      fontFamily: 'Inter',
+                                      fontWeight: FontWeight.w400,
+
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+
+
+                          ],
+                        ),
+                        // child: TextButton(
+                        //   onPressed: _pickImage,
+                        //   child: const Text(
+                        //     'Select Image (Optional)',
+                        //     style: TextStyle(
+                        //       color: Colors.blue,
+                        //       fontSize: 16,
+                        //     ),
+                        //   ),
+                        // ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
+
+
+
+
 
                 if (_selectedImage != null)
                   Image.file(
@@ -837,26 +903,28 @@ The Mboacare Team
 
                 const SizedBox(height: 20),
 
-                ElevatedButton(
-                  onPressed: () {
-                    concatenateMedicalServices();
-                    concatenateFacilities();
-                    concatenateEmergencyService();
-                    Future.delayed(const Duration(seconds: 1)).then((_) {
-                      _submitForm();
-                    });
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.buttonColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                Center(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      concatenateMedicalServices();
+                      concatenateFacilities();
+                      concatenateEmergencyService();
+                      Future.delayed(const Duration(seconds: 1)).then((_) {
+                        _submitForm();
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.buttonColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
                     ),
-                  ),
-                  child: const Text(
-                    'Sign Up',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
+                    child: const Text(
+                      'Submit',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                 ),

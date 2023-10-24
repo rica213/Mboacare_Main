@@ -99,7 +99,9 @@ flutter:
     - lib/assests/images/spain.png
     - lib/assests/images/france.png
     - lib/assests/images/america.png
-    
+    - lib/assests/images/image_upload.png
+    - lib/assests/images/icon.svg
+
 
   #   - images/a_dot_ham.jpeg
 

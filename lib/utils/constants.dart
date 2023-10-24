@@ -23,6 +23,8 @@ class AppStrings {
   static String password ="Password *";
   static String enterEmail ="Enter your email";
   static String details ="Welcome back! Please enter your details.";
+  static String photoType ="SVG, PNG, JPG or GIF (max. 800x400px)";
+  static String uploadImage ="Click to upload your hospital image";
 
 }
 
@@ -30,6 +32,9 @@ class AppImages {
   static const String appLogo = "lib/assests/images/logo.png";
   static const String googleIcon = "lib/assests/images/google-icon.png";
   static const String checkIcon = "lib/assests/images/check_icon.svg";
+  static const String emailIcon = "lib/assests/images/emailIcon.png";
+  static const String image = "lib/assests/images/image_upload.png";
+  static const String Icon = "lib/assests/images/icon.svg";
 }
 
 class AppFontSizes {
