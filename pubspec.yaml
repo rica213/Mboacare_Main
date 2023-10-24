@@ -63,6 +63,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   cached_network_image: ^3.3.0
+  multiselect: ^0.1.0
 
 dev_dependencies:
   flutter_test:
@@ -117,6 +118,9 @@ flutter:
     - lib/assests/icons/blog.svg
     - lib/assests/icons/hospital.svg
     - lib/assests/images/user.png
+    - lib/assests/images/central_park.png
+    - lib/assests/images/oakville.png
+    
     
 
   #   - images/a_dot_ham.jpeg
