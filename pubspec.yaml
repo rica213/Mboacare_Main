@@ -117,6 +117,8 @@ flutter:
     - lib/assests/icons/home.svg
     - lib/assests/icons/blog.svg
     - lib/assests/icons/upload.svg
+    - lib/assests/icons/delete.svg
+    - lib/assests/icons/location.svg
     - lib/assests/icons/check.svg
     - lib/assests/icons/uncheck.svg
     - lib/assests/icons/hospital.svg

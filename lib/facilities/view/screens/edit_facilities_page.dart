@@ -1,6 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mboacare/colors.dart';
+import 'package:mboacare/facilities/view/widget/chip_text_field.dart';
+
+import '../widget/custom_textfield.dart';
 
 class EditFacilitiesPage extends StatefulWidget {
   const EditFacilitiesPage({super.key});
@@ -33,16 +39,45 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
   bool isType = false;
   bool isOwnership = false;
   int selectedIndex = 0;
+  final ImagePicker _imagePicker = ImagePicker();
+  File? _selectedImage;
+
+  Future<void> _pickImage() async {
+    final pickedImage =
+        await _imagePicker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      if (pickedImage != null) {
+        _selectedImage = File(pickedImage.path);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(Icons.arrow_back),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back,
+            )),
         title: const Text(
           'Edit facility',
           style: TextStyle(
               fontSize: 18, fontWeight: FontWeight.w500, color: AppColors.grey),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 15),
+            child: InkWell(
+                onTap: () {
+                  deleteDialog(context);
+                },
+                child: SvgPicture.asset('lib/assests/icons/delete.svg')),
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -62,7 +97,7 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
               ),
               const Divider(
                 color: AppColors.buttonColor,
-                thickness: 3,
+                thickness: 2.5,
               ),
               const SizedBox(
                 height: 20,
@@ -141,7 +176,13 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
               const SizedBox(
                 height: 10,
               ),
-              const CustomTextField(
+              CustomTextField(
+                prefixIcon: Padding(
+                  padding: const EdgeInsets.all(17.0),
+                  child: SvgPicture.asset(
+                    'lib/assests/icons/location.svg',
+                  ),
+                ),
                 hintText: '5447, Park Lane, London, UK',
               ),
               const SizedBox(
@@ -519,39 +560,50 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
                 height: 20,
               ),
               Container(
-                height: 130,
+                height: 150,
                 width: double.infinity,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     border: Border.all(color: AppColors.grey300, width: 1.5)),
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    SvgPicture.asset('lib/assests/icons/upload.svg'),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const Text(
-                      'Click to upload your hospital image',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    const Text(
-                      'SVG, PNG, JPG or GIF (max. 800x400px)',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.grey),
-                    )
-                  ],
-                ),
+                child: _selectedImage != null
+                    ? Image.file(
+                        _selectedImage!,
+                        fit: BoxFit.cover,
+                        height: 150,
+                      )
+                    : InkWell(
+                        onTap: () {
+                          _pickImage();
+                        },
+                        child: Column(
+                          children: [
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            SvgPicture.asset('lib/assests/icons/upload.svg'),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            const Text(
+                              'Click to upload your hospital image',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            const Text(
+                              'SVG, PNG, JPG or GIF (max. 800x400px)',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppColors.grey),
+                            )
+                          ],
+                        ),
+                      ),
               ),
               const SizedBox(
                 height: 40,
@@ -571,7 +623,7 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    minimumSize: const Size(150, 50),
+                    minimumSize: const Size(150, 45),
                   ),
                   child: const Text(
                     'Submit',
@@ -591,122 +643,78 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
       ),
     );
   }
-}
 
-class CustomTextField extends StatelessWidget {
-  final TextEditingController? controller;
-  final String hintText;
-  const CustomTextField({
-    super.key,
-    required this.hintText,
-    this.controller,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      controller: controller,
-      decoration: InputDecoration(
-        contentPadding:
-            const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-        hintText: hintText,
-        hintStyle: const TextStyle(color: AppColors.grey200),
-
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: AppColors.grey300, width: 1.5),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: AppColors.grey300, width: 1.5),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: AppColors.grey300, width: 1.5),
-        ),
-        // errorBorder: const UnderlineInputBorder(
-        //   borderSide: BorderSide(color: AppColors.red),
-        // ),
-      ),
-    );
-  }
-}
-
-class ChipTextFieldScreen extends StatefulWidget {
-  final String hintText;
-  const ChipTextFieldScreen({super.key, required this.hintText});
-
-  @override
-  State<ChipTextFieldScreen> createState() => _ChipTextFieldScreenState();
-}
-
-class _ChipTextFieldScreenState extends State<ChipTextFieldScreen> {
-  TextEditingController tagsController = TextEditingController();
-  List<String> tags = [];
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        tags.isNotEmpty
-            ? GridView.builder(
-                shrinkWrap: true,
-                padding: const EdgeInsets.all(10),
-                itemCount: tags.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  mainAxisExtent: 45,
-                ),
-                itemBuilder: (context, index) => Chip(
-                  backgroundColor: Colors.white,
-                  label: Text(
-                    tags[index],
-                    style: const TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 17),
-                  ),
-                  deleteIconColor: Colors.black,
-                  padding: const EdgeInsets.all(0),
-                  onDeleted: () {
-                    setState(() {
-                      tags.remove(tags[index]);
-                    });
-                  },
-                ),
-              )
-            : const SizedBox.shrink(),
-        TextFormField(
-          controller: tagsController,
-          cursorColor: Colors.teal,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide:
-                  const BorderSide(color: AppColors.grey300, width: 1.5),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide:
-                  const BorderSide(color: AppColors.grey300, width: 1.5),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide:
-                  const BorderSide(color: AppColors.grey300, width: 1.5),
-            ),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-            hintText: widget.hintText,
+  void deleteDialog(BuildContext context) {
+    showDialog<AlertDialog>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          icon: Container(
+            height: 50,
+            width: 50,
+            decoration: const BoxDecoration(
+                shape: BoxShape.circle, color: AppColors.danger),
+            child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SvgPicture.asset(
+                  'lib/assests/icons/delete.svg',
+                )),
           ),
-          onFieldSubmitted: (_) {
-            setState(() {
-              tags.add(tagsController.text);
-              // provider.placerModel.ad.tags = tags;
-              tagsController.text = '';
-            });
-          },
-        ),
-      ],
+          title: const Text(
+            'Delete  medical facility',
+            style: TextStyle(
+                fontSize: 16, fontWeight: FontWeight.w700, color: Colors.black),
+          ),
+          content: const Text(
+            'You are about to permanently delete this medical facility.',
+            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
+            textAlign: TextAlign.center,
+          ),
+          actions: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.deleteColor,
+                    foregroundColor: AppColors.whiteColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    minimumSize: const Size(40, 40),
+                  ),
+                  child: const Text(
+                    'DELETE',
+                    style: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.buttonColor,
+                    foregroundColor: AppColors.whiteColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    minimumSize: const Size(40, 40),
+                  ),
+                  child: const Text(
+                    'CANCEL',
+                    style: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        );
+      },
     );
   }
 }

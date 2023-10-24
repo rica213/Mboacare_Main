@@ -1,57 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mboacare/colors.dart';
-import 'package:mboacare/facilities/edit_facilities_page.dart';
-
-class FacilitiesPage extends StatelessWidget {
-  const FacilitiesPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          leading: const Icon(Icons.arrow_back),
-          title: const Text(
-            'Manage facilities',
-            style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-                color: AppColors.grey),
-          ),
-        ),
-        body: Column(
-          children: [
-            Expanded(
-              child: ListView.builder(
-                  itemCount: 3,
-                  itemBuilder: (context, index) {
-                    return FacilitiesWidget();
-                  }),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.buttonColor,
-                foregroundColor: AppColors.whiteColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                minimumSize: const Size(350, 50),
-              ),
-              child: const Text(
-                'ADD A FACILITY',
-                style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-          ],
-        ));
-  }
-}
+import 'package:mboacare/facilities/view/screens/edit_facilities_page.dart';
 
 class FacilitiesWidget extends StatelessWidget {
   const FacilitiesWidget({
@@ -118,7 +67,7 @@ class FacilitiesWidget extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        EditFacilitiesPage()));
+                                        const EditFacilitiesPage()));
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.buttonColor,

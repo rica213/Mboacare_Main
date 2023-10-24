@@ -1,13 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mboacare/facilities/facilities_page.dart';
+
 import 'package:mboacare/login.dart';
-import 'package:mboacare/register.dart';
 import 'package:mboacare/sign_up_page.dart';
-import 'package:mboacare/settingsPage/language.dart';
 import 'package:mboacare/user_profile_page.dart';
 import 'colors.dart';
+import 'facilities/view/screens/facilities_page.dart';
 import 'settingsPage/settings.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'hospitaldashboard.dart';
@@ -56,10 +55,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   void _initializeScreens(BuildContext context) {
     _screens = [
-      DashboardContent(),
+      const DashboardContent(),
       const HospitalDashboard(),
-      FacilitiesPage(),
-      ProfilePage(),
+      const FacilitiesPage(),
+      const ProfilePage(),
     ];
   }
 
@@ -141,7 +140,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 }
 
 class DashboardContent extends StatefulWidget {
-  DashboardContent({super.key});
+  const DashboardContent({super.key});
 
   @override
   State<DashboardContent> createState() => _DashboardContentState();
@@ -262,7 +261,7 @@ class _DashboardContentState extends State<DashboardContent> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => DashboardContent()));
+                          builder: (context) => const DashboardContent()));
                 },
               ),
             ),
@@ -291,7 +290,7 @@ class _DashboardContentState extends State<DashboardContent> {
                     selectedIndex = 1;
                   });
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SettingsPage()));
+                      MaterialPageRoute(builder: (context) => const SettingsPage()));
                 },
               ),
             ),

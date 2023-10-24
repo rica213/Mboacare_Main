@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mboacare/settingsPage/language.dart';
 import 'package:mboacare/settingsPage/settings.dart';
 import 'package:mboacare/settingsPage/theme.dart';
 import 'package:mboacare/colors.dart';
@@ -69,9 +68,9 @@ class MyApp extends StatelessWidget {
       },
       home: const SplashScreen(),
       routes: {
-        '/themeScreen': (context) => ThemeScreen(),
-        '/deleteDialog': (context) => DeleteAccountDialog(),
-        '/profilePage': (context) => ProfilePage(),
+        '/themeScreen': (context) => const ThemeScreen(),
+        '/deleteDialog': (context) => const DeleteAccountDialog(),
+        '/profilePage': (context) => const ProfilePage(),
       },
     ); //MaterialApp
   }
