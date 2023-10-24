@@ -282,7 +282,7 @@ The Mboacare Team
                   decoration: BoxDecoration(
                     border: Border.all(
                       width: 1.0,
-                      color: AppColors.email,
+                      color: AppColors.password,
                     ),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
@@ -320,7 +320,7 @@ The Mboacare Team
                   decoration: BoxDecoration(
                     border: Border.all(
                       width: 1.0,
-                      color: AppColors.email,
+                      color: AppColors.password,
                     ),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
