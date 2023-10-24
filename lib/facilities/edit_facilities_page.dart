@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mboacare/colors.dart';
 
 class EditFacilitiesPage extends StatefulWidget {
@@ -9,8 +10,29 @@ class EditFacilitiesPage extends StatefulWidget {
 }
 
 class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
-  String selectedValue = 'Item 1';
-  List<String> items = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
+  String selectedSize = 'Select hospital type';
+  List<String> size = [
+    'Public',
+    'Private',
+    'Other',
+  ];
+  String selectedType = 'Select hospital size';
+  List<String> type = [
+    'Small',
+    'Medium',
+    'Large',
+  ];
+  String selectedOwnership = 'Select hospital ownership';
+  List<String> ownership = [
+    'Individual',
+    'Corporate',
+    'Government',
+  ];
+
+  bool isSize = false;
+  bool isType = false;
+  bool isOwnership = false;
+  int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,151 +44,547 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
               fontSize: 18, fontWeight: FontWeight.w500, color: AppColors.grey),
         ),
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
-              Text(
+              const Text(
                 'Hospital Information',
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                     color: AppColors.buttonColor),
               ),
-              Divider(
+              const Divider(
                 color: AppColors.buttonColor,
                 thickness: 3,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              Text(
+              const Text(
                 'Hospital name *',
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                     color: AppColors.grey),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
-              CustomTextField(
+              const CustomTextField(
                 hintText: 'Central Park Hospital',
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              Text(
+              const Text(
                 'Hospital Email',
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                     color: AppColors.grey),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
-              CustomTextField(
+              const CustomTextField(
                 hintText: 'support@centrapark.org',
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              Text(
+              const Text(
                 'Phone Number *',
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                     color: AppColors.grey),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
-              CustomTextField(
+              const CustomTextField(
                 hintText: '+44 786789378',
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              Text(
+              const Text(
                 'Hospital Website *',
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                     color: AppColors.grey),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
-              CustomTextField(
+              const CustomTextField(
                 hintText: 'centralpark.org',
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              Text(
+              const Text(
                 'Hospital Address *',
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                     color: AppColors.grey),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
-              CustomTextField(
+              const CustomTextField(
                 hintText: '5447, Park Lane, London, UK',
               ),
-             
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              Text('Medical Services Offered'),
-              SizedBox(
+              const Text('Medical Services Offered'),
+              const SizedBox(
                 height: 10,
               ),
-              ChipTextFieldScreen(),
-              SizedBox(
+              const ChipTextFieldScreen(
+                hintText: 'Add a medical service',
+              ),
+              const SizedBox(
                 height: 20,
               ),
-              Text('Facilities available'),
-              SizedBox(
+              const Text(
+                'Facilities available',
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.grey),
+              ),
+              const SizedBox(
                 height: 10,
               ),
-              ChipTextFieldScreen(),
-              SizedBox(
+              const ChipTextFieldScreen(
+                hintText: 'Add a facility',
+              ),
+              const SizedBox(
                 height: 20,
               ),
-              //  DropdownButton(
-              //    value: selectedValue,
-              //    onChanged: (String? newValue) {
-              //      setState(() {
-              //        selectedValue = newValue!;
-              //      });
-              //    },
-              //    items: items.map((String item) {
-              //      return DropdownMenuItem(
-              //        value: item,
-              //        child: RadioListTile(
-              //          title: Text(item),
-              //          value: item,
-              //          groupValue: selectedValue,
-              //          onChanged: (value) {
-              //            setState(() {
-              //              selectedValue = value!;
-              //            });
-              //          },
-              //        ),
-              //      );
-              //    }).toList(),
-              //  ),
-              SizedBox(height: 20),
-              Text('Selected Value: $selectedValue'),
+              const Text(
+                'Hospital Type',
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.grey),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              GestureDetector(
+                onTap: () {
+                  isType = !isType;
+                  setState(() {});
+                },
+                child: Container(
+                  height: 50,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      color: AppColors.whiteColor,
+                      border: Border.all(color: AppColors.grey300, width: 1.5),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            selectedSize,
+                            style: const TextStyle(
+                                color: AppColors.grey200,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          const Icon(
+                            Icons.keyboard_arrow_down,
+                            color: AppColors.grey,
+                          )
+                        ]),
+                  ),
+                ),
+              ),
+              if (isType)
+                Card(
+                  elevation: 0.2,
+                  child: SizedBox(
+                    height: 200,
+                    width: double.infinity,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 10),
+                          child: Text(
+                            'Select Hospital Type',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.black),
+                          ),
+                        ),
+                        const Divider(
+                          color: AppColors.grey,
+                        ),
+                        ListView.builder(
+                          primary: true,
+                          shrinkWrap: true,
+                          itemCount: size.length,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              color: selectedIndex == index
+                                  ? AppColors.grey100
+                                  : Colors.transparent,
+                              child: InkWell(
+                                  onTap: () {
+                                    selectedSize = size[index];
+                                    selectedIndex = index;
+                                    isType = false;
+                                    setState(() {});
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Row(
+                                      children: [
+                                        selectedIndex == index
+                                            ? SvgPicture.asset(
+                                                'lib/assests/icons/check.svg')
+                                            : SvgPicture.asset(
+                                                'lib/assests/icons/uncheck.svg'),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text(
+                                          size[index],
+                                          style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.black),
+                                        ),
+                                      ],
+                                    ),
+                                  )),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Text(
+                'Hospital Size',
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.grey),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              GestureDetector(
+                onTap: () {
+                  isSize = !isSize;
+                  setState(() {});
+                },
+                child: Container(
+                  height: 50,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      color: AppColors.whiteColor,
+                      border: Border.all(color: AppColors.grey300, width: 1.5),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            selectedType,
+                            style: const TextStyle(
+                                color: AppColors.grey200,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          const Icon(
+                            Icons.keyboard_arrow_down,
+                            color: AppColors.grey,
+                          )
+                        ]),
+                  ),
+                ),
+              ),
+              if (isSize)
+                Card(
+                  elevation: 0.2,
+                  child: SizedBox(
+                    height: 200,
+                    width: double.infinity,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 10),
+                          child: Text(
+                            'Select hospital Size',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.black),
+                          ),
+                        ),
+                        const Divider(
+                          color: AppColors.grey,
+                        ),
+                        ListView.builder(
+                          primary: true,
+                          shrinkWrap: true,
+                          itemCount: type.length,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              color: selectedIndex == index
+                                  ? AppColors.grey100
+                                  : Colors.transparent,
+                              child: InkWell(
+                                  onTap: () {
+                                    isSize = false;
+                                    selectedType = type[index];
+                                    selectedIndex = index;
+                                    setState(() {});
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Row(
+                                      children: [
+                                        selectedIndex == index
+                                            ? SvgPicture.asset(
+                                                'lib/assests/icons/check.svg')
+                                            : SvgPicture.asset(
+                                                'lib/assests/icons/uncheck.svg'),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text(
+                                          type[index],
+                                          style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.black),
+                                        ),
+                                      ],
+                                    ),
+                                  )),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Text(
+                'Hospital Ownership',
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.grey),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              GestureDetector(
+                onTap: () {
+                  isOwnership = !isOwnership;
+                  setState(() {});
+                },
+                child: Container(
+                  height: 50,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      color: AppColors.whiteColor,
+                      border: Border.all(color: AppColors.grey300, width: 1.5),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            selectedOwnership,
+                            style: const TextStyle(
+                                color: AppColors.grey200,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          const Icon(
+                            Icons.keyboard_arrow_down,
+                            color: AppColors.grey,
+                          )
+                        ]),
+                  ),
+                ),
+              ),
+              if (isOwnership)
+                Card(
+                  elevation: 0.2,
+                  child: SizedBox(
+                    height: 230,
+                    width: double.infinity,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 10),
+                          child: Text(
+                            'Select hospital ownership',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.black),
+                          ),
+                        ),
+                        const Divider(
+                          color: AppColors.grey,
+                        ),
+                        ListView.builder(
+                          primary: true,
+                          shrinkWrap: true,
+                          itemCount: ownership.length,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              color: selectedIndex == index
+                                  ? AppColors.grey100
+                                  : Colors.transparent,
+                              child: InkWell(
+                                  onTap: () {
+                                    isOwnership = false;
+                                    selectedOwnership = ownership[index];
+                                    selectedIndex = index;
+                                    setState(() {});
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Row(
+                                      children: [
+                                        selectedIndex == index
+                                            ? SvgPicture.asset(
+                                                'lib/assests/icons/check.svg')
+                                            : SvgPicture.asset(
+                                                'lib/assests/icons/uncheck.svg'),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text(
+                                          ownership[index],
+                                          style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.black),
+                                        ),
+                                      ],
+                                    ),
+                                  )),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                height: 130,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    border: Border.all(color: AppColors.grey300, width: 1.5)),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    SvgPicture.asset('lib/assests/icons/upload.svg'),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      'Click to upload your hospital image',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    const Text(
+                      'SVG, PNG, JPG or GIF (max. 800x400px)',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.grey),
+                    )
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) =>
+                    //             EditFacilitiesPage()));
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.buttonColor,
+                    foregroundColor: AppColors.whiteColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    minimumSize: const Size(150, 50),
+                  ),
+                  child: const Text(
+                    'Submit',
+                    style: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 50,
+              )
             ],
           ),
         ),
@@ -196,15 +614,15 @@ class CustomTextField extends StatelessWidget {
 
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: AppColors.grey, width: 1),
+          borderSide: const BorderSide(color: AppColors.grey300, width: 1.5),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: AppColors.grey, width: 1),
+          borderSide: const BorderSide(color: AppColors.grey300, width: 1.5),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: AppColors.grey, width: 1),
+          borderSide: const BorderSide(color: AppColors.grey300, width: 1.5),
         ),
         // errorBorder: const UnderlineInputBorder(
         //   borderSide: BorderSide(color: AppColors.red),
@@ -215,7 +633,8 @@ class CustomTextField extends StatelessWidget {
 }
 
 class ChipTextFieldScreen extends StatefulWidget {
-  const ChipTextFieldScreen({super.key});
+  final String hintText;
+  const ChipTextFieldScreen({super.key, required this.hintText});
 
   @override
   State<ChipTextFieldScreen> createState() => _ChipTextFieldScreenState();
@@ -263,18 +682,21 @@ class _ChipTextFieldScreenState extends State<ChipTextFieldScreen> {
           decoration: InputDecoration(
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: AppColors.grey, width: 1),
+              borderSide:
+                  const BorderSide(color: AppColors.grey300, width: 1.5),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: AppColors.grey, width: 1),
+              borderSide:
+                  const BorderSide(color: AppColors.grey300, width: 1.5),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: AppColors.grey, width: 1),
+              borderSide:
+                  const BorderSide(color: AppColors.grey300, width: 1.5),
             ),
             contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-            hintText: "Enter tag here",
+            hintText: widget.hintText,
           ),
           onFieldSubmitted: (_) {
             setState(() {

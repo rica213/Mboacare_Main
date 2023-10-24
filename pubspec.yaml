@@ -116,6 +116,9 @@ flutter:
     - lib/assests/icons/menu.svg
     - lib/assests/icons/home.svg
     - lib/assests/icons/blog.svg
+    - lib/assests/icons/upload.svg
+    - lib/assests/icons/check.svg
+    - lib/assests/icons/uncheck.svg
     - lib/assests/icons/hospital.svg
     - lib/assests/images/user.png
     - lib/assests/images/central_park.png
