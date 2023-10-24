@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mboacare/blog/add_blog_page.dart';
 import 'package:mboacare/blog/blog_page.dart';
 import 'package:mboacare/settingsPage/settings.dart';
 import 'package:mboacare/settingsPage/theme.dart';
 import 'package:mboacare/colors.dart';
-// import 'package:mboacare/splash.dart';
+import 'package:mboacare/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mboacare/user_profile_page.dart';
 import 'package:mboacare/user_provider.dart';
@@ -73,6 +74,7 @@ class MyApp extends StatelessWidget {
         '/deleteDialog': (context) => const DeleteAccountDialog(),
         '/profilePage': (context) => const ProfilePage(),
         '/blogPage' : (context) => const BlogPage(),
+        '/newBlog' : (context) => const AddBlogPage(),
       },
     ); //MaterialApp
   }

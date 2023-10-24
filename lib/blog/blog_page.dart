@@ -14,7 +14,10 @@ class _BlogPageState extends State<BlogPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.primaryColor,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil('/newBlog', (route) => false);
+        },
         tooltip: 'Add blog article',
         child: const Icon(
           Icons.add,
@@ -46,24 +49,24 @@ class _BlogPageState extends State<BlogPage> {
                       BottomBlogCard(
                         imageUrl: 'lib/assests/images/doctor.png',
                         category: 'Mental Health',
-                        title:
-                            toTitleCase("man wagon citizen machine then whale lady group neck"),
+                        title: toTitleCase(
+                            "man wagon citizen machine then whale lady group neck"),
                         author: "Harry Houston",
                         date: "8/23/2119",
                       ),
                       BottomBlogCard(
                         imageUrl: 'lib/assests/images/doctor.png',
                         category: 'Mental Health',
-                        title:
-                            toTitleCase("older applied hung blank claws pain eight fellow"),
+                        title: toTitleCase(
+                            "older applied hung blank claws pain eight fellow"),
                         author: "Derek Pierce",
                         date: "4/5/2115",
                       ),
                       BottomBlogCard(
                         imageUrl: 'lib/assests/images/doctor.png',
                         category: 'Mental Health',
-                        title:
-                            toTitleCase("some means are spent return case letter believed"),
+                        title: toTitleCase(
+                            "some means are spent return case letter believed"),
                         author: "John Obrien",
                         date: "8/12/2059",
                       ),
@@ -521,7 +524,7 @@ class CustomRoundedCardOnImageStack extends StatelessWidget {
 String toTitleCase(String text) {
   final words = text.split(' ');
   final capitalizedWords = words.map((word) {
-    if(word.isNotEmpty) {
+    if (word.isNotEmpty) {
       return word[0].toUpperCase() + word.substring(1);
     } else {
       return word;
