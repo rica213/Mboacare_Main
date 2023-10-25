@@ -1,5 +1,6 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mboacare/utils/constants.dart';
 import 'dart:developer' as devtools show log;
@@ -7,8 +8,8 @@ import 'dart:developer' as devtools show log;
 import '../utils/validations.dart';
 import '../widgets/snackbar.dart';
 
-class SignInProvider extends ChangeNotifier {
-  SignInProvider() {
+class LoginProvider extends ChangeNotifier {
+  LoginProvider() {
     checkUserLoggedIn();
   }
 
@@ -70,6 +71,13 @@ class SignInProvider extends ChangeNotifier {
 
   Future<void> signInWithEmailAndPassword(
       {Function()? onSuccessNavigate}) async {
+    bool isConnected = await _checkConnectivity();
+    if (!isConnected) {
+      showMessage(
+          isError: true,
+          message: "No internet connection. Please check your connection.");
+      return;
+    }
     try {
       UserCredential userCredential = await auth.signInWithEmailAndPassword(
         email: emailController.text.trim(),
@@ -109,7 +117,27 @@ class SignInProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> _sendVerificationEmail(User user) async {
+    try {
+      await user.sendEmailVerification();
+      showMessage(
+          message: "A verification email has been sent to your email address. Please verify your email.");
+    } catch (e) {
+      showMessage(
+          isError: true,
+          message:"Email verification failed: ${e.toString()}");
+    }
+  }
+
   Future<void> signInWithGoogle({Function()? onSuccessNavigate}) async {
+    bool isConnected = await _checkConnectivity();
+    if (!isConnected) {
+      showMessage(
+          isError: true,
+          message: "No internet connection. Please check your connection.");
+      return;
+    }
+
     try {
       GoogleSignInAccount? googleUser = googleSignIn.currentUser;
 
@@ -126,4 +154,30 @@ class SignInProvider extends ChangeNotifier {
       debugPrint(error.toString());
     }
   }
+
+  Future<bool> _checkConnectivity() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    return connectivityResult != ConnectivityResult.none;
+  }
+
+  void _showMessage(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Error'),
+          content: Text(message),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mboacare/login/signin_provider.dart';
+import 'package:mboacare/login/login_provider.dart';
 import 'package:mboacare/utils/constants.dart';
 import 'package:provider/provider.dart';
 import '../sign_up/sign_up_page.dart';
@@ -22,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<SignInProvider>(context);
+    final provider = Provider.of<LoginProvider>(context);
 
     return Scaffold(
       body: SafeArea(

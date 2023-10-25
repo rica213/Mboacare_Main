@@ -14,7 +14,7 @@ import 'hospital_provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'locale_provider.dart';
 import 'l10n/app_localizations.dart';
-import 'login/signin_provider.dart';
+import 'login/login_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +25,7 @@ void main() async {
       ChangeNotifierProvider(create: (_) => HospitalProvider()),
       ChangeNotifierProvider(create: (_) => LocaleProvider()),
       ChangeNotifierProvider(create: (_) => SignUpProvider()),
-      ChangeNotifierProvider(create: (_) => SignInProvider()),
+      ChangeNotifierProvider(create: (_) => LoginProvider()),
       ChangeNotifierProvider(
           create: (_) => UserDataProvider(TestData.getTestUser())),
       // Add other providers here if needed.
