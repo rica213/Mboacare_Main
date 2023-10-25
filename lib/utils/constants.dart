@@ -32,9 +32,11 @@ class AppImages {
   static const String appLogo = "lib/assests/images/logo.png";
   static const String googleIcon = "lib/assests/images/google-icon.png";
   static const String checkIcon = "lib/assests/images/check_icon.svg";
-  static const String emailIcon = "lib/assests/images/emailIcon.png";
-  static const String image = "lib/assests/images/image_upload.png";
+  static const String emailIcon = "lib/assests/images/email_Icon.png";
   static const String Icon = "lib/assests/images/icon.svg";
+  static const String markerPinIcon = "lib/assests/images/marker_pin.png";
+  static const String arrowDown = "lib/assests/images/arrow_down.png";
+  static const String uploadIcon = "lib/assests/images/upload_icon.png";
 }
 
 class AppFontSizes {
@@ -53,6 +55,7 @@ class AppFontSizes {
   static double fontSize12 = 12.0;
   static double fontSize10 = 10.0;
   static double fontSize8 = 8.0;
+  static double fontSize6 = 6.0;
   static double fontSize4 = 4.0;
   static double fontSize3 = 3.0;
   static double fontSize1 = 1.0;

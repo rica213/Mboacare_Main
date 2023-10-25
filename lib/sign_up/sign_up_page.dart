@@ -223,7 +223,12 @@ class _SignUpPageState extends State<SignUpPage> {
                           context,
                           MaterialPageRoute(
                               builder: (_) =>
-                                  const LoginScreen(title: "Mboacare")));
+                              const RegisterPage()));
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (_) =>
+                      //             const LoginScreen(title: "Mboacare")));
                     },
                     child: Text(
                       "Already have an account? Log in",
