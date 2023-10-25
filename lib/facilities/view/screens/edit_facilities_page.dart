@@ -70,7 +70,7 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 15),
+            padding: const EdgeInsets.only(right: 20),
             child: InkWell(
                 onTap: () {
                   deleteDialog(context);
@@ -559,51 +559,48 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
               const SizedBox(
                 height: 20,
               ),
-              Container(
-                height: 150,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    border: Border.all(color: AppColors.grey300, width: 1.5)),
-                child: _selectedImage != null
-                    ? Image.file(
-                        _selectedImage!,
+              Stack(
+                children: [
+                  Container(
+                      height: 150,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          border:
+                              Border.all(color: AppColors.grey300, width: 1.5)),
+                      child: Image.asset(
+                        'lib/assests/images/central_park.png',
                         fit: BoxFit.cover,
-                        height: 150,
-                      )
-                    : InkWell(
-                        onTap: () {
-                          _pickImage();
-                        },
-                        child: Column(
-                          children: [
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            SvgPicture.asset('lib/assests/icons/upload.svg'),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            const Text(
-                              'Click to upload your hospital image',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            const Text(
-                              'SVG, PNG, JPG or GIF (max. 800x400px)',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400,
-                                  color: AppColors.grey),
-                            )
-                          ],
+                      )),
+                  Positioned(
+                    top: 90,
+                    left: 180,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) =>
+                        //             EditFacilitiesPage()));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.buttonColor,
+                        foregroundColor: AppColors.whiteColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        minimumSize: const Size(15, 35),
+                      ),
+                      child: const Text(
+                        'Change photo',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 40,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mboacare/colors.dart';
+import 'package:mboacare/facilities/view/screens/pick_address_page.dart';
 import 'package:mboacare/facilities/view/widget/chip_text_field.dart';
 
 import '../widget/custom_textfield.dart';
@@ -156,23 +157,39 @@ class _AddFacilitiesPageState extends State<AddFacilitiesPage> {
               const SizedBox(
                 height: 20,
               ),
-              const Text(
-                'Hospital Address *',
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.grey),
+              InkWell(
+                 onTap: () {
+                  Navigator.push(
+                      context,
+                      (MaterialPageRoute(
+                          builder: (context) => PickAddressPage())));},
+                child: const Text(
+                  'Hospital Address *',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.grey),
+                ),
               ),
               const SizedBox(
                 height: 10,
               ),
-              CustomTextField(
-                prefixIcon: Padding(
-                  padding: const EdgeInsets.all(17.0),
-                  child: SvgPicture.asset('lib/assests/icons/location.svg',
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      (MaterialPageRoute(
+                          builder: (context) => PickAddressPage())));
+                },
+                child: CustomTextField(
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.all(17.0),
+                    child: SvgPicture.asset(
+                      'lib/assests/icons/location.svg',
+                    ),
                   ),
+                  hintText: '5447, Park Lane, London, UK',
                 ),
-                hintText: '5447, Park Lane, London, UK',
               ),
               const SizedBox(
                 height: 20,

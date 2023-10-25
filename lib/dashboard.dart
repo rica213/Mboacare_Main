@@ -56,8 +56,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void _initializeScreens(BuildContext context) {
     _screens = [
       const DashboardContent(),
-      const HospitalDashboard(),
-      const FacilitiesPage(),
+      FacilitiesPage(),
+       HospitalDashboard(),
+      
       const ProfilePage(),
     ];
   }

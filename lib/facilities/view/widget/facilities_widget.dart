@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mboacare/colors.dart';
+import 'package:mboacare/facilities/model/facilities_model.dart';
 import 'package:mboacare/facilities/view/screens/edit_facilities_page.dart';
 
+
 class FacilitiesWidget extends StatelessWidget {
+  final FacilitiesModel facilitiesModel;
   const FacilitiesWidget({
     super.key,
+    required this.facilitiesModel,
   });
 
   @override
@@ -27,15 +31,14 @@ class FacilitiesWidget extends StatelessWidget {
                 children: [
                   Container(
                     height: MediaQuery.sizeOf(context).height * .18,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(16.0),
                         topRight: Radius.circular(16.0),
                       ),
                       image: DecorationImage(
                         fit: BoxFit.cover,
-                        image:
-                            AssetImage('lib/assests/images/central_park.png'),
+                        image: AssetImage(facilitiesModel.image),
                       ),
                     ),
                   ),
@@ -44,16 +47,16 @@ class FacilitiesWidget extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Column(
+                        Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Central Park Hospital',
+                              facilitiesModel.name,
                               style: TextStyle(
                                   fontSize: 15, fontWeight: FontWeight.w700),
                             ),
                             Text(
-                              'London, UK',
+                              facilitiesModel.address,
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w500,
