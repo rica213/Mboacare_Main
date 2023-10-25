@@ -68,8 +68,7 @@ class MyApp extends StatelessWidget {
         }
         return supportedLocales.first;
       },
-      //home: const SplashScreen(),
-      home: const BlogPage(),
+      home: const SplashScreen(),
       routes: {
         '/themeScreen': (context) => const ThemeScreen(),
         '/deleteDialog': (context) => const DeleteAccountDialog(),

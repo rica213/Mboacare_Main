@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:mboacare/colors.dart';
 import 'package:image_picker/image_picker.dart';
-
 import 'package:iconsax/iconsax.dart';
 
 class AddBlogPage extends StatefulWidget {
@@ -35,18 +34,9 @@ class _AddBlogPageState extends State<AddBlogPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Row(
+          title: const Row(
             children: [
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context)
-              .pushNamedAndRemoveUntil('/blogPage', (route) => false);
-                },
-                child: const Text("←",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-              ),
-              const Expanded(
+              Expanded(
                 child: Center(
                   child: Text(
                     "New Blog",

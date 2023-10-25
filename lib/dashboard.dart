@@ -58,8 +58,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     _screens = [
       const DashboardContent(),
       const FacilitiesPage(),
-      const HospitalDashboard(),
-      
+      const BlogPage(),
       const ProfilePage(),
     ];
   }
@@ -67,7 +66,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   final List<String> _screenTitles = [
     'Home',
     'Hospital Dashbord',
-    'Settings',
+    'Blog',
     'Profile',
   ];
 

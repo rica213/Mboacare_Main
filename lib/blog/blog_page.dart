@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mboacare/blog/add_blog_page.dart';
 import '../colors.dart';
 
 class BlogPage extends StatefulWidget {
@@ -9,14 +10,20 @@ class BlogPage extends StatefulWidget {
 }
 
 class _BlogPageState extends State<BlogPage> {
+  void _navigateToAddBlogPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const AddBlogPage()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.primaryColor,
         onPressed: () {
-          Navigator.of(context)
-              .pushNamedAndRemoveUntil('/newBlog', (route) => false);
+          _navigateToAddBlogPage();
         },
         tooltip: 'Add blog article',
         child: const Icon(
