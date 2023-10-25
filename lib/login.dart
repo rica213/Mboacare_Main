@@ -7,6 +7,7 @@ import 'register.dart';
 import 'colors.dart';
 import 'dart:developer' as devtools show log;
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key, required String title}) : super(key: key);
 
@@ -41,6 +42,12 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> _signInWithEmailAndPassword() async {
+    bool isConnected = await _checkConnectivity();
+    if (!isConnected) {
+      _showMessage("No internet connection. Please check your connection.");
+      return;
+    }
+
     try {
       String email = _emailController.text.trim();
       String password = _passwordController.text.trim();
@@ -82,6 +89,11 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> _signInWithGoogle() async {
+    bool isConnected = await _checkConnectivity();
+    if (!isConnected) {
+      _showMessage("No internet connection. Please check your connection.");
+      return;
+    }
     try {
       GoogleSignInAccount? googleUser = _googleSignIn.currentUser;
 
@@ -105,10 +117,38 @@ class _LoginScreenState extends State<LoginScreen> {
   //   }
   // }
 
-  void _showMessage(String message) {
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(message)));
+  Future<void> _sendVerificationEmail(User user) async {
+    try {
+      await user.sendEmailVerification();
+      _showMessage(
+          "A verification email has been sent to your email address. Please verify your email.");
+    } catch (e) {
+      _showMessage("Email verification failed: ${e.toString()}");
+    }
   }
+  Future<bool> _checkConnectivity() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    return connectivityResult != ConnectivityResult.none;
+  }
+  void _showMessage(String message) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Error'),
+        content: Text(message),
+        actions: <Widget>[
+          TextButton(
+            child: Text('OK'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
 
   void _navigatetoHospitalRegistrationForm() {
     Navigator.push(
