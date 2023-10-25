@@ -10,6 +10,7 @@ import 'dashboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:connectivity_plus/connectivity_plus.dart';
+
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key});
 
@@ -149,7 +150,7 @@ The Mboacare Team
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => RegisterPage(),
+            builder: (context) => const RegisterPage(),
           ),
         );
       }
@@ -207,7 +208,7 @@ The Mboacare Team
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => RegisterPage(),
+            builder: (context) => const RegisterPage(),
           ),
         );
       }
@@ -215,29 +216,32 @@ The Mboacare Team
       print(error);
     }
   }
+
   Future<bool> _checkConnectivity() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
     return connectivityResult != ConnectivityResult.none;
   }
-   void _showMessage(String message) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text('Error'),
-        content: Text(message),
-        actions: <Widget>[
-          TextButton(
-            child: Text('OK'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      );
-    },
-  );
-}
+
+  void _showMessage(String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Error'),
+          content: Text(message),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -255,8 +259,8 @@ The Mboacare Team
                   'lib/assests/images/logo.png',
                   width: 125,
                 ),
-                SizedBox(height: 10),
-                Text(
+                const SizedBox(height: 10),
+                const Text(
                   ' Create an account',
                   style: TextStyle(
                     fontSize: 22,
@@ -370,8 +374,8 @@ The Mboacare Team
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
                           child: TextField(
                             controller: _passwordController,
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.symmetric(
+                            decoration: const InputDecoration(
+                              contentPadding: EdgeInsets.symmetric(
                                 vertical: 8.0,
                               ),
                               hintText: 'Enter your password',
@@ -434,8 +438,8 @@ The Mboacare Team
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
                           child: TextField(
                             controller: _confirmPasswordController,
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.symmetric(
+                            decoration: const InputDecoration(
+                              contentPadding: EdgeInsets.symmetric(
                                 vertical: 8.0,
                               ),
                               hintText: 'Confirm your password',
@@ -530,4 +534,3 @@ The Mboacare Team
     );
   }
 }
-

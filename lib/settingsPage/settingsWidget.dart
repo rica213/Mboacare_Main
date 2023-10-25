@@ -34,7 +34,8 @@ class SettingsPageListTiles extends StatelessWidget {
                   fontWeight: FontWeight.w600),
             ),
             Text(subtitle,
-                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
+                style:
+                    const TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
           ]),
           trailing: const Icon(
             Icons.arrow_forward_ios_outlined,
