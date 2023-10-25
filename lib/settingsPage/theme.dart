@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:mboacare/colors.dart';
 
 class ThemeScreen extends StatefulWidget {
@@ -40,11 +39,11 @@ class _ThemeScreenState extends State<ThemeScreen> {
               height: 15,
             ),
             Padding(
-              padding: EdgeInsets.only(left: 10.0),
+              padding: const EdgeInsets.only(left: 10.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(left: 4.0),
                     child: Text(
                       'App theme',
@@ -54,20 +53,20 @@ class _ThemeScreenState extends State<ThemeScreen> {
                           fontSize: 16),
                     ),
                   ),
-                  Text(
+                  const Text(
                     ' Set application theme',
                     style: TextStyle(
                         fontWeight: FontWeight.w400,
                         color: AppColors.textColor2,
                         fontSize: 16),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
+                      const Padding(
                           padding: EdgeInsets.only(left: 4.0),
                           child: Text(
                             'System settings',
@@ -91,7 +90,7 @@ class _ThemeScreenState extends State<ThemeScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
+                      const Padding(
                           padding: EdgeInsets.only(left: 4.0),
                           child: Text(
                             'Light mode',
@@ -118,7 +117,7 @@ class _ThemeScreenState extends State<ThemeScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
+                      const Padding(
                           padding: EdgeInsets.only(left: 4.0),
                           child: Text(
                             'Dark mode',

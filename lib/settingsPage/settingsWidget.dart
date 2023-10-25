@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:mboacare/colors.dart';
 
 class SettingsPageListTiles extends StatelessWidget {
@@ -29,15 +28,15 @@ class SettingsPageListTiles extends StatelessWidget {
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 19,
                   color: AppColors.textColor2,
                   fontWeight: FontWeight.w600),
             ),
             Text(subtitle,
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
+                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
           ]),
-          trailing: Icon(
+          trailing: const Icon(
             Icons.arrow_forward_ios_outlined,
             size: 20,
           ),
@@ -68,7 +67,7 @@ class Signout extends StatelessWidget {
           leading: icon,
           title: Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 19,
                 color: AppColors.textColor2,
                 fontWeight: FontWeight.w600),
@@ -100,7 +99,7 @@ class DeleteAccount extends StatelessWidget {
           leading: icon,
           title: Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 19,
                 color: Colors.redAccent,
                 fontWeight: FontWeight.w600),

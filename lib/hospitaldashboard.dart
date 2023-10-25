@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:mboacare/chip_widget.dart';
 import 'package:mboacare/hospitaldetails.dart';
@@ -342,7 +341,8 @@ class _HospitalDashboardState extends State<HospitalDashboard> {
                                                       )));
                                         },
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor: AppColors.buttonColor,
+                                          backgroundColor:
+                                              AppColors.buttonColor,
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10.0),
