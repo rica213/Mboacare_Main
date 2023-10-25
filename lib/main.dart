@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:mboacare/settingsPage/settings.dart';
+import 'package:mboacare/settingsPage/theme.dart';
 import 'package:mboacare/colors.dart';
 import 'package:mboacare/register/add_hospital_provider.dart';
 import 'package:mboacare/sign_up/view_model/signup_provider.dart';
 import 'package:mboacare/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mboacare/utils/constants.dart';
+import 'package:mboacare/user_profile_page.dart';
 import 'package:mboacare/user_provider.dart';
 import 'package:mboacare/user_test_data.dart';
 import 'package:provider/provider.dart';
@@ -12,7 +15,7 @@ import 'hospital_provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'locale_provider.dart';
 import 'l10n/app_localizations.dart';
-import 'login/signin_provider.dart';
+import 'login/login_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +26,7 @@ void main() async {
       ChangeNotifierProvider(create: (_) => HospitalProvider()),
       ChangeNotifierProvider(create: (_) => LocaleProvider()),
       ChangeNotifierProvider(create: (_) => SignUpProvider()),
+      ChangeNotifierProvider(create: (_) => LoginProvider()),
       ChangeNotifierProvider(create: (_) => SignInProvider()),
       ChangeNotifierProvider(create: (_) => AddHospitalProvider()),
       ChangeNotifierProvider(
@@ -41,22 +45,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a blue toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
         useMaterial3: true,
       ),
@@ -84,6 +74,11 @@ class MyApp extends StatelessWidget {
         return supportedLocales.first;
       },
       home: const SplashScreen(),
+      routes: {
+        '/themeScreen': (context) => const ThemeScreen(),
+        '/deleteDialog': (context) => const DeleteAccountDialog(),
+        '/profilePage': (context) => const ProfilePage(),
+      },
     ); //MaterialApp
   }
 }

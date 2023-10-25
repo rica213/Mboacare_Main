@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:mboacare/l10n/app_localizations.dart';
+import 'package:mboacare/locale_provider.dart';
 import 'package:provider/provider.dart';
-import 'l10n/app_localizations.dart';
-import 'locale_provider.dart';
-import 'dart:developer' as devtools show log;
 
-class SettingsPage extends StatefulWidget {
+class Language extends StatefulWidget {
   final BuildContext context;
 
-  const SettingsPage({super.key, required this.context});
+  const Language({super.key, required this.context});
   @override
-  State<SettingsPage> createState() => _SettingsPageState();
+  _LanguageState createState() => _LanguageState();
 }
 
-class _SettingsPageState extends State<SettingsPage> {
+class _LanguageState extends State<Language> {
   String _selectedLanguage = 'en'; // Default language is English (en)
 
   @override
@@ -112,7 +111,7 @@ class _SettingsPageState extends State<SettingsPage> {
   // Function to change the app's language
   // Function to change the app's language
   void _changeLanguage(BuildContext context, Locale locale) {
-    devtools.log("Changing language to: ${locale.languageCode}");
+    print("Changing language to: ${locale.languageCode}");
 
     setState(() {
       Provider.of<LocaleProvider>(context, listen: false).locale = locale;

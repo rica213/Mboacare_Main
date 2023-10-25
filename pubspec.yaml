@@ -48,10 +48,12 @@ dependencies:
   google_maps_flutter: ^2.4.0
   intl: ^0.18.0
   http: ^1.1.0
-  google_fonts: ^6.1.0
   flutter_svg: ^2.0.7
+  iconsax: ^0.0.8
+  google_fonts: ^6.1.0
+  connectivity_plus: ^5.0.1
   intl_phone_number_input: ^0.7.3+1
-  
+
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -61,6 +63,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   cached_network_image: ^3.3.0
+  multiselect: ^0.1.0
 
 dev_dependencies:
   flutter_test:
@@ -91,6 +94,7 @@ flutter:
     - lib/assests/images/google-icon.png
     - lib/assests/images/aiims.jpg
     - lib/assests/images/apollo.jpg
+    - lib/assests/images/lady.jpeg
     - lib/assests/images/CMC.jpg
     - lib/assests/images/Max.jpg
     - lib/assests/images/medanta.jpg
@@ -101,6 +105,31 @@ flutter:
     - lib/assests/images/spain.png
     - lib/assests/images/france.png
     - lib/assests/images/america.png
+    - lib/assests/icons/unselected_hospital.svg
+    - lib/assests/icons/selected_hospital.svg
+    - lib/assests/icons/unselected_blog.svg
+    - lib/assests/icons/selected_blog.svg
+    - lib/assests/icons/unselected_user.svg
+    - lib/assests/icons/selected_user.svg
+    - lib/assests/icons/unselected_home.svg
+    - lib/assests/icons/selected_home.svg
+    - lib/assests/icons/notification.svg
+    - lib/assests/icons/menu.svg
+    - lib/assests/icons/home.svg
+    - lib/assests/icons/blog.svg
+    - lib/assests/icons/location_search.svg
+    - lib/assests/icons/locate.svg
+    - lib/assests/icons/upload.svg
+    - lib/assests/icons/delete.svg
+    - lib/assests/icons/location.svg
+    - lib/assests/icons/check.svg
+    - lib/assests/icons/arrow_left.svg
+    - lib/assests/icons/uncheck.svg
+    - lib/assests/icons/hospital.svg
+    - lib/assests/images/user.png
+    - lib/assests/images/central_park.png
+    - lib/assests/images/oakville.png
+    - lib/assests/images/map.png
     - lib/assests/images/icon.svg
 
 
