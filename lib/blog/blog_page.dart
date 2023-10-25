@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mboacare/blog/add_blog_page.dart';
 import '../colors.dart';
 import 'dart:developer' as devtools show log;
+import 'blog_data.dart';
 
 class BlogPage extends StatefulWidget {
   const BlogPage({super.key});
@@ -11,11 +12,26 @@ class BlogPage extends StatefulWidget {
 }
 
 class _BlogPageState extends State<BlogPage> {
+  List<BlogItem> blogItems = [];
+
   void _navigateToAddBlogPage() {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (_) => const AddBlogPage()),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchBlogData();
+  }
+
+  Future<void> _fetchBlogData() async {
+    List<BlogItem> data = await fetchBlogData();
+    setState(() {
+      blogItems = data;
+    });
   }
 
   @override
@@ -52,33 +68,17 @@ class _BlogPageState extends State<BlogPage> {
             child: Scaffold(
               body: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: ListView(
-                    children: [
-                      BottomBlogCard(
-                        imageUrl: 'lib/assests/images/doctor.png',
-                        category: 'Mental Health',
-                        title: toTitleCase(
-                            "man wagon citizen machine then whale lady group neck"),
-                        author: "Harry Houston",
-                        date: "8/23/2119",
-                      ),
-                      BottomBlogCard(
-                        imageUrl: 'lib/assests/images/doctor.png',
-                        category: 'Mental Health',
-                        title: toTitleCase(
-                            "older applied hung blank claws pain eight fellow"),
-                        author: "Derek Pierce",
-                        date: "4/5/2115",
-                      ),
-                      BottomBlogCard(
-                        imageUrl: 'lib/assests/images/doctor.png',
-                        category: 'Mental Health',
-                        title: toTitleCase(
-                            "some means are spent return case letter believed"),
-                        author: "John Obrien",
-                        date: "8/12/2059",
-                      ),
-                    ],
+                  child: ListView.builder(
+                    itemCount: blogItems.length,
+                    itemBuilder: (context, index) {
+                      return BottomBlogCard(
+                        imageUrl: blogItems[index].imageUrl,
+                        category: blogItems[index].category,
+                        title: toTitleCase(blogItems[index].title),
+                        author: blogItems[index].author,
+                        date: blogItems[index].date,
+                      );
+                    },
                   )),
             ),
           )
@@ -359,12 +359,11 @@ class BottomBlogCard extends StatelessWidget {
               flex: 30,
               child: Padding(
                 padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(image: AssetImage(imageUrl)),
-                  ),
+                child: Image.network(
+                  imageUrl,
                   height: 120,
                   width: 120,
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
@@ -518,8 +517,8 @@ class BottomCard extends StatelessWidget {
   final String blogTitle;
   final String authorName;
   final String blogTime;
-
   final String authorImage;
+
   const BottomCard({
     super.key,
     required this.blogTitle,
