@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mboacare/colors.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:iconsax/iconsax.dart';
-
+import 'blog_data.dart';
 class AddBlogPage extends StatefulWidget {
   const AddBlogPage({super.key});
 
@@ -88,7 +88,13 @@ Widget _buildForm(
         ),
         _buildImagePicker(selectedImage, pickImage),
         const SizedBox(height: 32.0),
-        _buildSubmitButton()
+        _buildSubmitButton(
+          formKey,
+          titleController,
+          categoryController,
+          webLinkController,
+          selectedImage,
+        )
       ],
     ),
   );
@@ -170,9 +176,26 @@ Widget _buildImagePicker(
   );
 }
 
-Widget _buildSubmitButton() {
+Widget _buildSubmitButton(
+  GlobalKey<FormState> formKey,
+  TextEditingController titleController,
+  TextEditingController categoryController,
+  TextEditingController webLinkController,
+  File? selectedImage,
+) {
+  TextEditingController titleController = TextEditingController();
+  TextEditingController categoryController = TextEditingController();
+  TextEditingController webLinkController = TextEditingController();
+
   return ElevatedButton(
-    onPressed: () {},
+    onPressed: () {
+      if (formKey.currentState!.validate()) {
+        String title = titleController.text;
+        String category = categoryController.text;
+        String webLink = webLinkController.text;
+        addBlog(title, category, webLink, selectedImage);
+      }
+    },
     style: ElevatedButton.styleFrom(
       foregroundColor: Colors.white,
       backgroundColor: AppColors.cardbg,

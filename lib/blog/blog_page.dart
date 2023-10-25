@@ -242,28 +242,6 @@ Widget _buildFilterMenuContent(BuildContext context) {
       _buildFilterMenuItem('newest', 'Newest', Icons.access_time),
       _buildFilterMenuItem('author', 'Author', Icons.person),
       _buildFilterMenuItem('category', 'Category', Icons.category),
-
-      /* const PopupMenuItem<String>(
-        value: 'newest',
-        child: ListTile(
-          leading: Icon(Icons.access_time),
-          title: Text('Newest'),
-        ),
-      ),
-      const PopupMenuItem<String>(
-        value: 'author',
-        child: ListTile(
-          leading: Icon(Icons.person),
-          title: Text('Author'),
-        ),
-      ),
-      const PopupMenuItem<String>(
-        value: 'category',
-        child: ListTile(
-          leading: Icon(Icons.category),
-          title: Text('Category'),
-        ),
-      ), */
     ],
   );
 }
