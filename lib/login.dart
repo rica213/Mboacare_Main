@@ -117,15 +117,6 @@ class _LoginScreenState extends State<LoginScreen> {
   //   }
   // }
 
-  Future<void> _sendVerificationEmail(User user) async {
-    try {
-      await user.sendEmailVerification();
-      _showMessage(
-          "A verification email has been sent to your email address. Please verify your email.");
-    } catch (e) {
-      _showMessage("Email verification failed: ${e.toString()}");
-    }
-  }
   Future<bool> _checkConnectivity() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
     return connectivityResult != ConnectivityResult.none;
@@ -135,11 +126,11 @@ class _LoginScreenState extends State<LoginScreen> {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('Error'),
+        title: const Text('Error'),
         content: Text(message),
         actions: <Widget>[
           TextButton(
-            child: Text('OK'),
+            child: const Text('OK'),
             onPressed: () {
               Navigator.of(context).pop();
             },
