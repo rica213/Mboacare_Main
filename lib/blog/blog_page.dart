@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mboacare/blog/add_blog_page.dart';
 import '../colors.dart';
+import 'dart:developer' as devtools show log;
 
 class BlogPage extends StatefulWidget {
   const BlogPage({super.key});
@@ -36,7 +37,7 @@ class _BlogPageState extends State<BlogPage> {
       body: Column(
         children: [
           const SizedBox(height: 18.0),
-          _buildSearchBar(),
+          _buildSearchBar(context),
           const SizedBox(
             height: 8.0,
           ),
@@ -106,7 +107,7 @@ AppBar _buildAppBar() {
   );
 }
 
-Widget _buildSearchBar() {
+Widget _buildSearchBar(BuildContext context) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Row(
@@ -118,7 +119,7 @@ Widget _buildSearchBar() {
         const SizedBox(width: 10.0),
         Expanded(
           flex: 15,
-          child: _buildFilterButton(),
+          child: _buildFilterButton(context),
         )
       ],
     ),
@@ -164,22 +165,119 @@ Widget _buildSearchTextField() {
   );
 }
 
-Widget _buildFilterButton() {
+GlobalKey<PopupMenuButtonState<String>> filterPopupMenuButtonKey =
+    GlobalKey<PopupMenuButtonState<String>>();
+
+Widget _buildFilterButton(BuildContext context) {
+  return Stack(
+    alignment: Alignment.topRight,
+    children: [
+      _buildFilterButtonIcon(),
+      _buildFilterPopupMenuButton(context),
+    ],
+  );
+}
+
+Widget _buildFilterButtonIcon() {
   return Container(
     height: 40.0,
     width: 40.0,
     decoration: BoxDecoration(
-        color: AppColors.primaryColor,
-        borderRadius: BorderRadius.circular(5.0)),
-    child: IconButton(
-      onPressed: () {},
-      icon: const Icon(
+      color: AppColors.primaryColor,
+      borderRadius: BorderRadius.circular(5.0),
+    ),
+    child: const IconButton(
+      onPressed: _showFilterMenu,
+      icon: Icon(
         Icons.filter_list_alt,
         color: Colors.white,
         size: 25.0,
       ),
     ),
   );
+}
+
+void _showFilterMenu() {
+  filterPopupMenuButtonKey.currentState!.showButtonMenu();
+}
+
+Widget _buildFilterPopupMenuButton(BuildContext context) {
+  return PopupMenuButton<String>(
+    key: filterPopupMenuButtonKey,
+    icon: Container(), // Hide the triple-dot icon
+    onSelected: _onFilterMenuItemSelected,
+    itemBuilder: (BuildContext context) {
+      return <PopupMenuEntry<String>>[
+        PopupMenuItem<String>(
+          value: 'custom',
+          child: _buildFilterMenuContent(context),
+        ),
+      ];
+    },
+  );
+}
+
+void _onFilterMenuItemSelected(String value) {
+  devtools.log('Selected: $value');
+}
+
+Widget _buildFilterMenuContent(BuildContext context) {
+  return Column(
+    mainAxisSize: MainAxisSize.min,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      ListTile(
+        title: const Text(
+          'Sort by',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        trailing: IconButton(
+          icon: const Icon(Icons.close),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
+      const Divider(),
+      _buildFilterMenuItem('newest', 'Newest', Icons.access_time),
+      _buildFilterMenuItem('author', 'Author', Icons.person),
+      _buildFilterMenuItem('category', 'Category', Icons.category),
+
+      /* const PopupMenuItem<String>(
+        value: 'newest',
+        child: ListTile(
+          leading: Icon(Icons.access_time),
+          title: Text('Newest'),
+        ),
+      ),
+      const PopupMenuItem<String>(
+        value: 'author',
+        child: ListTile(
+          leading: Icon(Icons.person),
+          title: Text('Author'),
+        ),
+      ),
+      const PopupMenuItem<String>(
+        value: 'category',
+        child: ListTile(
+          leading: Icon(Icons.category),
+          title: Text('Category'),
+        ),
+      ), */
+    ],
+  );
+}
+
+Widget _buildFilterMenuItem(String value, String label, IconData icon) {
+  return Container(
+      padding: const EdgeInsets.all(0),
+      child: PopupMenuItem<String>(
+        value: value,
+        child: ListTile(
+          leading: Icon(icon),
+          title: Text(label),
+        ),
+      ));
 }
 
 Widget _buildBlogList() {
