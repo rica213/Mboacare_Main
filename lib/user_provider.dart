@@ -112,7 +112,6 @@ class UserDataProvider with ChangeNotifier {
   Future<void> updateUserDisplayName(
       BuildContext context, String newDisplayName) async {
     savingData = true;
-    print('new name $newDisplayName');
     notifyListeners();
     var headers = {
       'Content-Type': 'application/json',
