@@ -209,7 +209,7 @@ class UserDataProvider with ChangeNotifier {
     };
     var request = http.Request('PUT', Uri.parse('$baseURL/update-profile'));
     request.body = json.encode({
-      "uid": currentUser.uid,
+      "uid": userID,
       "photoURL": picURL,
     });
     request.headers.addAll(headers);
