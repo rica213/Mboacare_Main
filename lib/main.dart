@@ -12,6 +12,7 @@ import 'package:mboacare/user_provider.dart';
 import 'package:mboacare/user_test_data.dart';
 import 'package:mboacare/view_model/signup_view_model.dart';
 import 'package:provider/provider.dart';
+import 'add_hospital/add_hospital_provider.dart';
 import 'hospital_provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'locale_provider.dart';
@@ -27,6 +28,7 @@ void main() async {
       ChangeNotifierProvider(create: (_) => LocaleProvider()),
       ChangeNotifierProvider(create: (_) => SignUpProvider()),
       ChangeNotifierProvider(create: (_) => LoginProvider()),
+      ChangeNotifierProvider(create: (_) => AddHospitalProvider()),
       ChangeNotifierProvider(
           create: (_) => UserDataProvider(TestData.getTestUser())),
       ChangeNotifierProvider(create: (_) => UserDataProvider()),

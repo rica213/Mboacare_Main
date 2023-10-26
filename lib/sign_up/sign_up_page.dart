@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mboacare/login/login.dart';
-import 'package:mboacare/register.dart';
 import 'package:mboacare/sign_up/view_model/signup_provider.dart';
 import 'package:mboacare/utils/constants.dart';
 import 'package:mboacare/utils/validations.dart';
@@ -9,6 +7,7 @@ import 'package:mboacare/widgets/custom_btn.dart';
 import 'package:mboacare/widgets/input_fields.dart';
 import 'package:mboacare/widgets/password_validation_view.dart';
 import 'package:provider/provider.dart';
+import '../add_hospital/add_hopital.dart';
 import '../colors.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -178,7 +177,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const RegisterPage(),
+                              builder: (context) => const AddHospitalPage(),
                             ),
                           );
                         }
@@ -203,7 +202,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const RegisterPage(),
+                              builder: (context) => const AddHospitalPage(),
                             ),
                           );
                         }
@@ -223,7 +222,12 @@ class _SignUpPageState extends State<SignUpPage> {
                           context,
                           MaterialPageRoute(
                               builder: (_) =>
-                                  const LoginScreen(title: "Mboacare")));
+                              const AddHospitalPage()));
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (_) =>
+                      //             const LoginScreen(title: "Mboacare")));
                     },
                     child: Text(
                       "Already have an account? Log in",
