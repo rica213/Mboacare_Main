@@ -29,12 +29,21 @@ class SettingsPageListTiles extends StatelessWidget {
             Text(
               title,
               style: const TextStyle(
+<<<<<<< HEAD:lib/settingsPage/settings_widget.dart
                   fontSize: 19,
+=======
+                  fontSize: 16,
+>>>>>>> 617c5ce (add tests):lib/settingsPage/settingsWidget.dart
                   color: AppColors.textColor2,
                   fontWeight: FontWeight.w600),
             ),
             Text(subtitle,
+<<<<<<< HEAD:lib/settingsPage/settings_widget.dart
                 style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
+=======
+                style:
+                    const TextStyle(fontSize: 15, fontWeight: FontWeight.w400)),
+>>>>>>> 617c5ce (add tests):lib/settingsPage/settingsWidget.dart
           ]),
           trailing: const Icon(
             Icons.arrow_forward_ios_outlined,

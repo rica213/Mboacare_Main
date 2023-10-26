@@ -6,27 +6,24 @@ import 'package:mboacare/settingsPage/theme.dart';
 import 'package:mboacare/colors.dart';
 import 'package:mboacare/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:mboacare/user_profile_page.dart';
 import 'package:mboacare/user_provider.dart';
-import 'package:mboacare/user_test_data.dart';
 import 'package:mboacare/view_model/signup_view_model.dart';
 import 'package:provider/provider.dart';
 import 'hospital_provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'locale_provider.dart';
 import 'l10n/app_localizations.dart';
+import 'user_profile_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => HospitalProvider()),
       ChangeNotifierProvider(create: (_) => LocaleProvider()),
       ChangeNotifierProvider(create: (_) => SignUpProvider()),
-      ChangeNotifierProvider(
-          create: (_) => UserDataProvider(TestData.getTestUser())),
+      ChangeNotifierProvider(create: (_) => UserDataProvider()),
       // Add other providers here if needed.
     ],
     child: const MyApp(),
