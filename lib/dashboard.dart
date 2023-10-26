@@ -293,8 +293,10 @@ class _DashboardContentState extends State<DashboardContent> {
                   setState(() {
                     selectedIndex = 1;
                   });
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const SettingsPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SettingsPage()));
                 },
               ),
             ),

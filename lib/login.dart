@@ -8,6 +8,7 @@ import 'colors.dart';
 import 'dart:developer' as devtools show log;
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key, required String title}) : super(key: key);
 
@@ -121,25 +122,26 @@ class _LoginScreenState extends State<LoginScreen> {
     var connectivityResult = await (Connectivity().checkConnectivity());
     return connectivityResult != ConnectivityResult.none;
   }
+
   void _showMessage(String message) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: const Text('Error'),
-        content: Text(message),
-        actions: <Widget>[
-          TextButton(
-            child: const Text('OK'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      );
-    },
-  );
-}
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Error'),
+          content: Text(message),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   void _navigatetoHospitalRegistrationForm() {
     Navigator.push(

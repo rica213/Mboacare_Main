@@ -158,11 +158,12 @@ class _AddFacilitiesPageState extends State<AddFacilitiesPage> {
                 height: 20,
               ),
               InkWell(
-                 onTap: () {
+                onTap: () {
                   Navigator.push(
                       context,
                       (MaterialPageRoute(
-                          builder: (context) => const PickAddressPage())));},
+                          builder: (context) => const PickAddressPage())));
+                },
                 child: const Text(
                   'Hospital Address *',
                   style: TextStyle(
