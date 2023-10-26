@@ -1,8 +1,12 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mboacare/login/login.dart';
 import 'package:mboacare/sign_up/sign_up_page.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import 'package:mboacare/blog/blog_page.dart';
 import 'package:mboacare/user_profile_page.dart';
 import 'colors.dart';
 import 'facilities/view/screens/facilities_page.dart';
@@ -55,16 +59,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void _initializeScreens(BuildContext context) {
     _screens = [
       const DashboardContent(),
-      FacilitiesPage(),
-       HospitalDashboard(),
+      const FacilitiesPage(),
+      const BlogPage(),
       const ProfilePage(),
     ];
   }
 
+  // ignore: unused_field
   final List<String> _screenTitles = [
     'Home',
     'Hospital Dashbord',
-    'Settings',
+    'Blog',
     'Profile',
   ];
 
