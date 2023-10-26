@@ -66,6 +66,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   cached_network_image: ^3.3.0
+  mockito: ^5.4.2
+  nock: ^1.2.3
   multiselect: ^0.1.0
 
 dev_dependencies:

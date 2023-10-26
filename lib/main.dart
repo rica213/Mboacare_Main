@@ -7,10 +7,10 @@ import 'package:mboacare/colors.dart';
 import 'package:mboacare/sign_up/view_model/signup_provider.dart';
 import 'package:mboacare/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:mboacare/utils/constants.dart';
 import 'package:mboacare/user_profile_page.dart';
 import 'package:mboacare/user_provider.dart';
 import 'package:mboacare/user_test_data.dart';
+import 'package:mboacare/view_model/signup_view_model.dart';
 import 'package:provider/provider.dart';
 import 'hospital_provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -21,7 +21,6 @@ import 'login/login_provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => HospitalProvider()),
@@ -30,6 +29,7 @@ void main() async {
       ChangeNotifierProvider(create: (_) => LoginProvider()),
       ChangeNotifierProvider(
           create: (_) => UserDataProvider(TestData.getTestUser())),
+      ChangeNotifierProvider(create: (_) => UserDataProvider()),
       // Add other providers here if needed.
     ],
     child: const MyApp(),
