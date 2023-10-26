@@ -3,7 +3,15 @@ import 'package:mboacare/colors.dart';
 
 class ChipTextFieldScreen extends StatefulWidget {
   final String hintText;
-  const ChipTextFieldScreen({super.key, required this.hintText});
+  List<String> tag;
+  final Function(String)? onFieldSubmitted;
+
+  ChipTextFieldScreen({
+    super.key,
+    required this.hintText,
+    required this.tag,
+    this.onFieldSubmitted,
+  });
 
   @override
   State<ChipTextFieldScreen> createState() => _ChipTextFieldScreenState();
@@ -70,7 +78,9 @@ class _ChipTextFieldScreenState extends State<ChipTextFieldScreen> {
           onFieldSubmitted: (_) {
             setState(() {
               tags.add(tagsController.text);
-              // provider.placerModel.ad.tags = tags;
+              widget.tag = tags;
+              print(tags);
+              print('gg${widget.tag}');
               tagsController.text = '';
             });
           },

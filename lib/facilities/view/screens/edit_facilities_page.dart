@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mboacare/colors.dart';
+import 'package:mboacare/facilities/provider/facilities_provider.dart';
 import 'package:mboacare/facilities/view/widget/chip_text_field.dart';
+import 'package:provider/provider.dart';
 
 import '../widget/custom_textfield.dart';
 
@@ -41,7 +43,8 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
   int selectedIndex = 0;
   final ImagePicker _imagePicker = ImagePicker();
   File? _selectedImage;
-
+  List<String> facilitiesTags = [];
+    List<String> medicalTags = [];
   Future<void> _pickImage() async {
     final pickedImage =
         await _imagePicker.pickImage(source: ImageSource.gallery);
@@ -51,9 +54,16 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
       }
     });
   }
+  final formKey = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
+    final _phoneNoController = TextEditingController();
+      final _emailController = TextEditingController();
+        final _websiteController = TextEditingController();
+          final _addressController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final facilitiesProvider = Provider.of<FacilitiesProvider>(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -112,8 +122,9 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
               const SizedBox(
                 height: 10,
               ),
-              const CustomTextField(
+               CustomTextField(
                 hintText: 'Central Park Hospital',
+                controller: _nameController,
               ),
               const SizedBox(
                 height: 20,
@@ -128,8 +139,9 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
               const SizedBox(
                 height: 10,
               ),
-              const CustomTextField(
+               CustomTextField(
                 hintText: 'support@centrapark.org',
+                controller: _emailController,
               ),
               const SizedBox(
                 height: 20,
@@ -144,8 +156,9 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
               const SizedBox(
                 height: 10,
               ),
-              const CustomTextField(
+               CustomTextField(
                 hintText: '+44 786789378',
+                controller: _phoneNoController,
               ),
               const SizedBox(
                 height: 20,
@@ -160,8 +173,9 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
               const SizedBox(
                 height: 10,
               ),
-              const CustomTextField(
+               CustomTextField(
                 hintText: 'centralpark.org',
+                controller: _websiteController,
               ),
               const SizedBox(
                 height: 20,
@@ -177,6 +191,7 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
                 height: 10,
               ),
               CustomTextField(
+                controller: _addressController,
                 prefixIcon: Padding(
                   padding: const EdgeInsets.all(17.0),
                   child: SvgPicture.asset(
@@ -192,25 +207,37 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
               const SizedBox(
                 height: 10,
               ),
-              const ChipTextFieldScreen(
-                hintText: 'Add a medical service',
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text(
-                'Facilities available',
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.grey),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const ChipTextFieldScreen(
-                hintText: 'Add a facility',
-              ),
+            //    ChipTextFieldScreen(
+            //     hintText: 'Add a medical service',
+            //     controller: tagsController,
+            //     tag: medicalTags,
+            //     onFieldSubmitted:  (_) {
+            //   setState(() {
+            //     tags.add(tagsController.text);
+            //     widget.tag = tags;
+            //     print(tags);
+            //     print('gg${widget.tag}');
+            //     tagsController.text = '';
+            //   });
+            // },,
+            //   ),
+            //   const SizedBox(
+            //     height: 20,
+            //   ),
+            //   const Text(
+            //     'Facilities available',
+            //     style: TextStyle(
+            //         fontSize: 16,
+            //         fontWeight: FontWeight.w500,
+            //         color: AppColors.grey),
+            //   ),
+            //   const SizedBox(
+            //     height: 10,
+            //   ),
+            //    ChipTextFieldScreen(
+            //     hintText: 'Add a facility',
+            //     tag: facilitiesTags,
+            //   ),
               const SizedBox(
                 height: 20,
               ),

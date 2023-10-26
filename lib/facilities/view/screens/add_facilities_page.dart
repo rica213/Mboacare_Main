@@ -1,11 +1,14 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mboacare/colors.dart';
+import 'package:mboacare/facilities/provider/facilities_provider.dart';
 import 'package:mboacare/facilities/view/screens/pick_address_page.dart';
 import 'package:mboacare/facilities/view/widget/chip_text_field.dart';
+import 'package:provider/provider.dart';
 
 import '../widget/custom_textfield.dart';
 
@@ -53,8 +56,19 @@ class _AddFacilitiesPageState extends State<AddFacilitiesPage> {
     });
   }
 
+  List<String> facilitiesTags = [];
+  List<String> medicalTags = [];
+  final formKey = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
+  final _phoneNoController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _websiteController = TextEditingController();
+  final _addressController = TextEditingController();
+  TextEditingController medicalTagsController = TextEditingController();
+  TextEditingController facilitiesTagsController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final facilitiesProvider = Provider.of<FacilitiesProvider>(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -103,8 +117,9 @@ class _AddFacilitiesPageState extends State<AddFacilitiesPage> {
               const SizedBox(
                 height: 10,
               ),
-              const CustomTextField(
+              CustomTextField(
                 hintText: 'Central Park Hospital',
+                controller: _nameController,
               ),
               const SizedBox(
                 height: 20,
@@ -119,8 +134,9 @@ class _AddFacilitiesPageState extends State<AddFacilitiesPage> {
               const SizedBox(
                 height: 10,
               ),
-              const CustomTextField(
+              CustomTextField(
                 hintText: 'support@centrapark.org',
+                controller: _emailController,
               ),
               const SizedBox(
                 height: 20,
@@ -135,8 +151,9 @@ class _AddFacilitiesPageState extends State<AddFacilitiesPage> {
               const SizedBox(
                 height: 10,
               ),
-              const CustomTextField(
+              CustomTextField(
                 hintText: '+44 786789378',
+                controller: _phoneNoController,
               ),
               const SizedBox(
                 height: 20,
@@ -151,18 +168,20 @@ class _AddFacilitiesPageState extends State<AddFacilitiesPage> {
               const SizedBox(
                 height: 10,
               ),
-              const CustomTextField(
+              CustomTextField(
                 hintText: 'centralpark.org',
+                controller: _websiteController,
               ),
               const SizedBox(
                 height: 20,
               ),
               InkWell(
-                 onTap: () {
+                onTap: () {
                   Navigator.push(
                       context,
                       (MaterialPageRoute(
-                          builder: (context) => PickAddressPage())));},
+                          builder: (context) => const PickAddressPage())));
+                },
                 child: const Text(
                   'Hospital Address *',
                   style: TextStyle(
@@ -179,7 +198,7 @@ class _AddFacilitiesPageState extends State<AddFacilitiesPage> {
                   Navigator.push(
                       context,
                       (MaterialPageRoute(
-                          builder: (context) => PickAddressPage())));
+                          builder: (context) => const PickAddressPage())));
                 },
                 child: CustomTextField(
                   prefixIcon: Padding(
@@ -189,6 +208,7 @@ class _AddFacilitiesPageState extends State<AddFacilitiesPage> {
                     ),
                   ),
                   hintText: '5447, Park Lane, London, UK',
+                  controller: _addressController,
                 ),
               ),
               const SizedBox(
@@ -198,9 +218,71 @@ class _AddFacilitiesPageState extends State<AddFacilitiesPage> {
               const SizedBox(
                 height: 10,
               ),
-              const ChipTextFieldScreen(
-                hintText: 'Add a medical service',
+              medicalTags.isNotEmpty
+                  ? GridView.builder(
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.all(10),
+                      itemCount: medicalTags.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        mainAxisExtent: 45,
+                      ),
+                      itemBuilder: (context, index) => Chip(
+                        backgroundColor: Colors.white,
+                        label: Text(
+                          medicalTags[index],
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 17),
+                        ),
+                        deleteIconColor: Colors.black,
+                        padding: const EdgeInsets.all(0),
+                        onDeleted: () {
+                          setState(() {
+                            medicalTags.remove(medicalTags[index]);
+                          });
+                        },
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+              TextFormField(
+                controller: medicalTagsController,
+                cursorColor: Colors.teal,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide:
+                        const BorderSide(color: AppColors.grey300, width: 1.5),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide:
+                        const BorderSide(color: AppColors.grey300, width: 1.5),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide:
+                        const BorderSide(color: AppColors.grey300, width: 1.5),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                  hintText: 'Add a medical service',
+                ),
+                onFieldSubmitted: (_) {
+                  setState(() {
+                    medicalTags.add(medicalTagsController.text);
+                    // tags;
+                    // print(tags);
+                    // print('gg${widget.tag}');
+                    medicalTagsController.text = '';
+                  });
+                },
               ),
+              // ChipTextFieldScreen(
+              //   hintText: 'Add a medical service',
+              //   tag: medicalTags,
+              // ),
               const SizedBox(
                 height: 20,
               ),
@@ -214,9 +296,76 @@ class _AddFacilitiesPageState extends State<AddFacilitiesPage> {
               const SizedBox(
                 height: 10,
               ),
-              const ChipTextFieldScreen(
-                hintText: 'Add a facility',
+              Column(
+                children: [
+                  facilitiesTags.isNotEmpty
+                      ? GridView.builder(
+                          shrinkWrap: true,
+                          padding: const EdgeInsets.all(10),
+                          itemCount: facilitiesTags.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            mainAxisExtent: 45,
+                          ),
+                          itemBuilder: (context, index) => Chip(
+                            backgroundColor: Colors.white,
+                            label: Text(
+                              facilitiesTags[index],
+                              style: const TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 17),
+                            ),
+                            deleteIconColor: Colors.black,
+                            padding: const EdgeInsets.all(0),
+                            onDeleted: () {
+                              setState(() {
+                                facilitiesTags.remove(facilitiesTags[index]);
+                              });
+                            },
+                          ),
+                        )
+                      : const SizedBox.shrink(),
+                  TextFormField(
+                    controller: facilitiesTagsController,
+                    cursorColor: Colors.teal,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(
+                            color: AppColors.grey300, width: 1.5),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(
+                            color: AppColors.grey300, width: 1.5),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(
+                            color: AppColors.grey300, width: 1.5),
+                      ),
+                      contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 10),
+                      hintText: 'Add a facility',
+                    ),
+                    onFieldSubmitted: (_) {
+                      setState(() {
+                        facilitiesTags.add(facilitiesTagsController.text);
+                        //  widget.tag = tags;
+                        print(facilitiesTags);
+                        // print('gg${widget.tag}');
+                        facilitiesTagsController.text = '';
+                      });
+                    },
+                  ),
+                ],
               ),
+              // ChipTextFieldScreen(
+              //   hintText: 'Add a facility',
+              //   tag: facilitiesTags,
+              // ),
               const SizedBox(
                 height: 20,
               ),
@@ -617,11 +766,36 @@ class _AddFacilitiesPageState extends State<AddFacilitiesPage> {
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) =>
-                    //             AddFacilitiesPage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                AddFacilitiesPage()));
+                    facilitiesProvider.addFacilities(
+                        
+                        name: _nameController.text,
+                        email: _emailController.text,
+                        website: _websiteController.text,
+                        phoneno: _phoneNoController.text,
+                        latitude: 'n',
+                        longitude: 'k',
+                        serviceType: medicalTags,
+                        facilitiesType: facilitiesTags,
+                        hospitalType: selectedType,
+                        hospitalOwner: selectedOwnership,
+                        hospitalSize: selectedSize,
+                        hospitalImage: _selectedImage!);
+
+                    log('''
+${_emailController.text} 
+${_nameController.text} ${_websiteController.text} ${_phoneNoController.text} 
+${medicalTags} 
+${facilitiesTags} 
+${selectedOwnership} 
+${selectedSize} 
+${_selectedImage} 
+${selectedType}
+''');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.buttonColor,
