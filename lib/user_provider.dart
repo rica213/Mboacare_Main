@@ -119,7 +119,7 @@ class UserDataProvider with ChangeNotifier {
     };
     var request = http.Request('PUT', Uri.parse('$baseURL/update-profile'));
     request.body = json.encode({
-      "uid": '7umbzaVQcFZycz1QyTVJu40jBC33',
+      "uid": currentUser.uid,
       "displayName": newDisplayName,
     });
     request.headers.addAll(headers);
@@ -150,7 +150,7 @@ class UserDataProvider with ChangeNotifier {
     };
     var request = http.Request('PUT', Uri.parse('$baseURL/update-profile'));
     request.body = json.encode({
-      "uid": '7umbzaVQcFZycz1QyTVJu40jBC33',
+      "uid": currentUser.uid,
       "phoneNumber": newPhoneNumber,
     });
     request.headers.addAll(headers);
@@ -181,7 +181,7 @@ class UserDataProvider with ChangeNotifier {
     };
     var request = http.Request('PUT', Uri.parse('$baseURL/update-profile'));
     request.body = json.encode({
-      "uid": '7umbzaVQcFZycz1QyTVJu40jBC33',
+      "uid": currentUser.uid,
       "email": newEmail,
     });
     request.headers.addAll(headers);
@@ -233,7 +233,7 @@ class UserDataProvider with ChangeNotifier {
       'Content-Type': 'application/json',
     };
     var request = http.Request('POST', Uri.parse('$baseURL/reset-password'));
-    request.body = json.encode({"email": 'manyirect@gmail.com'});
+    request.body = json.encode({"email": currentUser.email});
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();

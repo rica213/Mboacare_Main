@@ -11,7 +11,7 @@ Future<UserModel?> getUserInfo() async {
       Uri.parse(
           'https://us-central1-mboacare-api-v1.cloudfunctions.net/api/auth/sign-in'));
   request.body =
-      json.encode({"email": "manyirect@gmail.com", "password": "General14@#"});
+      json.encode({"email": "kabanda1@gmail.com", "password": "General14@#"});
   request.headers.addAll(headers);
 
   http.StreamedResponse response = await request.send();
