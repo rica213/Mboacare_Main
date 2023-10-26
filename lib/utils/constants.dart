@@ -1,8 +1,28 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mboacare/colors.dart';
 
-class AppStrings {}
+import '../cache/sharedpreferences.dart';
+
+///Global variables
+final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
+final SharedPreference sharedPreference = SharedPreference();
+
+class AppStrings {
+  static String welcome ="Welcome back";
+  static String remember ="Remember Me";
+  static String sign ="Sign in";
+  static String signUp ="Sign up";
+  static String doNotHaveAccount ="Don't have an account? ";
+  static String signInWithGoogle ="Sign in with Google";
+  static String forgot ="Forgot password";
+  static String enterPassword ="Enter your password";
+  static String email ="Email *";
+  static String password ="Password *";
+  static String enterEmail ="Enter your email";
+  static String details ="Welcome back! Please enter your details.";
+
+}
 
 class AppImages {
   static const String appLogo = "lib/assests/images/logo.png";

@@ -43,12 +43,6 @@ class EditTextForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      // decoration: BoxDecoration(
-      //   border: Border.all(
-      //     width: AppFontSizes.fontSize1,
-      //   ),
-      //   borderRadius: BorderRadius.circular(AppFontSizes.fontSize8),
-      // ),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: AppFontSizes.fontSize1),
         child: TextField(
@@ -127,21 +121,16 @@ class PasswordForm extends StatefulWidget {
 }
 
 class _PasswordFormState extends State<PasswordForm> {
-  bool obscureText = true;
+  bool obscureText = false;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
-      decoration: BoxDecoration(
-        border: Border.all(
-          width: 1.0,
-          color: AppColors.password,
-        ),
-        borderRadius: BorderRadius.circular(8.0),
-      ),
       child: TextField(
         controller: widget.controller,
+        maxLines: 1,
+        onChanged: widget.onChanged,
         obscureText: obscureText,
         decoration: InputDecoration(
           isDense: true,
@@ -149,10 +138,16 @@ class _PasswordFormState extends State<PasswordForm> {
             top: AppFontSizes.fontSize10,
             left: AppFontSizes.fontSize8,
             right: AppFontSizes.fontSize8,
-            // horizontal: AppFontSizes.fontSize8,
           ),
+          hintStyle: GoogleFonts.inter(
+              color: AppColors.hintTextColor,
+              fontSize: AppFontSizes.fontSize16,
+              fontWeight: FontWeight.w400),
+          labelStyle: GoogleFonts.inter(
+              color: AppColors.primaryColor,
+              fontSize: AppFontSizes.fontSize16,
+              fontWeight: FontWeight.w500),
           hintText: widget.hintText,
-          labelStyle: const TextStyle(color: AppColors.primaryColor),
           border: InputBorder.none,
           suffixIcon: SizedBox(
             child: IconButton(
