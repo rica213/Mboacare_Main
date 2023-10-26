@@ -37,6 +37,9 @@ class AppImages {
   static const String markerPinIcon = "lib/assests/images/marker_pin.png";
   static const String arrowDown = "lib/assests/images/arrow_down.png";
   static const String uploadIcon = "lib/assests/images/upload_icon.png";
+  static const String uncheckRingIcon = "lib/assests/images/uncheck_ring.png";
+  static const String checkRingIcon = "lib/assests/images/check_ring.png";
+  static const String closeIcon = "lib/assests/images/close.svg";
 }
 
 class AppFontSizes {

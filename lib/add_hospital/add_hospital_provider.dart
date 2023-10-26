@@ -9,24 +9,27 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'dart:developer' as devtools show log;
 import 'package:http/http.dart' as http;
 
+import '../widgets/snackbar.dart';
 import 'add_hopital.dart';
 
-class AddHospitalProvider extends ChangeNotifier{
-
+class AddHospitalProvider extends ChangeNotifier {
   AddHospitalProvider() {
     fetchApiKey();
   }
 
-  final addressController = TextEditingController();
-  final phoneNumberController = TextEditingController();
-  final emailController = TextEditingController();
-  final websiteController = TextEditingController();
-  final medicalController = TextEditingController();
-  final facilityController = TextEditingController();
+  final hospitalAddressController = TextEditingController();
+  final hospitalPhoneNumberController = TextEditingController();
+  final hospitalEmailController = TextEditingController();
+  final hospitalWebsiteController = TextEditingController();
+  final hospitalMedicalController = TextEditingController();
+  final hospitalFacilityController = TextEditingController();
   final hospitalTypeController = TextEditingController();
   final hospitalSizeController = TextEditingController();
   final hospitalOwnerShipController = TextEditingController();
-  final nameController = TextEditingController();
+  final hospitalNameController = TextEditingController();
+  final hospitalSpecialitiesController = TextEditingController();
+  final hospitalBedCapacityController = TextEditingController();
+  final hospitalEmergencyServicesController = TextEditingController();
   String initialCountry = 'NG';
   final number = PhoneNumber(isoCode: 'NG');
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -50,6 +53,23 @@ class AddHospitalProvider extends ChangeNotifier{
   String? hospitalFacilities;
   String? hospitalBedCapacity;
   String? hospitalEmergencyServices;
+  List<String> medicalServicesChipItems = [];
+  List<String> facilitiesAvailableChipItems = [];
+
+  setHospitalName(String value) {
+    hospitalName = value;
+    notifyListeners();
+  }
+
+  setHospitalEmail(String value) {
+    hospitalEmail = value;
+    notifyListeners();
+  }
+
+  void setHospitalPhoneNumber(String value) {
+    hospitalPhone = value;
+    notifyListeners();
+  }
 
   Future<void> fetchApiKey() async {
     try {
@@ -126,29 +146,29 @@ The Mboacare Team
     }
   }
 
-  void submitForm() async {
+  void submitForm({Function()? onSuccessNavigate}) async {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
 
       // Convert hospitalData to a map
       final hospitalDataMap = {
-        'hospitalName': hospitalName,
-        'hospitalAddress': hospitalAddress,
-        'hospitalPhone': hospitalPhone,
-        'hospitalEmail': hospitalEmail,
-        'hospitalWebsite': hospitalWebsite,
-        'hospitalType': hospitalType,
-        'hospitalSize': hospitalSize,
-        'hospitalOwnership': hospitalOwnership,
-        'hospitalSpecialities': hospitalSpecialities,
-        'hospitalFacilities': hospitalFacilities,
-        'hospitalBedCapacity': hospitalBedCapacity,
-        'hospitalEmergencyServices': hospitalEmergencyServices
+        'hospitalName': hospitalNameController.text,
+        'hospitalAddress': hospitalAddressController.text,
+        'hospitalPhone': hospitalPhoneNumberController.text,
+        'hospitalEmail': hospitalEmailController.text,
+        'hospitalWebsite': hospitalWebsiteController.text,
+        'hospitalType': hospitalTypeController.text,
+        'hospitalSize': hospitalSizeController.text,
+        'hospitalOwnership': hospitalOwnerShipController.text,
+        'hospitalSpecialities': hospitalSpecialitiesController.text,
+        'hospitalFacilities': hospitalFacilityController.text,
+        'hospitalBedCapacity': hospitalBedCapacityController.text,
+        'hospitalEmergencyServices': hospitalEmergencyServicesController.text
       };
 
       // CollectionReference for the hospitals collection in Cloud Firestore
       final CollectionReference hospitalsRef =
-      FirebaseFirestore.instance.collection('hospitals');
+          FirebaseFirestore.instance.collection('hospitals');
 
       try {
         if (selectedImage != null) {
@@ -170,15 +190,15 @@ The Mboacare Team
           final Reference storageReference = FirebaseStorage.instance
               .ref()
               .child(
-              'hospital_images/${DateTime.now().millisecondsSinceEpoch}');
+                  'hospital_images/${DateTime.now().millisecondsSinceEpoch}');
 
           final UploadTask uploadTask =
-          storageReference.putFile(selectedImage!);
+              storageReference.putFile(selectedImage!);
           TaskSnapshot storageTaskSnapshot = await uploadTask;
 
           if (uploadTask.snapshot.state == TaskState.success) {
             final String downloadUrl =
-            await storageTaskSnapshot.ref.getDownloadURL();
+                await storageTaskSnapshot.ref.getDownloadURL();
             devtools.log("Download URL: $downloadUrl");
 
             hospitalDataMap['hospitalImageUrl'] = downloadUrl;
@@ -199,13 +219,8 @@ The Mboacare Team
         if (hospitalEmail!.isNotEmpty) {
           sendRegisterSuccessEmail(hospitalEmail!, hospitalName!);
         }
-          // Show a snackbar indicating successful form submission
-          // ScaffoldMessenger.of(context).showSnackBar(
-          //   const SnackBar(
-          //     content: Text('Form submitted successfully'),
-          //     duration: Duration(seconds: 2),
-          //   ),
-          // );
+        // Show a snackbar indicating successful form submission
+        showMessage(message: 'Form submitted successfully');
 
         // Clear the form fields and selected image after successful submission
         formKey.currentState?.reset();
@@ -223,24 +238,14 @@ The Mboacare Team
         // ));
         Future.delayed(const Duration(seconds: 1)).then((_) {
           // Navigate to the HospitalDashboard screen
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => const HospitalDashboard(),
-          //   ),
-          // );
+          onSuccessNavigate!();
         });
       } catch (e) {
         devtools.log('Error saving data to Cloud Firestore: $e');
 
-          // Show an error message if there's an issue with data saving
-          // ScaffoldMessenger.of(context).showSnackBar(
-          //   const SnackBar(
-          //     content: Text('Error saving data. Please try again.'),
-          //     duration: Duration(seconds: 2),
-          //   ),
-          // );
-
+        // Show an error message if there's an issue with data saving
+        showMessage(
+            isError: true, message: 'Error saving data. Please try again.');
       }
     }
   }
@@ -271,6 +276,32 @@ The Mboacare Team
     ChecklistItem(title: 'Ambulance', isChecked: false),
     ChecklistItem(title: '24/7 Emergency Room', isChecked: false),
     ChecklistItem(title: 'Other', isChecked: false),
+  ];
+
+  List<ChecklistItem> checklistHospitalSize = [
+    ChecklistItem(title: 'Ambulance', isChecked: false),
+    ChecklistItem(title: '24/7 Emergency Room', isChecked: false),
+    ChecklistItem(title: 'Other', isChecked: false),
+  ];
+
+  List<ChecklistItem> checklistHospitalOwners = [
+    ChecklistItem(title: 'Individual', isChecked: false),
+    ChecklistItem(title: 'Corp0rate', isChecked: false),
+    ChecklistItem(title: 'Government', isChecked: false),
+  ];
+
+  List<ChecklistItem> checklistHospitalTypeList = [
+    ChecklistItem(title: 'Public', isChecked: false),
+    ChecklistItem(title: 'Private', isChecked: false),
+    ChecklistItem(title: 'Other', isChecked: false),
+  ];
+
+  List<String> hospitalTypeList = ["Public", "Private", "Other"];
+  List<String> hospitalSizeList = ["Small", "Medium", "Large"];
+  List<String> hospitalSizeOwnershipList = [
+    "Individual",
+    "Corporate",
+    "Government"
   ];
 
   void concatenateMedicalServices() {
@@ -316,37 +347,64 @@ The Mboacare Team
   }
 
   void setOtherValue(String name, String value) {
-      switch (name) {
-        case 'hospitalType':
-          hospitalType = value;
-          break;
-        case 'hospitalSize':
-          hospitalSize = value;
-          break;
-        case 'hospitalOwnership':
-          hospitalOwnership = value;
-          break;
-        case 'hospitalBedCapacity':
-          hospitalBedCapacity = value;
-          break;
-        default:
-          break;
-      }
+    switch (name) {
+      case 'hospitalType':
+        hospitalType = value;
+        break;
+      case 'hospitalSize':
+        hospitalSize = value;
+        break;
+      case 'hospitalOwnership':
+        hospitalOwnership = value;
+        break;
+      case 'hospitalBedCapacity':
+        hospitalBedCapacity = value;
+        break;
+      default:
+        break;
+    }
     notifyListeners();
   }
 
   Future<void> pickImage() async {
     final pickedImage =
-    await _imagePicker.pickImage(source: ImageSource.gallery);
-      if (pickedImage != null) {
-        selectedImage = File(pickedImage.path);
-      }
+        await _imagePicker.pickImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      selectedImage = File(pickedImage.path);
+    }
+    notifyListeners();
+  }
+
+  void addToMedsChip(String text) {
+    debugPrint("AddToMed: $medicalServicesChipItems");
+
+    medicalServicesChipItems.add(text);
+    hospitalMedicalController.clear();
+    notifyListeners();
+  }
+
+  void addToFacilitiesChip(String text) {
+    debugPrint("AddToFac: $facilitiesAvailableChipItems");
+    facilitiesAvailableChipItems.add(text);
+    hospitalFacilityController.clear();
     notifyListeners();
   }
 
   @override
   void dispose() {
-    phoneNumberController.dispose();
+    hospitalAddressController.dispose();
+    hospitalPhoneNumberController.dispose();
+    hospitalEmailController.dispose();
+    hospitalWebsiteController.dispose();
+    hospitalMedicalController.dispose();
+    hospitalFacilityController.dispose();
+    hospitalTypeController.dispose();
+    hospitalSizeController.dispose();
+    hospitalOwnerShipController.dispose();
+    hospitalNameController.dispose();
+    hospitalSpecialitiesController.dispose();
+    hospitalBedCapacityController.dispose();
+    hospitalEmergencyServicesController.dispose();
     super.dispose();
   }
 }

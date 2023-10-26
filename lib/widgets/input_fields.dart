@@ -16,7 +16,7 @@ class EditTextForm extends StatelessWidget {
   final VoidCallback? onTap;
   final Iterable<String>? autofillHints;
   final VoidCallback? onEditingComplete;
-  final Function(String)? onFieldSubmitted;
+  final Function(String)? onSubmitted;
   final Function(String)? onChanged;
   final TextEditingController controller;
   final TextInputType? keyboardType;
@@ -31,7 +31,7 @@ class EditTextForm extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.onTap,
     this.onEditingComplete,
-    this.onFieldSubmitted,
+    this.onSubmitted,
     this.inputFormatter,
     this.validator,
     this.autofillHints,
@@ -49,12 +49,17 @@ class EditTextForm extends StatelessWidget {
         child: TextField(
           controller: controller,
           onEditingComplete: onEditingComplete,
-          onSubmitted: onFieldSubmitted,
+          onSubmitted: onSubmitted,
           maxLines: 1,
           onChanged: onChanged,
           onTap: onTap,
+          readOnly: readonly,
           keyboardType: keyboardType,
           inputFormatters: inputFormatter,
+          style: GoogleFonts.inter(
+              color: AppColors.primaryColor,
+              fontSize: AppFontSizes.fontSize16,
+              fontWeight: FontWeight.w500),
           decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(
               vertical: AppFontSizes.fontSize8,
@@ -88,7 +93,7 @@ class EditTextForm extends StatelessWidget {
             labelStyle: GoogleFonts.inter(
                 color: AppColors.primaryColor,
                 fontSize: AppFontSizes.fontSize16,
-                fontWeight: FontWeight.w500),
+                fontWeight: FontWeight.w400),
             border: InputBorder.none,
             focusedBorder: OutlineInputBorder(
                 borderRadius:
@@ -153,6 +158,10 @@ class _PasswordFormState extends State<PasswordForm> {
         maxLines: 1,
         onChanged: widget.onChanged,
         obscureText: obscureText,
+        style: GoogleFonts.inter(
+            color: AppColors.primaryColor,
+            fontSize: AppFontSizes.fontSize16,
+            fontWeight: FontWeight.w500),
         decoration: InputDecoration(
           isDense: true,
           contentPadding: EdgeInsets.only(
@@ -167,7 +176,7 @@ class _PasswordFormState extends State<PasswordForm> {
           labelStyle: GoogleFonts.inter(
               color: AppColors.primaryColor,
               fontSize: AppFontSizes.fontSize16,
-              fontWeight: FontWeight.w500),
+              fontWeight: FontWeight.w400),
           hintText: widget.hintText,
           border: InputBorder.none,
           suffixIcon: SizedBox(
@@ -264,7 +273,7 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
         autoValidateMode: AutovalidateMode.disabled,
         selectorTextStyle: GoogleFonts.inter(
             color: AppColors.primaryColor,
-            fontSize: AppFontSizes.fontSize14,
+            fontSize: AppFontSizes.fontSize16,
             fontWeight: FontWeight.w500),
         textStyle: GoogleFonts.inter(
             color: AppColors.primaryColor,

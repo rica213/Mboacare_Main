@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mboacare/login/login_provider.dart';
 import 'package:mboacare/utils/constants.dart';
 import 'package:provider/provider.dart';
-import '../register/add_hopital.dart';
+import '../add_hospital/add_hopital.dart';
 import '../sign_up/sign_up_page.dart';
 import '../colors.dart';
 
@@ -163,7 +163,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         onSuccessNavigate: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (_) => const RegisterPage()),
+                            MaterialPageRoute(builder: (_) => const AddHospitalPage()),
                           );
                         }
                     );
@@ -177,7 +177,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     provider.signInWithGoogle(
                         onSuccessNavigate: () {
                           Navigator.push(
-                              context, MaterialPageRoute(builder: (_) => const RegisterPage()));
+                              context, MaterialPageRoute(builder: (_) => const AddHospitalPage()));
                         }
                     );
                   },

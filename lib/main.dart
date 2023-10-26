@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mboacare/settingsPage/settings.dart';
 import 'package:mboacare/settingsPage/theme.dart';
 import 'package:mboacare/colors.dart';
-import 'package:mboacare/register/add_hospital_provider.dart';
 import 'package:mboacare/sign_up/view_model/signup_provider.dart';
 import 'package:mboacare/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -11,6 +10,7 @@ import 'package:mboacare/user_profile_page.dart';
 import 'package:mboacare/user_provider.dart';
 import 'package:mboacare/user_test_data.dart';
 import 'package:provider/provider.dart';
+import 'add_hospital/add_hospital_provider.dart';
 import 'hospital_provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'locale_provider.dart';
@@ -27,7 +27,6 @@ void main() async {
       ChangeNotifierProvider(create: (_) => LocaleProvider()),
       ChangeNotifierProvider(create: (_) => SignUpProvider()),
       ChangeNotifierProvider(create: (_) => LoginProvider()),
-      ChangeNotifierProvider(create: (_) => SignInProvider()),
       ChangeNotifierProvider(create: (_) => AddHospitalProvider()),
       ChangeNotifierProvider(
           create: (_) => UserDataProvider(TestData.getTestUser())),
