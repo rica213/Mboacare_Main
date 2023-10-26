@@ -9,8 +9,8 @@ import 'package:mboacare/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mboacare/user_profile_page.dart';
 import 'package:mboacare/user_provider.dart';
-import 'package:mboacare/user_test_data.dart';
-import 'package:mboacare/view_model/signup_view_model.dart';
+// import 'package:mboacare/user_test_data.dart';
+// import 'package:mboacare/view_model/signup_view_model.dart';
 import 'package:provider/provider.dart';
 import 'add_hospital/add_hospital_provider.dart';
 import 'hospital_provider.dart';
@@ -29,8 +29,8 @@ void main() async {
       ChangeNotifierProvider(create: (_) => SignUpProvider()),
       ChangeNotifierProvider(create: (_) => LoginProvider()),
       ChangeNotifierProvider(create: (_) => AddHospitalProvider()),
-      ChangeNotifierProvider(
-          create: (_) => UserDataProvider(TestData.getTestUser())),
+      // ChangeNotifierProvider(
+      //     create: (_) => UserDataProvider(TestData.getTestUser())),
       ChangeNotifierProvider(create: (_) => UserDataProvider()),
       // Add other providers here if needed.
     ],
@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
         useMaterial3: true,
       ),
-      scaffoldMessengerKey: scaffoldKey,
+      // scaffoldMessengerKey: scaffoldKey,
       // Add supported locales and localizations delegates
       supportedLocales: const [
         Locale('en', 'US'), // English
@@ -79,8 +79,8 @@ class MyApp extends StatelessWidget {
         '/themeScreen': (context) => const ThemeScreen(),
         '/deleteDialog': (context) => const DeleteAccountDialog(),
         '/profilePage': (context) => const ProfilePage(),
-        '/blogPage' : (context) => const BlogPage(),
-        '/newBlog' : (context) => const AddBlogPage(),
+        '/blogPage': (context) => const BlogPage(),
+        '/newBlog': (context) => const AddBlogPage(),
       },
     ); //MaterialApp
   }
