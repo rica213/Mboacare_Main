@@ -43,7 +43,9 @@ class PickAddressPage extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             InkWell(
               onTap: () {
                 Navigator.push(
