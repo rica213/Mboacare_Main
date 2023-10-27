@@ -7,6 +7,17 @@ import 'hospital_provider.dart';
 import 'colors.dart';
 import 'dart:developer' as devtools show log;
 
+const List<String> dropdownItems = <String>[
+  'View All',
+  'Emergency Room',
+  'Laboratory',
+  'Radiology',
+  'Pharmacy',
+  'Intensive Care Unit',
+  'Operating Room',
+  'Blood Bank',
+];
+
 class HospitalDashboard extends StatefulWidget {
   const HospitalDashboard({super.key});
 
@@ -17,38 +28,15 @@ class HospitalDashboard extends StatefulWidget {
 class _HospitalDashboardState extends State<HospitalDashboard> {
   final TextEditingController _searchController = TextEditingController();
   String _selectedFilter = 'View All'; // Initialize with 'View All'
-  String _selectedDropdownFilter = 'View All'; // Initialize with 'View All'
+  String dropdownValue = dropdownItems.first; // Initialize with 'View All'
   late List<HospitalData> filteredHospitals;
   final FocusNode _searchFocusNode = FocusNode();
-
+  final TextEditingController dropdownController = TextEditingController();
   @override
   void dispose() {
     _searchController.dispose();
     super.dispose();
   }
-
-  // Defined but not referenced
-  // Uncomment to use the code below
-  // Function to launch the website URL
-  // Future<void> _launchURL(String url) async {
-  //   devtools.log('Launching URL: $url');
-
-  //   if (url.isNotEmpty &&
-  //       (url.startsWith('http://') || url.startsWith('https://'))) {
-  //     try {
-  //       final Uri uri = Uri.parse(url);
-  //       if (await url_launcher.canLaunchUrl(uri)) {
-  //         await url_launcher.launchUrl(uri);
-  //       } else {
-  //         devtools.log('Could not launch $url');
-  //       }
-  //     } catch (e) {
-  //       devtools.log('Error launching URL: $e');
-  //     }
-  //   } else {
-  //     devtools.log('Invalid URL: $url');
-  //   }
-  // }
 
   Future<void> _refreshData() async {
     //final hospitalProvider = Provider.of<HospitalProvider>(context);
@@ -125,31 +113,22 @@ class _HospitalDashboardState extends State<HospitalDashboard> {
           ),
         ),
         body: RefreshIndicator(
+          backgroundColor: Colors.white,
           onRefresh: _refreshData,
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 RichText(
                   // textAlign: TextAlign.center,
                   text: const TextSpan(
                     children: [
                       TextSpan(
-                        text: 'Connecting Hospitals',
+                        text: 'Connecting Hospitals Globally',
                         style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.primaryColor,
-                          fontFamily:
-                              'Inter', // Replace with the appropriate font family
-                        ),
-                      ),
-                      TextSpan(text: '\n'), // Add a line break here
-                      TextSpan(
-                        text: 'Globally',
-                        style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 28,
                           fontWeight: FontWeight.bold,
                           color: AppColors.primaryColor,
                           fontFamily:
@@ -190,52 +169,10 @@ class _HospitalDashboardState extends State<HospitalDashboard> {
                     ],
                   ),
                 ),
-
-                // const SizedBox(height: 16.0),
-
-                // Dropdown Filter
-                // DropdownButton<String>(
-                //   isExpanded: true,
-                //   icon: const Icon(Icons.keyboard_arrow_down),
-                //   value: _selectedDropdownFilter,
-                //   onChanged: (String? newValue) {
-                //     setState(() {
-                //       _selectedDropdownFilter = newValue!;
-                //       _selectedFilter =
-                //           newValue; // Set the filter tab value based on dropdown selection
-                //       hospitalProvider.setSelectedFilter(_selectedFilter);
-                //       Future.delayed(const Duration(milliseconds: 500))
-                //           .then((_) {
-                //         hospitalProvider
-                //             .updateFilteredHospitalsDropdown(filteredHospitals);
-                //         //hospitalProvider.filterHospitals(_selectedFilter);
-                //       });
-                //     });
-                //   },
-                //   items: <String>[
-                //     'View All',
-                //     'Emergency Room',
-                //     'Laboratory',
-                //     'Radiology',
-                //     'Pharmacy',
-                //     'Intensive Care Unit',
-                //     'Operating Room',
-                //     'Blood Bank',
-                //   ].map<DropdownMenuItem<String>>((String value) {
-                //     return DropdownMenuItem<String>(
-                //       value: value,
-                //       child: Text(
-                //         value,
-                //         style: const TextStyle(
-                //           color: AppColors.primaryColor,
-                //         ),
-                //       ),
-                //     );
-                //   }).toList(),
-                // ),
                 const SizedBox(height: 16.0),
-                // Second dropdown
-                DropdownMenu(
+                // Hospital filter dropdown menu
+                DropdownMenu<String>(
+                    controller: dropdownController,
                     inputDecorationTheme: const InputDecorationTheme(
                       filled: true,
                       fillColor: AppColors.navbarColor,
@@ -244,7 +181,7 @@ class _HospitalDashboardState extends State<HospitalDashboard> {
                         borderSide: BorderSide.none,
                       ),
                     ),
-                    width: 380.0,
+                    width: MediaQuery.of(context).size.width * 0.9,
                     enableFilter: true,
                     menuStyle: const MenuStyle(
                       backgroundColor: MaterialStatePropertyAll<Color>(
@@ -256,22 +193,27 @@ class _HospitalDashboardState extends State<HospitalDashboard> {
                         const Icon(Icons.keyboard_arrow_down_outlined),
                     selectedTrailingIcon:
                         const Icon(Icons.keyboard_arrow_up_outlined),
-                    dropdownMenuEntries: [
-                      'View All',
-                      'Emergency Room',
-                      'Laboratory',
-                      'Radiology',
-                      'Pharmacy',
-                      'Intensive Care Unit',
-                      'Operating Room',
-                      'Blood Bank',
-                    ].map<DropdownMenuEntry>((String value) {
+                    onSelected: (String? newValue) {
+                      setState(() {
+                        dropdownValue = newValue!;
+                        hospitalProvider.setSelectedFilter(dropdownValue);
+                        Future.delayed(const Duration(milliseconds: 500))
+                            .then((_) {
+                          hospitalProvider.updateFilteredHospitalsDropdown(
+                              filteredHospitals);
+                          //hospitalProvider.filterHospitals(_selectedFilter);
+                        });
+                      });
+                    },
+                    dropdownMenuEntries: dropdownItems
+                        .map<DropdownMenuEntry<String>>((String value) {
                       return DropdownMenuEntry<String>(
                         value: value,
                         label: value,
                       );
                     }).toList()),
                 const SizedBox(height: 16.0),
+
                 // Hospitals list
                 Expanded(
                   child: StreamBuilder<List<HospitalData>>(
@@ -344,10 +286,6 @@ class _HospitalDashboardState extends State<HospitalDashboard> {
                                           top: 2,
                                           child: IconButton(
                                             style: ButtonStyle(
-                                              // backgroundColor:
-                                              //     MaterialStateProperty.all(
-                                              //   Colors.white,
-                                              // ),
                                               fixedSize:
                                                   MaterialStateProperty.all(
                                                 const Size(2.0, 10.0),
@@ -376,34 +314,6 @@ class _HospitalDashboardState extends State<HospitalDashboard> {
                                       ],
                                     ),
                                   ),
-                                  // Hospital Image
-                                  // Container(
-                                  //   height:
-                                  //       MediaQuery.sizeOf(context).height *
-                                  //           .15,
-                                  //   decoration: BoxDecoration(
-                                  //     borderRadius: const BorderRadius.all(
-                                  //       Radius.circular(16.0),
-                                  //     ),
-                                  //     image: hospitalProvider
-                                  //                 .filteredHospitals[index]
-                                  //                 .hospitalImageUrl !=
-                                  //             ''
-                                  //         ? DecorationImage(
-                                  //             fit: BoxFit.cover,
-                                  //             image: NetworkImage(
-                                  //                 hospitalProvider
-                                  //                     .filteredHospitals[
-                                  //                         index]
-                                  //                     .hospitalImageUrl),
-                                  //           )
-                                  //         : const DecorationImage(
-                                  //             fit: BoxFit.cover,
-                                  //             image: AssetImage(
-                                  //                 'lib/assests/images/placeholder_image.png'),
-                                  //           ),
-                                  //   ),
-                                  // ),
                                   const SizedBox(
                                     height: 8.0,
                                   ),
