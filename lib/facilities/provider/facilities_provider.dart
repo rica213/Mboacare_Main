@@ -1,19 +1,30 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:dio/dio.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:mboacare/facilities/model/facilities_model.dart';
 
 class FacilitiesProvider with ChangeNotifier {
-  List<Post> _posts = [];
+  List<FacilitiesModel> _facilities = [];
 
-  List<Post> get posts => _posts;
+  List<FacilitiesModel> get facilities => _facilities;
   final Dio _dio = Dio();
 
   Future<void> getFacilities() async {
-    final response = await _dio.get('https://us-central1-mboacare-api-v1.cloudfunctions.net/api/hospital/all-hospital');
+    final response = await _dio.get(
+        'https://us-central1-mboacare-api-v1.cloudfunctions.net/api/hospital/all-hospital');
     if (response.statusCode == 200) {
-      _posts = response.data;
+      // log(response.data);
+      // print('hhh${_facilities.toString()}');
+      // // _facilities =  FacilitiesModel.fromJson(response.data['favouriteStores']);
+      // for (int i = 0; i < response.data.length; i++) {
+      //   FacilitiesModel model = FacilitiesModel.fromJson(response.data[i]);
+      //   _facilities.add(model);
+      // }
+      final List<dynamic> data = response.data;
+      _facilities = data.map((json) => FacilitiesModel.fromJson(json)).toList();
       // final List<dynamic> data = json.decode(response.body);
       // _posts = data.map((json) => Post.fromJson(json)).toList();
       notifyListeners();
@@ -64,11 +75,11 @@ class FacilitiesProvider with ChangeNotifier {
         'https://us-central1-mboacare-api-v1.cloudfunctions.net/api/hospital/add-hospital',
         data: FormData.fromMap(body),
         options: Options(headers: {
-          'Authorization': 'Bearer ${''}',
+          // 'Authorization': 'Bearer ${''}',
         }, contentType: 'multipart/form-data'),
       );
       if (response.statusCode == 200) {
-        // Handle a successful response, if needed
+        log(response.data);
       } else {
         throw Exception('Failed to post data');
       }
@@ -116,7 +127,8 @@ class FacilitiesProvider with ChangeNotifier {
             ),
     };
     try {
-      final response = await _dio.patch('https://us-central1-mboacare-api-v1.cloudfunctions.net/api/hospital/update-hospital',
+      final response = await _dio.patch(
+          'https://us-central1-mboacare-api-v1.cloudfunctions.net/api/hospital/update-hospital',
           data: FormData.fromMap(body),
           options: Options(headers: {
             'Authorization': 'Bearer ${''}',
@@ -131,16 +143,29 @@ class FacilitiesProvider with ChangeNotifier {
     }
   }
 
-  Future<void> deleteFacilities() async {
+  Future<void> deleteFacilities({required String website}) async {
     try {
-      final response = await 
-      _dio.delete('https://us-central1-mboacare-api-v1.cloudfunctions.net/api/hospital/delete-hospital/cbc3.com',
-          options: Options(headers: {
-            'Authorization': 'Bearer ${''}',
-          }, contentType: 'multipart/form-data'));
+      final response = await _dio.delete(
+        'https://us-central1-mboacare-api-v1.cloudfunctions.net/api/hospital/delete-hospital/$website',
+      );
 
       if (response.statusCode == 200) {
-        // Handle a successful response, if needed
+        print(response.data);
+      } else {
+        throw Exception('Failed to post data');
+      }
+    } catch (e) {
+      throw Exception('Error: $e');
+    }
+  }
+
+  Future<String> getPlaces(Uri uri, {Map<String, String>? headers}) async {
+    try {
+      final response = await http.get(uri, headers: headers);
+
+      if (response.statusCode == 200) {
+             
+        return response.body;
       } else {
         throw Exception('Failed to post data');
       }

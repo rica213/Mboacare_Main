@@ -6,12 +6,23 @@ import 'package:mboacare/facilities/view/screens/add_facilities_page.dart';
 import 'package:mboacare/facilities/view/widget/facilities_widget.dart';
 import 'package:provider/provider.dart';
 
-class FacilitiesPage extends StatelessWidget {
+class FacilitiesPage extends StatefulWidget {
   const FacilitiesPage({super.key});
 
   @override
+  State<FacilitiesPage> createState() => _FacilitiesPageState();
+}
+
+class _FacilitiesPageState extends State<FacilitiesPage> {
+  @override
+  void initState() {
+    Provider.of<FacilitiesProvider>(context, listen: false).getFacilities();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-     final facilitiesProvider = Provider.of<FacilitiesProvider>(context);
+    final facilitiesProvider = Provider.of<FacilitiesProvider>(context);
     return Scaffold(
         appBar: AppBar(
           leading: const Icon(Icons.arrow_back),
@@ -30,10 +41,10 @@ class FacilitiesPage extends StatelessWidget {
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   physics: const AlwaysScrollableScrollPhysics(),
-                  itemCount: facilities.length,
+                  itemCount: 2,
                   itemBuilder: (context, index) {
                     return FacilitiesWidget(
-                      facilitiesModel: facilities[index],
+                      facilitiesModel: facilitiesProvider.facilities[index],
                     );
                   }),
               const SizedBox(
@@ -67,4 +78,3 @@ class FacilitiesPage extends StatelessWidget {
         ));
   }
 }
-

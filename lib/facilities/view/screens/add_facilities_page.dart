@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mboacare/colors.dart';
 import 'package:mboacare/facilities/provider/facilities_provider.dart';
+import 'package:mboacare/facilities/view/screens/map_screen.dart';
 import 'package:mboacare/facilities/view/screens/pick_address_page.dart';
 import 'package:mboacare/facilities/view/widget/chip_text_field.dart';
 import 'package:provider/provider.dart';
@@ -52,6 +53,7 @@ class _AddFacilitiesPageState extends State<AddFacilitiesPage> {
     setState(() {
       if (pickedImage != null) {
         _selectedImage = File(pickedImage.path);
+        log(_selectedImage.toString());
       }
     });
   }
@@ -198,7 +200,7 @@ class _AddFacilitiesPageState extends State<AddFacilitiesPage> {
                   Navigator.push(
                       context,
                       (MaterialPageRoute(
-                          builder: (context) => const PickAddressPage())));
+                          builder: (context) => const MapSample ())));
                 },
                 child: CustomTextField(
                   prefixIcon: Padding(
@@ -272,17 +274,10 @@ class _AddFacilitiesPageState extends State<AddFacilitiesPage> {
                 onFieldSubmitted: (_) {
                   setState(() {
                     medicalTags.add(medicalTagsController.text);
-                    // tags;
-                    // print(tags);
-                    // print('gg${widget.tag}');
                     medicalTagsController.text = '';
                   });
                 },
               ),
-              // ChipTextFieldScreen(
-              //   hintText: 'Add a medical service',
-              //   tag: medicalTags,
-              // ),
               const SizedBox(
                 height: 20,
               ),
@@ -362,10 +357,6 @@ class _AddFacilitiesPageState extends State<AddFacilitiesPage> {
                   ),
                 ],
               ),
-              // ChipTextFieldScreen(
-              //   hintText: 'Add a facility',
-              //   tag: facilitiesTags,
-              // ),
               const SizedBox(
                 height: 20,
               ),
@@ -769,16 +760,14 @@ class _AddFacilitiesPageState extends State<AddFacilitiesPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                AddFacilitiesPage()));
+                            builder: (context) => AddFacilitiesPage()));
                     facilitiesProvider.addFacilities(
-                        
                         name: _nameController.text,
                         email: _emailController.text,
                         website: _websiteController.text,
                         phoneno: _phoneNoController.text,
-                        latitude: 'n',
-                        longitude: 'k',
+                        latitude: '20.00',
+                        longitude: '30.00',
                         serviceType: medicalTags,
                         facilitiesType: facilitiesTags,
                         hospitalType: selectedType,

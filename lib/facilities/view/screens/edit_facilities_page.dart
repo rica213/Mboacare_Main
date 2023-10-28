@@ -4,14 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mboacare/colors.dart';
+import 'package:mboacare/facilities/model/facilities_model.dart';
 import 'package:mboacare/facilities/provider/facilities_provider.dart';
-import 'package:mboacare/facilities/view/widget/chip_text_field.dart';
 import 'package:provider/provider.dart';
 
 import '../widget/custom_textfield.dart';
 
 class EditFacilitiesPage extends StatefulWidget {
-  const EditFacilitiesPage({super.key});
+  final FacilitiesModel facilitiesModel;
+  const EditFacilitiesPage({super.key, required this.facilitiesModel});
 
   @override
   State<EditFacilitiesPage> createState() => _EditFacilitiesPageState();
@@ -44,7 +45,7 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
   final ImagePicker _imagePicker = ImagePicker();
   File? _selectedImage;
   List<String> facilitiesTags = [];
-    List<String> medicalTags = [];
+  List<String> medicalTags = [];
   Future<void> _pickImage() async {
     final pickedImage =
         await _imagePicker.pickImage(source: ImageSource.gallery);
@@ -54,13 +55,15 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
       }
     });
   }
+
   final formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
-    final _phoneNoController = TextEditingController();
-      final _emailController = TextEditingController();
-        final _websiteController = TextEditingController();
-          final _addressController = TextEditingController();
-
+  final _phoneNoController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _websiteController = TextEditingController();
+  final _addressController = TextEditingController();
+  TextEditingController medicalTagsController = TextEditingController();
+  TextEditingController facilitiesTagsController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final facilitiesProvider = Provider.of<FacilitiesProvider>(context);
@@ -122,8 +125,8 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
               const SizedBox(
                 height: 10,
               ),
-               CustomTextField(
-                hintText: 'Central Park Hospital',
+              CustomTextField(
+                hintText: widget.facilitiesModel.name ?? '',
                 controller: _nameController,
               ),
               const SizedBox(
@@ -139,8 +142,8 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
               const SizedBox(
                 height: 10,
               ),
-               CustomTextField(
-                hintText: 'support@centrapark.org',
+              CustomTextField(
+                hintText: widget.facilitiesModel.email ?? '',
                 controller: _emailController,
               ),
               const SizedBox(
@@ -156,8 +159,8 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
               const SizedBox(
                 height: 10,
               ),
-               CustomTextField(
-                hintText: '+44 786789378',
+              CustomTextField(
+                hintText: widget.facilitiesModel.phoneNumber ?? '',
                 controller: _phoneNoController,
               ),
               const SizedBox(
@@ -173,8 +176,8 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
               const SizedBox(
                 height: 10,
               ),
-               CustomTextField(
-                hintText: 'centralpark.org',
+              CustomTextField(
+                hintText: widget.facilitiesModel.website ?? '',
                 controller: _websiteController,
               ),
               const SizedBox(
@@ -204,40 +207,204 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
                 height: 20,
               ),
               const Text('Medical Services Offered'),
+              widget.facilitiesModel.facilitiesType != null
+                  ? GridView.builder(
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.all(10),
+                      itemCount: widget.facilitiesModel.facilitiesType?.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        mainAxisExtent: 45,
+                      ),
+                      itemBuilder: (context, index) {
+                        print(widget.facilitiesModel.facilitiesType?.length);
+                        return Chip(
+                          backgroundColor: Colors.white,
+                          label: Text(
+                            widget.facilitiesModel.facilitiesType![index],
+                            style: const TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 17),
+                          ),
+                          deleteIconColor: Colors.black,
+                          padding: const EdgeInsets.all(0),
+                          onDeleted: () {
+                            setState(() {
+                              widget.facilitiesModel.facilitiesType?.remove(
+                                  widget
+                                      .facilitiesModel.facilitiesType?[index]);
+                            });
+                          },
+                        );
+                      },
+                    )
+                  : SizedBox(),
+              medicalTags.isNotEmpty
+                  ? GridView.builder(
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.all(10),
+                      itemCount: medicalTags.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        mainAxisExtent: 45,
+                      ),
+                      itemBuilder: (context, index) => Chip(
+                        backgroundColor: Colors.white,
+                        label: Text(
+                          medicalTags[index],
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 17),
+                        ),
+                        deleteIconColor: Colors.black,
+                        padding: const EdgeInsets.all(0),
+                        onDeleted: () {
+                          setState(() {
+                            medicalTags.remove(medicalTags[index]);
+                          });
+                        },
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+              TextFormField(
+                controller: medicalTagsController,
+                cursorColor: Colors.teal,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide:
+                        const BorderSide(color: AppColors.grey300, width: 1.5),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide:
+                        const BorderSide(color: AppColors.grey300, width: 1.5),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide:
+                        const BorderSide(color: AppColors.grey300, width: 1.5),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                  hintText: 'Add a medical service',
+                ),
+                onFieldSubmitted: (_) {
+                  setState(() {
+                    medicalTags.add(medicalTagsController.text);
+
+                    medicalTagsController.text = '';
+                  });
+                },
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Text(
+                'Facilities available',
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.grey),
+              ),
               const SizedBox(
                 height: 10,
               ),
-            //    ChipTextFieldScreen(
-            //     hintText: 'Add a medical service',
-            //     controller: tagsController,
-            //     tag: medicalTags,
-            //     onFieldSubmitted:  (_) {
-            //   setState(() {
-            //     tags.add(tagsController.text);
-            //     widget.tag = tags;
-            //     print(tags);
-            //     print('gg${widget.tag}');
-            //     tagsController.text = '';
-            //   });
-            // },,
-            //   ),
-            //   const SizedBox(
-            //     height: 20,
-            //   ),
-            //   const Text(
-            //     'Facilities available',
-            //     style: TextStyle(
-            //         fontSize: 16,
-            //         fontWeight: FontWeight.w500,
-            //         color: AppColors.grey),
-            //   ),
-            //   const SizedBox(
-            //     height: 10,
-            //   ),
-            //    ChipTextFieldScreen(
-            //     hintText: 'Add a facility',
-            //     tag: facilitiesTags,
-            //   ),
+              widget.facilitiesModel.serviceType != null
+                  ? GridView.builder(
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.all(10),
+                      itemCount: widget.facilitiesModel.serviceType?.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        mainAxisExtent: 45,
+                      ),
+                      itemBuilder: (context, index) {
+                        print(widget.facilitiesModel.serviceType?.length);
+                        return Chip(
+                          backgroundColor: Colors.white,
+                          label: Text(
+                            widget.facilitiesModel.serviceType![index],
+                            style: const TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 17),
+                          ),
+                          deleteIconColor: Colors.black,
+                          padding: const EdgeInsets.all(0),
+                          onDeleted: () {
+                            setState(() {
+                              widget.facilitiesModel.serviceType?.remove(
+                                  widget.facilitiesModel.serviceType?[index]);
+                            });
+                          },
+                        );
+                      },
+                    )
+                  : SizedBox(),
+              facilitiesTags.isNotEmpty
+                  ? GridView.builder(
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.all(10),
+                      itemCount: facilitiesTags.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        mainAxisExtent: 45,
+                      ),
+                      itemBuilder: (context, index) => Chip(
+                        backgroundColor: Colors.white,
+                        label: Text(
+                          facilitiesTags[index],
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 17),
+                        ),
+                        deleteIconColor: Colors.black,
+                        padding: const EdgeInsets.all(0),
+                        onDeleted: () {
+                          setState(() {
+                            facilitiesTags.remove(facilitiesTags[index]);
+                          });
+                        },
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+              TextFormField(
+                controller: facilitiesTagsController,
+                cursorColor: Colors.teal,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide:
+                        const BorderSide(color: AppColors.grey300, width: 1.5),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide:
+                        const BorderSide(color: AppColors.grey300, width: 1.5),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide:
+                        const BorderSide(color: AppColors.grey300, width: 1.5),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                  hintText: 'Add a facility',
+                ),
+                onFieldSubmitted: (_) {
+                  setState(() {
+                    facilitiesTags.add(facilitiesTagsController.text);
+
+                    facilitiesTagsController.text = '';
+                  });
+                },
+              ),
               const SizedBox(
                 height: 20,
               ),
@@ -269,7 +436,7 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            selectedSize,
+                            widget.facilitiesModel.hospitalType ?? '',
                             style: const TextStyle(
                                 color: AppColors.grey200,
                                 fontSize: 16,
@@ -384,7 +551,7 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            selectedType,
+                            widget.facilitiesModel.hospitalSize ?? '',
                             style: const TextStyle(
                                 color: AppColors.grey200,
                                 fontSize: 16,
@@ -499,7 +666,7 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            selectedOwnership,
+                            widget.facilitiesModel.hospitalOwner ?? '',
                             style: const TextStyle(
                                 color: AppColors.grey200,
                                 fontSize: 16,
@@ -589,16 +756,17 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
               Stack(
                 children: [
                   Container(
-                      height: 150,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          border:
-                              Border.all(color: AppColors.grey300, width: 1.5)),
-                      child: Image.asset(
-                        'lib/assests/images/central_park.png',
-                        fit: BoxFit.cover,
-                      )),
+                    height: 150,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(
+                                widget.facilitiesModel.hospitalImage ?? '')),
+                        borderRadius: BorderRadius.circular(15),
+                        border:
+                            Border.all(color: AppColors.grey300, width: 1.5)),
+                  ),
                   Positioned(
                     top: 90,
                     left: 180,
@@ -669,6 +837,8 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
   }
 
   void deleteDialog(BuildContext context) {
+    final facilitiesProvider =
+        Provider.of<FacilitiesProvider>(context, listen: false);
     showDialog<AlertDialog>(
       context: context,
       builder: (BuildContext context) {
@@ -699,7 +869,13 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    print('hh');
+                    facilitiesProvider
+                        .deleteFacilities(
+                            website: widget.facilitiesModel.website ?? '')
+                        .then((value) => Navigator.pop(context));
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.deleteColor,
                     foregroundColor: AppColors.whiteColor,
@@ -717,7 +893,9 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.buttonColor,
                     foregroundColor: AppColors.whiteColor,

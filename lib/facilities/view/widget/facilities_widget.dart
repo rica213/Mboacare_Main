@@ -3,7 +3,6 @@ import 'package:mboacare/colors.dart';
 import 'package:mboacare/facilities/model/facilities_model.dart';
 import 'package:mboacare/facilities/view/screens/edit_facilities_page.dart';
 
-
 class FacilitiesWidget extends StatelessWidget {
   final FacilitiesModel facilitiesModel;
   const FacilitiesWidget({
@@ -37,9 +36,9 @@ class FacilitiesWidget extends StatelessWidget {
                         topRight: Radius.circular(16.0),
                       ),
                       image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage(facilitiesModel.image),
-                      ),
+                          fit: BoxFit.cover,
+                          image: NetworkImage(
+                              facilitiesModel.hospitalImage ?? '')),
                     ),
                   ),
                   Padding(
@@ -51,12 +50,12 @@ class FacilitiesWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              facilitiesModel.name,
+                              facilitiesModel.name ?? '',
                               style: const TextStyle(
                                   fontSize: 15, fontWeight: FontWeight.w700),
                             ),
                             Text(
-                              facilitiesModel.address,
+                              facilitiesModel.website ?? '',
                               style: const TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w500,
@@ -70,7 +69,9 @@ class FacilitiesWidget extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const EditFacilitiesPage()));
+                                         EditFacilitiesPage(
+                                          facilitiesModel: facilitiesModel,
+                                        )));
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.buttonColor,
