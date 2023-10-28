@@ -22,7 +22,7 @@ class _PickAddressPageState extends State<PickAddressPage> {
     Uri uri =
         Uri.https('maps.googleapis.com', 'maps/api/place/autocomplete/json', {
       'input': query,
-      'key': 'AIzaSyBbi0oN09TuCD9-YAGL9SfP1KPv4BUZFbg',
+      'key': 'map_api',
       'location': '37.76999%2C-122.44696',
       'radius': '500',
       'types': 'establishment'
