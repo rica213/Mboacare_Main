@@ -33,6 +33,8 @@ class FacilitiesWidget extends StatelessWidget {
                     height: MediaQuery.sizeOf(context).height * .18,
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(16.0),
                         topRight: Radius.circular(16.0),
                       ),
@@ -67,6 +69,16 @@ class FacilitiesWidget extends StatelessWidget {
                               facilitiesModel.website ?? '',
                               style: const TextStyle(
                                   fontSize: 16,
+
+                              facilitiesModel.name,
+                              style: const TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.w700),
+                            ),
+                            Text(
+                              facilitiesModel.address,
+                              style: const TextStyle(
+                                  fontSize: 15,
+
                                   fontWeight: FontWeight.w500,
                                   color: AppColors.grey),
                             )

@@ -136,15 +136,128 @@ class _AddFacilitiesPageState extends State<AddFacilitiesPage> {
                 ),
                 const Text(
                   'Hospital Email',
+
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 10,
+              ),
+              const Text(
+                'Hospital Information',
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.buttonColor),
+              ),
+              const Divider(
+                color: AppColors.buttonColor,
+                thickness: 2.5,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Text(
+                'Hospital name *',
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.grey),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const CustomTextField(
+                hintText: 'Central Park Hospital',
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Text(
+                'Hospital Email',
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.grey),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const CustomTextField(
+                hintText: 'support@centrapark.org',
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Text(
+                'Phone Number *',
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.grey),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const CustomTextField(
+                hintText: '+44 786789378',
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Text(
+                'Hospital Website *',
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.grey),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const CustomTextField(
+                hintText: 'centralpark.org',
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      (MaterialPageRoute(
+                          builder: (context) => const PickAddressPage())));
+                },
+                child: const Text(
+                  'Hospital Address *',
+
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                       color: AppColors.grey),
                 ),
+
                 const SizedBox(
                   height: 10,
                 ),
                 CustomTextField(
+
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      (MaterialPageRoute(
+                          builder: (context) => const PickAddressPage())));
+                },
+                child: CustomTextField(
+
                   prefixIcon: Padding(
                     padding: const EdgeInsets.all(17.0),
                     child: SvgPicture.asset(
@@ -817,16 +930,7 @@ class _AddFacilitiesPageState extends State<AddFacilitiesPage> {
                             hospitalSize: selectedSize,
                             hospitalImage: _selectedImage!);
 
-                        log('''
-      ${_emailController.text} 
-      ${_nameController.text} ${_websiteController.text} ${_phoneNoController.text} 
-      $medicalTags 
-      $facilitiesTags 
-      $selectedOwnership 
-      $selectedSize 
-      $_selectedImage 
-      $selectedType
-      ''');
+
                       }
                     },
                     style: ElevatedButton.styleFrom(

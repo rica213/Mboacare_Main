@@ -83,6 +83,12 @@ class _PickAddressPageState extends State<PickAddressPage> {
                 //     context,
                 //     MaterialPageRoute(
                 //         builder: (context) => const SearchFacilitiesPage()));
+
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SearchFacilitiesPage()));
+
               },
               child: Row(
                 children: [

@@ -1,4 +1,9 @@
+
 import 'dart:developer';
+
+// ignore_for_file: unused_element, unused_field
+
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -825,16 +830,7 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
                         hospitalOwner: selectedOwnership,
                         hospitalSize: selectedSize,
                         hospitalImage: _selectedImage!);
-                    log('''
-${_emailController.text} 
-${_nameController.text} ${_websiteController.text} ${_phoneNoController.text} 
-$medicalTags 
-$facilitiesTags 
-$selectedOwnership 
-$selectedSize 
-$_selectedImage 
-$selectedType
-''');
+                    
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.buttonColor,
