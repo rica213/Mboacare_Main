@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 import 'package:mboacare/colors.dart';
 import 'package:mboacare/facilities/model/autocomplete_prediction.dart';
+import 'package:mboacare/facilities/model/geometry_model.dart';
 import 'package:mboacare/facilities/model/place_autocomplete.dart';
 import 'package:mboacare/facilities/provider/facilities_provider.dart';
 import 'package:mboacare/facilities/view/screens/search_facilties_page.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uuid/uuid.dart';
 
 class PickAddressPage extends StatefulWidget {
   const PickAddressPage({super.key});
@@ -16,36 +21,19 @@ class PickAddressPage extends StatefulWidget {
 
 class _PickAddressPageState extends State<PickAddressPage> {
   List<AutocompletePrediction> placePrediction = [];
-  void placeAutoComplete(String query) async {
-    final placeProvider =
+  @override
+  void initState() {
+    super.initState();
+    final facilitiesProvider =
         Provider.of<FacilitiesProvider>(context, listen: false);
-    Uri uri =
-        Uri.https('maps.googleapis.com', 'maps/api/place/autocomplete/json', {
-      'input': query,
-      'key': 'map_api',
-      'location': '37.76999%2C-122.44696',
-      'radius': '500',
-      'types': 'establishment'
-    });
-    String response = await placeProvider.getPlaces(
-      uri,
-    );
-    if (response != null) {
-      PlaceAutocompleteResponse result =
-          PlaceAutocompleteResponse.parseAutocompleteResult(response);
-      if (result.predictions != null) {
-        setState(() {
-          placePrediction = result.predictions!;
-        });
-      }
-    }
+    // facilitiesProvider.getPlace(query: 'Dubai');
   }
 
-  String _previousQuery = '';
   final placeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final facilitiesProvider = Provider.of<FacilitiesProvider>(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -67,15 +55,15 @@ class _PickAddressPageState extends State<PickAddressPage> {
           children: [
             TextFormField(
               onChanged: (value) {
-                placeAutoComplete(value);
-                placeController.text = value;
+                facilitiesProvider.getPlace(query: value);
+                // placeController.text = value;
               },
-              onTap: () {
-                if (placeController.text.isEmpty) {
-                  placeController.text =
-                      _previousQuery; // Restore previous query on click
-                }
-              },
+              // onTap: () {
+              //   if (placeController.text.isEmpty) {
+              //     placeController.text =
+              //         _previousQuery; // Restore previous query on click
+              //   }
+              // },
               controller: placeController,
               decoration: const InputDecoration(
                 hintText: 'Search location.......',
@@ -97,7 +85,7 @@ class _PickAddressPageState extends State<PickAddressPage> {
             ),
             InkWell(
               onTap: () {
-                placeAutoComplete('Dubai');
+                // facilitiesProvider.getPlace(query: 'Dubai');
                 // Navigator.push(
                 //     context,
                 //     MaterialPageRoute(
@@ -121,11 +109,24 @@ class _PickAddressPageState extends State<PickAddressPage> {
             ),
             Expanded(
               child: ListView.builder(
-                  itemCount: placePrediction.length,
+                  itemCount: facilitiesProvider.place.length,
                   itemBuilder: (context, index) {
+                    // facilitiesProvider.getGeometry(
+                    //     placeId: 'ChIJYa1Q9z-5woAR2EuC6RcSFZ8');
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(placePrediction[index].description ?? ''),
+                      child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SearchFacilitiesPage(
+                                        geometryModel: facilitiesProvider
+                                            .geometry[index])));
+                          },
+                          child: Text(
+                              facilitiesProvider.place[index].description ??
+                                  '')),
                     );
                   }),
             ),

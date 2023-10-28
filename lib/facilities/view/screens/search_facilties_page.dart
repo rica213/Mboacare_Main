@@ -1,10 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mboacare/colors.dart';
+import 'package:mboacare/facilities/model/geometry_model.dart';
+import 'package:mboacare/facilities/provider/facilities_provider.dart';
+import 'package:provider/provider.dart';
 
-class SearchFacilitiesPage extends StatelessWidget {
-  const SearchFacilitiesPage({super.key});
+class SearchFacilitiesPage extends StatefulWidget {
+  final GeometryModel geometryModel;
+  const SearchFacilitiesPage({super.key, required this.geometryModel});
 
+  @override
+  State<SearchFacilitiesPage> createState() => _SearchFacilitiesPageState();
+}
+
+class _SearchFacilitiesPageState extends State<SearchFacilitiesPage> {
+    @override
+  void initState() {
+    super.initState();
+    final facilitiesProvider =
+        Provider.of<FacilitiesProvider>(context, listen: false);
+   // facilitiesProvider.getGeometry(placeId: widget.geometryModel.pl);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

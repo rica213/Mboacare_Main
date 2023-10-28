@@ -200,7 +200,7 @@ class _AddFacilitiesPageState extends State<AddFacilitiesPage> {
                   Navigator.push(
                       context,
                       (MaterialPageRoute(
-                          builder: (context) => const MapSample ())));
+                          builder: (context) => const MapSample())));
                 },
                 child: CustomTextField(
                   prefixIcon: Padding(
@@ -768,6 +768,7 @@ class _AddFacilitiesPageState extends State<AddFacilitiesPage> {
                         phoneno: _phoneNoController.text,
                         latitude: '20.00',
                         longitude: '30.00',
+                        hospitalAddress: _addressController.text,
                         serviceType: medicalTags,
                         facilitiesType: facilitiesTags,
                         hospitalType: selectedType,
