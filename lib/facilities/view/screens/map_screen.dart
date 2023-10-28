@@ -26,24 +26,7 @@ class MapSampleState extends State<MapSample> {
       target: LatLng(37.43296265331129, -122.08832357078792),
       tilt: 59.440717697143555,
       zoom: 19.151926040649414);
-  // List<Marker> _marker = [];
-  // List<Marker> _list = [
-  //   Marker(
-  //       markerId: MarkerId('1'),
-  //       icon: BitmapDescriptor.defaultMarker,
-  //       position: currentP!,
-  //       infoWindow: InfoWindow(title: 'My position')),
-  //   Marker(
-  //       markerId: MarkerId('1'),
-  //       icon: BitmapDescriptor.defaultMarker,
-  //       position: LatLng(33.6844, 73.0479),
-  //       infoWindow: InfoWindow(title: 'My position')),
-  //   Marker(
-  //       markerId: MarkerId('3'),
-  //       icon: BitmapDescriptor.defaultMarker,
-  //       position: LatLng(33.6844, 73.0479),
-  //       infoWindow: InfoWindow(title: 'My position'))
-  // ];
+
   @override
   void initState() {
     // TODO: implement initState
@@ -55,39 +38,34 @@ class MapSampleState extends State<MapSample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          
-          currentP == null
-              ? Text('Loading')
-              : GoogleMap(
-                  mapType: MapType.normal,
-                  myLocationEnabled: true,
-                  compassEnabled: true,
-                  initialCameraPosition: _kGooglePlex,
-                  onMapCreated: (GoogleMapController controller) {
-                    _controller.complete(controller);
-                  },
-                  markers: {
-                    Marker(
-                        markerId: MarkerId('1'),
-                        icon: BitmapDescriptor.defaultMarker,
-                        position: currentP!,
-                        infoWindow: InfoWindow(title: 'Source position')),
-                    Marker(
-                        markerId: MarkerId('1'),
-                        icon: BitmapDescriptor.defaultMarker,
-                        position: LatLng(33.6844, 73.0479),
-                        infoWindow: InfoWindow(title: 'My position')),
-                    Marker(
-                        markerId: MarkerId('3'),
-                        icon: BitmapDescriptor.defaultMarker,
-                        position: LatLng(33.6844, 73.0479),
-                        infoWindow: InfoWindow(title: 'My position'))
-                  },
-                ),
-        ],
-      ),
+      body: currentP == null
+          ? Text('Loading')
+          : GoogleMap(
+              mapType: MapType.normal,
+              myLocationEnabled: true,
+              compassEnabled: true,
+              initialCameraPosition: _kGooglePlex,
+              onMapCreated: (GoogleMapController controller) {
+                _controller.complete(controller);
+              },
+              markers: {
+                Marker(
+                    markerId: MarkerId('1'),
+                    icon: BitmapDescriptor.defaultMarker,
+                    position: currentP!,
+                    infoWindow: InfoWindow(title: 'Source position')),
+                Marker(
+                    markerId: MarkerId('1'),
+                    icon: BitmapDescriptor.defaultMarker,
+                    position: LatLng(33.6844, 73.0479),
+                    infoWindow: InfoWindow(title: 'My position')),
+                Marker(
+                    markerId: MarkerId('3'),
+                    icon: BitmapDescriptor.defaultMarker,
+                    position: LatLng(33.6844, 73.0479),
+                    infoWindow: InfoWindow(title: 'My position'))
+              },
+            ),
       // floatingActionButton: FloatingActionButton.extended(
       //   onPressed: _goToTheLake,
       //   label: const Text('To the lake!'),

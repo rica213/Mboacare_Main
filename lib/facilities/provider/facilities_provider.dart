@@ -50,12 +50,13 @@ class FacilitiesProvider with ChangeNotifier {
       required File hospitalImage,
       required String hospitalAddress}) async {
     final body = {
-      'userEmail': '',
+      'userEmail': 'mercyjae20@gmail.com',
       'name': name,
       'phoneNumber': phoneno,
       'email': email,
       'website': website,
       'latitude': latitude,
+      'longitude': longitude,
       'serviceType': serviceType,
       'facilitiesType': facilitiesType,
       'hospitalType': hospitalType,
@@ -77,44 +78,46 @@ class FacilitiesProvider with ChangeNotifier {
       final response = await _dio.post(
         'https://us-central1-mboacare-api-v1.cloudfunctions.net/api/hospital/add-hospital',
         data: FormData.fromMap(body),
-        options: Options(headers: {}, contentType: 'multipart/form-data'),
+        options: Options(contentType: 'multipart/form-data'),
       );
       if (response.statusCode == 200) {
         log(response.data);
       } else {
-        print('Failed to post data');
+        throw Exception('Failed to post data');
       }
     } catch (e) {
-      print('Error: $e');
+      print(e);
     }
   }
 
   Future<void> editFacilities({
-    required String userEmail,
     required String name,
+    required String hospitalAddress,
     required String email,
     required String website,
     required String phoneno,
     required String latitude,
     required String longitude,
-    required String serviceType,
-    required String facilitiesType,
+    required List<String> serviceType,
+    required List<String> facilitiesType,
     required String hospitalType,
     required String hospitalOwner,
     required String hospitalSize,
     required File hospitalImage,
   }) async {
     final body = {
-      'idToken': userEmail,
+      'userEmail': 'mercyjae20@gmail.com',
       'name': name,
       'phoneNumber': phoneno,
       'email': email,
       'website': website,
       'latitude': latitude,
+      'longitude': longitude,
       'serviceType': serviceType,
       'facilitiesType': facilitiesType,
       'hospitalType': hospitalType,
       'hospitalOwner': hospitalOwner,
+      'placeAddress': hospitalAddress,
       'hospitalSize': hospitalSize,
       'hospitalImage': hospitalImage == null
           ? null
@@ -159,8 +162,6 @@ class FacilitiesProvider with ChangeNotifier {
       throw Exception('Error: $e');
     }
   }
-
-  
 
   Future<void> getPlace({required String query}) async {
     final Uuid uuid = Uuid();
@@ -208,4 +209,60 @@ class FacilitiesProvider with ChangeNotifier {
       throw Exception('Error: $e');
     }
   }
+//   Future<void> addBlog(
+//   String title,
+//   String category,
+//   String webLink,
+//   File? image,
+// ) async {
+//   final url = Uri.parse(
+//       'https://us-central1-mboacare-api-v1.cloudfunctions.net/api/hospital/add-hospital');
+
+//   final request = http.MultipartRequest('POST', url);
+
+//   request.fields['name'] = title;
+//   request.fields['phoneNumber'] = category;
+//   request.fields['email'] = webLink;
+//   request.fields['userEmail'] =
+//   request.fields['website'] = title;
+//   request.fields['latitude'] = category;
+//   request.fields['blogWebLink'] = webLink;
+//   request.fields['idToken'] =
+//   request.fields['blogTitle'] = title;
+//   request.fields['blogCat'] = category;
+//   request.fields['blogWebLink'] = webLink;
+//   request.fields['idToken'] =
+
+//   'idToken': userEmail,
+//       'name': name,
+//       'phoneNumber': phoneno,
+//       'email': email,
+//       'website': website,
+//       'latitude': latitude,
+//       'serviceType': serviceType,
+//       'facilitiesType': facilitiesType,
+//       'hospitalType': hospitalType,
+//       'hospitalOwner': hospitalOwner,
+//       'hospitalSize': hospitalSize,
+//       'hospitalImage': hospitalImage
+
+//   if (image != null) {
+//     request.files
+//         .add(await http.MultipartFile.fromPath('blogImage', image.path));
+//   }
+
+//   try {
+//     final response = await request.send();
+
+//     if (response.statusCode == 200) {
+//       devtools.log('Blog added successfully');
+//     } else {
+//       final errorMessage =
+//           'Failed to add blog. Status Code: ${response.statusCode}';
+//       devtools.log(errorMessage);
+//     }
+//   } catch (e) {
+//     final errorMessage = 'Error adding blog: $e';
+//     devtools.log(errorMessage);
+//   }
 }

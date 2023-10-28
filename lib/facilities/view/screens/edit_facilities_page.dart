@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -19,14 +20,14 @@ class EditFacilitiesPage extends StatefulWidget {
 }
 
 class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
-  String selectedSize = 'Select hospital type';
-  List<String> size = [
+  String selectedType = 'Select hospital type';
+  List<String> type = [
     'Public',
     'Private',
     'Other',
   ];
-  String selectedType = 'Select hospital size';
-  List<String> type = [
+  String selectedSize = 'Select hospital size';
+  List<String> size = [
     'Small',
     'Medium',
     'Large',
@@ -431,12 +432,14 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
                       border: Border.all(color: AppColors.grey300, width: 1.5),
                       borderRadius: BorderRadius.circular(10)),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    padding: EdgeInsets.symmetric(horizontal: 10),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            widget.facilitiesModel.hospitalType ?? '',
+                            widget.facilitiesModel.hospitalSize != null
+                                ? widget.facilitiesModel.hospitalSize!
+                                : selectedType,
                             style: const TextStyle(
                                 color: AppColors.grey200,
                                 fontSize: 16,
@@ -478,7 +481,7 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
                         ListView.builder(
                           primary: true,
                           shrinkWrap: true,
-                          itemCount: size.length,
+                          itemCount: type.length,
                           itemBuilder: (context, index) {
                             return Container(
                               color: selectedIndex == index
@@ -486,7 +489,7 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
                                   : Colors.transparent,
                               child: InkWell(
                                   onTap: () {
-                                    selectedSize = size[index];
+                                    selectedType = type[index];
                                     selectedIndex = index;
                                     isType = false;
                                     setState(() {});
@@ -504,7 +507,7 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
                                           width: 10,
                                         ),
                                         Text(
-                                          size[index],
+                                          type[index],
                                           style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
@@ -551,7 +554,9 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            widget.facilitiesModel.hospitalSize ?? '',
+                            widget.facilitiesModel.hospitalType != null
+                                ? widget.facilitiesModel.hospitalType!
+                                : selectedSize,
                             style: const TextStyle(
                                 color: AppColors.grey200,
                                 fontSize: 16,
@@ -593,7 +598,7 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
                         ListView.builder(
                           primary: true,
                           shrinkWrap: true,
-                          itemCount: type.length,
+                          itemCount: size.length,
                           itemBuilder: (context, index) {
                             return Container(
                               color: selectedIndex == index
@@ -602,7 +607,7 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
                               child: InkWell(
                                   onTap: () {
                                     isSize = false;
-                                    selectedType = type[index];
+                                    selectedSize = type[index];
                                     selectedIndex = index;
                                     setState(() {});
                                   },
@@ -619,7 +624,7 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
                                           width: 10,
                                         ),
                                         Text(
-                                          type[index],
+                                          size[index],
                                           style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
@@ -756,27 +761,35 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
               Stack(
                 children: [
                   Container(
-                    height: 150,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                                widget.facilitiesModel.hospitalImage ?? '')),
-                        borderRadius: BorderRadius.circular(15),
-                        border:
-                            Border.all(color: AppColors.grey300, width: 1.5)),
-                  ),
+                      height: 150,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          // image: DecorationImage(
+                          //     fit: BoxFit.cover,
+
+                          //     image:
+                          //     NetworkImage(
+                          //         widget.facilitiesModel.hospitalImage ?? ''),
+                          //         ),
+                          borderRadius: BorderRadius.circular(15),
+                          border:
+                              Border.all(color: AppColors.grey300, width: 1.5)),
+                      child: _selectedImage == null
+                          ? Image.network(
+                              widget.facilitiesModel.hospitalImage ?? '',
+                              fit: BoxFit.cover,
+                            )
+                          : Image.file(
+                              _selectedImage!,
+                              fit: BoxFit.cover,
+                              height: 150,
+                            )),
                   Positioned(
                     top: 90,
                     left: 180,
                     child: ElevatedButton(
                       onPressed: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) =>
-                        //             EditFacilitiesPage()));
+                        _pickImage();
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.buttonColor,
@@ -803,11 +816,30 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) =>
-                    //             EditFacilitiesPage()));
+                    facilitiesProvider.editFacilities(
+                        name: _nameController.text,
+                        email: _emailController.text,
+                        website: _websiteController.text,
+                        phoneno: _phoneNoController.text,
+                        latitude: '20.00',
+                        longitude: '30.00',
+                        hospitalAddress: _addressController.text,
+                        serviceType: medicalTags,
+                        facilitiesType: facilitiesTags,
+                        hospitalType: selectedType,
+                        hospitalOwner: selectedOwnership,
+                        hospitalSize: selectedSize,
+                        hospitalImage: _selectedImage!);
+                    log('''
+${_emailController.text} 
+${_nameController.text} ${_websiteController.text} ${_phoneNoController.text} 
+${medicalTags} 
+${facilitiesTags} 
+${selectedOwnership} 
+${selectedSize} 
+${_selectedImage} 
+${selectedType}
+''');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.buttonColor,

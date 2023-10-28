@@ -757,24 +757,25 @@ class _AddFacilitiesPageState extends State<AddFacilitiesPage> {
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => AddFacilitiesPage()));
-                    facilitiesProvider.addFacilities(
-                        name: _nameController.text,
-                        email: _emailController.text,
-                        website: _websiteController.text,
-                        phoneno: _phoneNoController.text,
-                        latitude: '20.00',
-                        longitude: '30.00',
-                        hospitalAddress: _addressController.text,
-                        serviceType: medicalTags,
-                        facilitiesType: facilitiesTags,
-                        hospitalType: selectedType,
-                        hospitalOwner: selectedOwnership,
-                        hospitalSize: selectedSize,
-                        hospitalImage: _selectedImage!);
+                    facilitiesProvider
+                        .addFacilities(
+                            name: _nameController.text,
+                            email: _emailController.text,
+                            website: _websiteController.text,
+                            phoneno: _phoneNoController.text,
+                            latitude: '20.00',
+                            longitude: '30.00',
+                            hospitalAddress: _addressController.text,
+                            serviceType: medicalTags,
+                            facilitiesType: facilitiesTags,
+                            hospitalType: selectedType,
+                            hospitalOwner: selectedOwnership,
+                            hospitalSize: selectedSize,
+                            hospitalImage: _selectedImage!)
+                        .then((value) => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AddFacilitiesPage())));
 
                     log('''
 ${_emailController.text} 

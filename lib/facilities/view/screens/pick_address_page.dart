@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
 import 'package:mboacare/colors.dart';
 import 'package:mboacare/facilities/model/autocomplete_prediction.dart';
-import 'package:mboacare/facilities/model/geometry_model.dart';
-import 'package:mboacare/facilities/model/place_autocomplete.dart';
 import 'package:mboacare/facilities/provider/facilities_provider.dart';
+import 'package:mboacare/facilities/view/screens/map_screen.dart';
 import 'package:mboacare/facilities/view/screens/search_facilties_page.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:uuid/uuid.dart';
 
 class PickAddressPage extends StatefulWidget {
   const PickAddressPage({super.key});
@@ -120,9 +115,10 @@ class _PickAddressPageState extends State<PickAddressPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => SearchFacilitiesPage(
-                                        geometryModel: facilitiesProvider
-                                            .geometry[index])));
+                                    builder: (context) => MapSample(
+                                        // geometryModel: facilitiesProvider
+                                        //     .geometry[index]
+                                            )));
                           },
                           child: Text(
                               facilitiesProvider.place[index].description ??

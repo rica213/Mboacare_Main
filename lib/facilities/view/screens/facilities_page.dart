@@ -34,47 +34,47 @@ class _FacilitiesPageState extends State<FacilitiesPage> {
                 color: AppColors.grey),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              ListView.builder(
+        body: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  itemCount: 2,
+                
+                  itemCount: facilitiesProvider.facilities.length,
                   itemBuilder: (context, index) {
                     return FacilitiesWidget(
                       facilitiesModel: facilitiesProvider.facilities[index],
                     );
                   }),
-              const SizedBox(
-                height: 10,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const AddFacilitiesPage()));
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.buttonColor,
-                  foregroundColor: AppColors.whiteColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  minimumSize: const Size(350, 50),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AddFacilitiesPage()));
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.buttonColor,
+                foregroundColor: AppColors.whiteColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                child: const Text(
-                  'ADD A FACILITY',
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w500,
-                  ),
+                minimumSize: const Size(350, 50),
+              ),
+              child: const Text(
+                'ADD A FACILITY',
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ));
   }
 }
