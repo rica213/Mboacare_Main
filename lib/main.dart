@@ -9,8 +9,9 @@ import 'package:mboacare/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mboacare/user_profile_page.dart';
 import 'package:mboacare/user_provider.dart';
-// import 'package:mboacare/user_test_data.dart';
-// import 'package:mboacare/view_model/signup_view_model.dart';
+import 'package:mboacare/user_data.dart';
+import 'package:mboacare/sign_up/view_model/signup_provider.dart';
+import 'package:mboacare/utils/constants.dart';
 import 'package:provider/provider.dart';
 import 'add_hospital/add_hospital_provider.dart';
 import 'hospital_provider.dart';
@@ -29,8 +30,8 @@ void main() async {
       ChangeNotifierProvider(create: (_) => SignUpProvider()),
       ChangeNotifierProvider(create: (_) => LoginProvider()),
       ChangeNotifierProvider(create: (_) => AddHospitalProvider()),
-      // ChangeNotifierProvider(
-      //     create: (_) => UserDataProvider(TestData.getTestUser())),
+      ChangeNotifierProvider(
+          create: (_) => UserDataProvider()),
       ChangeNotifierProvider(create: (_) => UserDataProvider()),
       // Add other providers here if needed.
     ],
