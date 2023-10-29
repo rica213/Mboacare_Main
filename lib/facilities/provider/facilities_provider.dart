@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -87,8 +88,8 @@ class FacilitiesProvider with ChangeNotifier {
               content: Text('Hospital added successfully'),
               backgroundColor: AppColors.buttonColor),
         );
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const FacilitiesPage()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const FacilitiesPage()));
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -157,8 +158,8 @@ class FacilitiesProvider with ChangeNotifier {
             backgroundColor: AppColors.buttonColor,
           ),
         );
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const FacilitiesPage()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const FacilitiesPage()));
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -173,19 +174,32 @@ class FacilitiesProvider with ChangeNotifier {
     }
   }
 
-  Future<void> deleteFacilities({required String website}) async {
+  Future<void> deleteFacilities({required String website,
+  required BuildContext context}) async {
     try {
       final response = await _dio.delete(
         'https://us-central1-mboacare-api-v1.cloudfunctions.net/api/hospital/delete-hospital/$website',
       );
 
       if (response.statusCode == 200) {
-        print(response.data);
+        log(response.data);
+           ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Hospital updated successfully'),
+            backgroundColor: AppColors.buttonColor,
+          ),
+        );
       } else {
-        throw Exception('Failed to post data');
+         ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text('Error occured'), backgroundColor: Colors.red),
+      );
       }
     } catch (e) {
-      throw Exception('Error: $e');
+       ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text('Error occured'), backgroundColor: Colors.red),
+      );
     }
   }
 

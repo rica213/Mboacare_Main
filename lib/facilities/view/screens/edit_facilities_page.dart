@@ -19,19 +19,20 @@ class EditFacilitiesPage extends StatefulWidget {
 }
 
 class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
-  String selectedType = 'Select hospital type';
+  
+  String selectedType = 'Public';
   List<String> type = [
     'Public',
     'Private',
     'Other',
   ];
-  String selectedSize = 'Select hospital size';
+  String selectedSize = 'Medium';
   List<String> size = [
     'Small',
     'Medium',
     'Large',
   ];
-  String selectedOwnership = 'Select hospital ownership';
+  String selectedOwnership = 'Government';
   List<String> ownership = [
     'Individual',
     'Corporate',
@@ -433,9 +434,7 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            widget.facilitiesModel.hospitalSize != null
-                                ? widget.facilitiesModel.hospitalSize!
-                                : selectedType,
+                            selectedType,
                             style: const TextStyle(
                                 color: AppColors.grey200,
                                 fontSize: 16,
@@ -550,9 +549,8 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            widget.facilitiesModel.hospitalType != null
-                                ? widget.facilitiesModel.hospitalType!
-                                : selectedSize,
+                            
+                               selectedSize, 
                             style: const TextStyle(
                                 color: AppColors.grey200,
                                 fontSize: 16,
@@ -667,7 +665,7 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            widget.facilitiesModel.hospitalOwner ?? '',
+                            selectedOwnership,
                             style: const TextStyle(
                                 color: AppColors.grey200,
                                 fontSize: 16,
@@ -898,12 +896,15 @@ $selectedType
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     print('hh');
-                    facilitiesProvider
-                        .deleteFacilities(
-                            website: widget.facilitiesModel.website ?? '')
-                        .then((value) => Navigator.pop(context));
+                await    facilitiesProvider.deleteFacilities(
+                      context: context,
+                        website: widget.facilitiesModel.website ?? '');
+                         facilitiesProvider.getFacilities();
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                   
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.deleteColor,

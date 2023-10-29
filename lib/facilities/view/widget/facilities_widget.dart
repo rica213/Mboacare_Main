@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mboacare/colors.dart';
 import 'package:mboacare/facilities/model/facilities_model.dart';
@@ -30,15 +31,23 @@ class FacilitiesWidget extends StatelessWidget {
                 children: [
                   Container(
                     height: MediaQuery.sizeOf(context).height * .18,
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.only(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(16.0),
                         topRight: Radius.circular(16.0),
                       ),
-                      image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(
-                              facilitiesModel.hospitalImage ?? '')),
+                    ),
+                    child: CachedNetworkImage(
+                      imageUrl: facilitiesModel.hospitalImage ?? '',
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      placeholder: (context, url) => const Center(
+                        child: CircularProgressIndicator(
+                          color: AppColors.buttonColor,
+                        ),
+                      ),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
                     ),
                   ),
                   Padding(
@@ -52,12 +61,12 @@ class FacilitiesWidget extends StatelessWidget {
                             Text(
                               facilitiesModel.name ?? '',
                               style: const TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w700),
+                                  fontSize: 16, fontWeight: FontWeight.w700),
                             ),
                             Text(
                               facilitiesModel.website ?? '',
                               style: const TextStyle(
-                                  fontSize: 15,
+                                  fontSize: 16,
                                   fontWeight: FontWeight.w500,
                                   color: AppColors.grey),
                             )
