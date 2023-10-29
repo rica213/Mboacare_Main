@@ -30,8 +30,7 @@ void main() async {
       ChangeNotifierProvider(create: (_) => SignUpProvider()),
       ChangeNotifierProvider(create: (_) => LoginProvider()),
       ChangeNotifierProvider(create: (_) => AddHospitalProvider()),
-      ChangeNotifierProvider(
-          create: (_) => UserDataProvider()),
+      ChangeNotifierProvider(create: (_) => UserDataProvider()),
       ChangeNotifierProvider(create: (_) => UserDataProvider()),
       // Add other providers here if needed.
     ],

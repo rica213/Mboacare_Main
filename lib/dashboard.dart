@@ -9,6 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:mboacare/blog/blog_page.dart';
 import 'package:mboacare/user_profile_page.dart';
+import 'package:mboacare/widgets/home_navigation_list_item.dart';
 import 'colors.dart';
 import 'facilities/view/screens/facilities_page.dart';
 import 'settingsPage/settings.dart';
@@ -77,6 +78,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void _onTabTapped(int index) {
     setState(() {
       _currentIndex = index;
+    });
+  }
+
+  void onHomeTabTapped(int index) {
+    setState(() {
+      _currentIndex = 1;
     });
   }
 
@@ -390,7 +397,10 @@ class _DashboardContentState extends State<DashboardContent> {
             const Center(
               child: Text(
                 'v0.0.1',
-                style: TextStyle(fontSize: 18, color: AppColors.buttonColor),
+                style: TextStyle(
+                  fontSize: 18,
+                  color: AppColors.buttonColor,
+                ),
               ),
             )
           ],
@@ -398,7 +408,7 @@ class _DashboardContentState extends State<DashboardContent> {
       ),
       body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
             const SizedBox(height: 20),
@@ -407,14 +417,15 @@ class _DashboardContentState extends State<DashboardContent> {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     const Text(
                       'Your Health, Simplified.',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 36,
+                        fontWeight: FontWeight.w700,
                         fontFamily: 'Inter',
                         color: AppColors.textColor2,
                       ),
@@ -429,46 +440,73 @@ class _DashboardContentState extends State<DashboardContent> {
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(
-                        height: 20), // Add some space before the buttons
-                    ElevatedButton(
-                      onPressed: () {
-                        // Navigate to the RegisterPage
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const SignUpPage(
-                                    //title: 'mboacare',
-                                    )));
-                      },
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        backgroundColor: AppColors.cardbg,
-                        minimumSize: const Size(double.infinity, 50),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(14),
-                        ),
+                    const SizedBox(height: 33.0),
+                    const Text(
+                      'Services',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: AppColors.primaryColor,
+                        fontSize: 18.0,
+                        fontFamily: 'Inter',
+                        fontWeight: FontWeight.w700,
+                        shadows: [
+                          Shadow(
+                            color: Colors.black87,
+                            blurRadius: 10.0,
+                            offset: Offset(0, 4.0),
+                          ),
+                        ],
                       ),
-                      child: const Text('Hospital Sign Up'),
                     ),
-                    const SizedBox(
-                        height: 10), // Add some space between the buttons
-                    ElevatedButton(
-                      onPressed: () async {
+                    HomeNavigationItems(
+                      title: 'Register medical facility',
+                      subtitle: 'Want to register a medical facility?',
+                      iconImage: 'lib/assests/icons/hospital.svg',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SignUpPage(),
+                          ),
+                        );
+                      },
+                    ),
+                    HomeNavigationItems(
+                      title: 'Facilities',
+                      subtitle: 'Browse through facilities',
+                      iconImage: 'lib/assests/icons/hospital.svg',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const HospitalDashboard(),
+                          ),
+                        );
+                      },
+                    ),
+                    HomeNavigationItems(
+                      title: 'Blog',
+                      subtitle: 'Read blog posts',
+                      iconImage: 'lib/assests/icons/blog.svg',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const BlogPage(),
+                          ),
+                        );
+                      },
+                    ),
+                    HomeNavigationItems(
+                      title: 'Community',
+                      subtitle: 'Join the Mboacare Community',
+                      iconImage: 'lib/assests/icons/location.svg',
+                      onTap: () async {
                         // Open the LinkedIn URL in the browser
                         const url = 'https://www.linkedin.com/company/mboalab/';
                         final Uri uri = Uri.parse(url);
                         await launchUrl(uri);
                       },
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.black,
-                        backgroundColor: Colors.white,
-                        minimumSize: const Size(double.infinity, 50),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(14),
-                        ),
-                      ),
-                      child: const Text('Join the Community'),
                     ),
                   ],
                 ),
@@ -482,7 +520,7 @@ class _DashboardContentState extends State<DashboardContent> {
 
   Widget _buildCard() {
     return Container(
-      width: 280,
+      width: MediaQuery.of(context).size.width,
       height: 230,
       margin: const EdgeInsets.symmetric(horizontal: 14.0),
       constraints: const BoxConstraints(
