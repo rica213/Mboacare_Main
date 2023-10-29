@@ -61,15 +61,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void _initializeScreens(BuildContext context) {
     _screens = [
       const DashboardContent(),
-
       const FacilitiesPage(),
-       const HospitalDashboard(),
-      
-
-      const HospitalDashboard(),
       const BlogPage(),
-
-      const ProfilePage(),
+      const SettingsPage(),
     ];
   }
 
@@ -181,7 +175,7 @@ class _DashboardContentState extends State<DashboardContent> {
         centerTitle: true,
         actions: [
           InkWell(
-            onTap: (){
+            onTap: () {
               Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -367,7 +361,7 @@ class _DashboardContentState extends State<DashboardContent> {
                   color: selectedIndex == 3 ? Colors.white : Colors.black,
                 ),
                 title: Text(
-                  'Account',
+                  'Settings',
                   style: TextStyle(
                       color: selectedIndex == 3 ? Colors.white : Colors.black,
                       fontWeight: FontWeight.w700,
@@ -380,7 +374,7 @@ class _DashboardContentState extends State<DashboardContent> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const HospitalDashboard()));
+                          builder: (context) => const SettingsPage()));
                 },
               ),
             ),
