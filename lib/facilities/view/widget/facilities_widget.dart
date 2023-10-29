@@ -1,8 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mboacare/colors.dart';
 import 'package:mboacare/facilities/model/facilities_model.dart';
 import 'package:mboacare/facilities/view/screens/edit_facilities_page.dart';
-
 
 class FacilitiesWidget extends StatelessWidget {
   final FacilitiesModel facilitiesModel;
@@ -31,15 +31,25 @@ class FacilitiesWidget extends StatelessWidget {
                 children: [
                   Container(
                     height: MediaQuery.sizeOf(context).height * .18,
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
                     decoration: BoxDecoration(
                       borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(16.0),
                         topRight: Radius.circular(16.0),
                       ),
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage(facilitiesModel.image),
+                    ),
+                    child: CachedNetworkImage(
+                      imageUrl: facilitiesModel.hospitalImage ?? '',
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      placeholder: (context, url) => const Center(
+                        child: CircularProgressIndicator(
+                          color: AppColors.buttonColor,
+                        ),
                       ),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
                     ),
                   ),
                   Padding(
@@ -51,6 +61,15 @@ class FacilitiesWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
+                              facilitiesModel.name ?? '',
+                              style: const TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.w700),
+                            ),
+                            Text(
+                              facilitiesModel.website ?? '',
+                              style: const TextStyle(
+                                  fontSize: 16,
+
                               facilitiesModel.name,
                               style: const TextStyle(
                                   fontSize: 15, fontWeight: FontWeight.w700),
@@ -59,6 +78,7 @@ class FacilitiesWidget extends StatelessWidget {
                               facilitiesModel.address,
                               style: const TextStyle(
                                   fontSize: 15,
+
                                   fontWeight: FontWeight.w500,
                                   color: AppColors.grey),
                             )
@@ -69,8 +89,9 @@ class FacilitiesWidget extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        const EditFacilitiesPage()));
+                                    builder: (context) => EditFacilitiesPage(
+                                          facilitiesModel: facilitiesModel,
+                                        )));
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.buttonColor,
