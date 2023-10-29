@@ -20,6 +20,7 @@ class AppColors {
   static const Color grey = Color(0xFF565656);
   static const Color grey100 = Color(0xFFE6EAEE);
   static const Color grey200 = Color(0xFF817E7E);
+  static const Color dividerColor = Color.fromARGB(0, 207, 207, 205);
   static const Color hintTextColor = Color(0xFF547F58);
   static const Color borderColor = Color(0xFFCFD4DC);
   static const redColor = Color(0xFFD93535);

@@ -142,6 +142,11 @@ flutter:
     - lib/assests/images/oakville.png
     - lib/assests/images/map.png
     - lib/assests/images/icon.svg
+    - lib/assests/icons/gmail.svg
+    - lib/assests/icons/x.svg
+    - lib/assests/icons/instagram.svg
+    - lib/assests/icons/whatsapp.svg
+    - lib/assests/icons/linkedin.svg
 
 
   #   - images/a_dot_ham.jpeg
