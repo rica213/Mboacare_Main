@@ -32,8 +32,7 @@ void main() async {
        ChangeNotifierProvider(create: (context) => FacilitiesProvider()),
       ChangeNotifierProvider(create: (_) => LoginProvider()),
       ChangeNotifierProvider(create: (_) => AddHospitalProvider()),
-      ChangeNotifierProvider(
-          create: (_) => UserDataProvider()),
+      ChangeNotifierProvider(create: (_) => UserDataProvider()),
       ChangeNotifierProvider(create: (_) => UserDataProvider()),
       // Add other providers here if needed.
     ],
@@ -54,7 +53,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
         useMaterial3: true,
       ),
-      scaffoldMessengerKey: scaffoldKey,
+      // scaffoldMessengerKey: scaffoldKey,
       // Add supported locales and localizations delegates
       supportedLocales: const [
         Locale('en', 'US'), // English
@@ -82,8 +81,8 @@ class MyApp extends StatelessWidget {
         '/themeScreen': (context) => const ThemeScreen(),
         '/deleteDialog': (context) => const DeleteAccountDialog(),
         '/profilePage': (context) => const ProfilePage(),
-        '/blogPage' : (context) => const BlogPage(),
-        '/newBlog' : (context) => const AddBlogPage(),
+        '/blogPage': (context) => const BlogPage(),
+        '/newBlog': (context) => const AddBlogPage(),
       },
     ); //MaterialApp
   }
