@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mboacare/colors.dart';
 import 'package:mboacare/facilities/provider/facilities_provider.dart';
+import 'package:mboacare/facilities/view/screens/facilities_page.dart';
 import 'package:mboacare/facilities/view/screens/map_screen.dart';
 import 'package:mboacare/facilities/view/screens/pick_address_page.dart';
 import 'package:mboacare/facilities/view/widget/chip_text_field.dart';
@@ -122,6 +123,13 @@ class _AddFacilitiesPageState extends State<AddFacilitiesPage> {
               CustomTextField(
                 hintText: 'Central Park Hospital',
                 controller: _nameController,
+                validate: (value) {
+                  if (value!.isEmpty) {
+                    return 'field is required';
+                  }
+
+                  return null;
+                },
               ),
               const SizedBox(
                 height: 20,
@@ -139,6 +147,13 @@ class _AddFacilitiesPageState extends State<AddFacilitiesPage> {
               CustomTextField(
                 hintText: 'support@centrapark.org',
                 controller: _emailController,
+                validate: (value) {
+                  if (value!.isEmpty) {
+                    return 'field is required';
+                  }
+
+                  return null;
+                },
               ),
               const SizedBox(
                 height: 20,
@@ -268,7 +283,8 @@ class _AddFacilitiesPageState extends State<AddFacilitiesPage> {
                     borderSide:
                         const BorderSide(color: AppColors.grey300, width: 1.5),
                   ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
                   hintText: 'Add a medical service',
                 ),
                 onFieldSubmitted: (_) {
@@ -341,16 +357,14 @@ class _AddFacilitiesPageState extends State<AddFacilitiesPage> {
                         borderSide: const BorderSide(
                             color: AppColors.grey300, width: 1.5),
                       ),
-                      contentPadding:
-                          const EdgeInsets.symmetric(horizontal: 10),
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 15),
                       hintText: 'Add a facility',
                     ),
                     onFieldSubmitted: (_) {
                       setState(() {
                         facilitiesTags.add(facilitiesTagsController.text);
-                        //  widget.tag = tags;
-                        print(facilitiesTags);
-                        // print('gg${widget.tag}');
+
                         facilitiesTagsController.text = '';
                       });
                     },
@@ -757,25 +771,21 @@ class _AddFacilitiesPageState extends State<AddFacilitiesPage> {
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    facilitiesProvider
-                        .addFacilities(
-                            name: _nameController.text,
-                            email: _emailController.text,
-                            website: _websiteController.text,
-                            phoneno: _phoneNoController.text,
-                            latitude: '20.00',
-                            longitude: '30.00',
-                            hospitalAddress: _addressController.text,
-                            serviceType: medicalTags,
-                            facilitiesType: facilitiesTags,
-                            hospitalType: selectedType,
-                            hospitalOwner: selectedOwnership,
-                            hospitalSize: selectedSize,
-                            hospitalImage: _selectedImage!)
-                        .then((value) => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AddFacilitiesPage())));
+                    facilitiesProvider.addFacilities(
+                        name: _nameController.text,
+                        email: _emailController.text,
+                        website: _websiteController.text,
+                        phoneno: _phoneNoController.text,
+                        latitude: '20.00',
+                        longitude: '30.00',
+                        hospitalAddress: _addressController.text,
+                        serviceType: medicalTags,
+                        context: context,
+                        facilitiesType: facilitiesTags,
+                        hospitalType: selectedType,
+                        hospitalOwner: selectedOwnership,
+                        hospitalSize: selectedSize,
+                        hospitalImage: _selectedImage!);
 
                     log('''
 ${_emailController.text} 

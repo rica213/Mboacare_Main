@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mboacare/colors.dart';
-import 'package:mboacare/facilities/model/autocomplete_prediction.dart';
 import 'package:mboacare/facilities/provider/facilities_provider.dart';
 import 'package:mboacare/facilities/view/screens/map_screen.dart';
 import 'package:mboacare/facilities/view/screens/search_facilties_page.dart';
@@ -15,7 +14,7 @@ class PickAddressPage extends StatefulWidget {
 }
 
 class _PickAddressPageState extends State<PickAddressPage> {
-  List<AutocompletePrediction> placePrediction = [];
+
   @override
   void initState() {
     super.initState();

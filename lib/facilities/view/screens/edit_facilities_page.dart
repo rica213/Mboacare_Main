@@ -821,6 +821,7 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
                         email: _emailController.text,
                         website: _websiteController.text,
                         phoneno: _phoneNoController.text,
+                        context: context,
                         latitude: '20.00',
                         longitude: '30.00',
                         hospitalAddress: _addressController.text,

@@ -7,6 +7,7 @@ import 'package:http_parser/http_parser.dart';
 import 'package:mboacare/facilities/model/facilities_model.dart';
 import 'package:mboacare/facilities/model/geometry_model.dart';
 import 'package:mboacare/facilities/model/place_model.dart';
+import 'package:mboacare/facilities/view/screens/facilities_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
@@ -48,6 +49,7 @@ class FacilitiesProvider with ChangeNotifier {
       required String hospitalOwner,
       required String hospitalSize,
       required File hospitalImage,
+      required BuildContext context,
       required String hospitalAddress}) async {
     final body = {
       'userEmail': 'mercyjae20@gmail.com',
@@ -81,30 +83,38 @@ class FacilitiesProvider with ChangeNotifier {
         options: Options(contentType: 'multipart/form-data'),
       );
       if (response.statusCode == 200) {
-        log(response.data);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Hospital added successfully')),
+        );
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => FacilitiesPage()));
       } else {
-        throw Exception('Failed to post data');
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Error occured')),
+        );
       }
     } catch (e) {
-      print(e);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Error occured')),
+      );
     }
   }
 
-  Future<void> editFacilities({
-    required String name,
-    required String hospitalAddress,
-    required String email,
-    required String website,
-    required String phoneno,
-    required String latitude,
-    required String longitude,
-    required List<String> serviceType,
-    required List<String> facilitiesType,
-    required String hospitalType,
-    required String hospitalOwner,
-    required String hospitalSize,
-    required File hospitalImage,
-  }) async {
+  Future<void> editFacilities(
+      {required String name,
+      required String hospitalAddress,
+      required String email,
+      required String website,
+      required String phoneno,
+      required String latitude,
+      required String longitude,
+      required List<String> serviceType,
+      required List<String> facilitiesType,
+      required String hospitalType,
+      required String hospitalOwner,
+      required String hospitalSize,
+      required File hospitalImage,
+      required BuildContext context}) async {
     final body = {
       'userEmail': 'mercyjae20@gmail.com',
       'name': name,
@@ -138,12 +148,20 @@ class FacilitiesProvider with ChangeNotifier {
             'Authorization': 'Bearer ${''}',
           }, contentType: 'multipart/form-data'));
       if (response.statusCode == 200) {
-        // Handle a successful response, if needed
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Hospital updated successfully')),
+        );
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => FacilitiesPage()));
       } else {
-        throw Exception('Failed to post data');
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Error occured')),
+        );
       }
     } catch (e) {
-      throw Exception('Error: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Error occured')),
+      );
     }
   }
 
