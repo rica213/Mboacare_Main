@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
@@ -241,7 +240,7 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
                         );
                       },
                     )
-                  : SizedBox(),
+                  : const SizedBox(),
               medicalTags.isNotEmpty
                   ? GridView.builder(
                       shrinkWrap: true,
@@ -311,9 +310,6 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
                     fontWeight: FontWeight.w500,
                     color: AppColors.grey),
               ),
-              const SizedBox(
-                height: 10,
-              ),
               widget.facilitiesModel.serviceType != null
                   ? GridView.builder(
                       shrinkWrap: true,
@@ -346,7 +342,7 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
                         );
                       },
                     )
-                  : SizedBox(),
+                  : const SizedBox(),
               facilitiesTags.isNotEmpty
                   ? GridView.builder(
                       shrinkWrap: true,
@@ -432,7 +428,7 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
                       border: Border.all(color: AppColors.grey300, width: 1.5),
                       borderRadius: BorderRadius.circular(10)),
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -834,12 +830,12 @@ class _EditFacilitiesPageState extends State<EditFacilitiesPage> {
                     log('''
 ${_emailController.text} 
 ${_nameController.text} ${_websiteController.text} ${_phoneNoController.text} 
-${medicalTags} 
-${facilitiesTags} 
-${selectedOwnership} 
-${selectedSize} 
-${_selectedImage} 
-${selectedType}
+$medicalTags 
+$facilitiesTags 
+$selectedOwnership 
+$selectedSize 
+$_selectedImage 
+$selectedType
 ''');
                   },
                   style: ElevatedButton.styleFrom(

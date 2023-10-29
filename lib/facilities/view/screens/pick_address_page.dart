@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mboacare/colors.dart';
 import 'package:mboacare/facilities/provider/facilities_provider.dart';
 import 'package:mboacare/facilities/view/screens/map_screen.dart';
-import 'package:mboacare/facilities/view/screens/search_facilties_page.dart';
 import 'package:provider/provider.dart';
 
 class PickAddressPage extends StatefulWidget {
@@ -114,7 +113,7 @@ class _PickAddressPageState extends State<PickAddressPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => MapSample(
+                                    builder: (context) => const MapSample(
                                         // geometryModel: facilitiesProvider
                                         //     .geometry[index]
                                             )));

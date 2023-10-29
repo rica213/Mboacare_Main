@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mboacare/colors.dart';
-import 'package:mboacare/facilities/model/facilities_model.dart';
 import 'package:mboacare/facilities/provider/facilities_provider.dart';
 import 'package:mboacare/facilities/view/screens/add_facilities_page.dart';
 import 'package:mboacare/facilities/view/widget/facilities_widget.dart';

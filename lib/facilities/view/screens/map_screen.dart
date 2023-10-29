@@ -19,7 +19,7 @@ class MapSampleState extends State<MapSample> {
     target: LatLng(33.6844, 73.0479),
     zoom: 14.4746,
   );
-  LatLng? currentP = null;
+  LatLng? currentP;
 
   static const CameraPosition _kLake = CameraPosition(
       bearing: 192.8334901395799,
@@ -39,7 +39,7 @@ class MapSampleState extends State<MapSample> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: currentP == null
-          ? Text('Loading')
+          ? const Text('Loading')
           : GoogleMap(
               mapType: MapType.normal,
               myLocationEnabled: true,
@@ -50,16 +50,16 @@ class MapSampleState extends State<MapSample> {
               },
               markers: {
                 Marker(
-                    markerId: MarkerId('1'),
+                    markerId: const MarkerId('1'),
                     icon: BitmapDescriptor.defaultMarker,
                     position: currentP!,
-                    infoWindow: InfoWindow(title: 'Source position')),
-                Marker(
+                    infoWindow: const InfoWindow(title: 'Source position')),
+                const Marker(
                     markerId: MarkerId('1'),
                     icon: BitmapDescriptor.defaultMarker,
                     position: LatLng(33.6844, 73.0479),
                     infoWindow: InfoWindow(title: 'My position')),
-                Marker(
+                const Marker(
                     markerId: MarkerId('3'),
                     icon: BitmapDescriptor.defaultMarker,
                     position: LatLng(33.6844, 73.0479),
@@ -80,20 +80,20 @@ class MapSampleState extends State<MapSample> {
   }
 
   Future<void> getLocationUpdates() async {
-    bool _serviceEnabled;
-    PermissionStatus _permissionGranted;
-    _serviceEnabled = await location.serviceEnabled();
+    bool serviceEnabled;
+    PermissionStatus permissionGranted;
+    serviceEnabled = await location.serviceEnabled();
 
-    if (_serviceEnabled) {
-      _serviceEnabled = await location.requestService();
+    if (serviceEnabled) {
+      serviceEnabled = await location.requestService();
     } else {
       return;
     }
-    _permissionGranted = await location.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await location.requestPermission();
+    permissionGranted = await location.hasPermission();
+    if (permissionGranted == PermissionStatus.denied) {
+      permissionGranted = await location.requestPermission();
     }
-    if (_permissionGranted != PermissionStatus.granted) {
+    if (permissionGranted != PermissionStatus.granted) {
       return;
     }
     location.onLocationChanged.listen((LocationData currentLocation) {

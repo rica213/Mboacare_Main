@@ -1,9 +1,8 @@
 import 'dart:io';
-import 'dart:math';
 import 'package:dio/dio.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:http_parser/http_parser.dart';
+import 'package:mboacare/colors.dart';
 import 'package:mboacare/facilities/model/facilities_model.dart';
 import 'package:mboacare/facilities/model/geometry_model.dart';
 import 'package:mboacare/facilities/model/place_model.dart';
@@ -84,18 +83,22 @@ class FacilitiesProvider with ChangeNotifier {
       );
       if (response.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Hospital added successfully')),
+          const SnackBar(
+              content: Text('Hospital added successfully'),
+              backgroundColor: AppColors.buttonColor),
         );
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => FacilitiesPage()));
+            context, MaterialPageRoute(builder: (context) => const FacilitiesPage()));
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Error occured')),
+          const SnackBar(
+              content: Text('Error occured'), backgroundColor: Colors.red),
         );
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Error occured')),
+        const SnackBar(
+            content: Text('Error occured'), backgroundColor: Colors.red),
       );
     }
   }
@@ -149,18 +152,23 @@ class FacilitiesProvider with ChangeNotifier {
           }, contentType: 'multipart/form-data'));
       if (response.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Hospital updated successfully')),
+          const SnackBar(
+            content: Text('Hospital updated successfully'),
+            backgroundColor: AppColors.buttonColor,
+          ),
         );
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => FacilitiesPage()));
+            context, MaterialPageRoute(builder: (context) => const FacilitiesPage()));
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Error occured')),
+          const SnackBar(
+              content: Text('Error occured'), backgroundColor: Colors.red),
         );
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Error occured')),
+        const SnackBar(
+            content: Text('Error occured'), backgroundColor: Colors.red),
       );
     }
   }
@@ -182,7 +190,7 @@ class FacilitiesProvider with ChangeNotifier {
   }
 
   Future<void> getPlace({required String query}) async {
-    final Uuid uuid = Uuid();
+    const Uuid uuid = Uuid();
     final sessionToken = uuid.v4();
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('sessiontoken', sessionToken);
@@ -207,7 +215,7 @@ class FacilitiesProvider with ChangeNotifier {
   Future<void> getGeometry({required String placeId}) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    final sessionToken = await prefs.getString(
+    final sessionToken = prefs.getString(
       'sessiontoken',
     );
     try {

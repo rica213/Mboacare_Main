@@ -126,6 +126,7 @@ flutter:
     - lib/assests/icons/menu.svg
     - lib/assests/icons/home.svg
     - lib/assests/icons/blog.svg
+    - lib/assests/icons/mail.svg
     - lib/assests/icons/location_search.svg
     - lib/assests/icons/locate.svg
     - lib/assests/icons/upload.svg
