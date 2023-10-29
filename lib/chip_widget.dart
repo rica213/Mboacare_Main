@@ -47,18 +47,22 @@ class _ChipWidgetState extends State<ChipWidget> {
       padding: const EdgeInsets.all(5.0),
       child: Container(
         decoration: BoxDecoration(
-            color: colorShade,
-            borderRadius: BorderRadius.circular(15),
-            border: Border.all(
-              color: color,
-              width: 1.0,
-            )),
+          color: colorShade,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: color,
+            width: 1.0,
+          ),
+        ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 10.0),
           child: Text(
             widget.title,
             style: TextStyle(
               color: color,
+              fontSize: 14.0,
+              fontWeight: FontWeight.w400,
+              fontFamily: "Inter",
             ),
           ),
         ),
