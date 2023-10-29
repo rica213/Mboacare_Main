@@ -1,14 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:mboacare/colors.dart';
-import 'package:mboacare/facilities/model/facilities_model.dart';
+import 'package:mboacare/facilities/provider/facilities_provider.dart';
 import 'package:mboacare/facilities/view/screens/add_facilities_page.dart';
 import 'package:mboacare/facilities/view/widget/facilities_widget.dart';
+import 'package:provider/provider.dart';
 
-class FacilitiesPage extends StatelessWidget {
+class FacilitiesPage extends StatefulWidget {
   const FacilitiesPage({super.key});
 
   @override
+  State<FacilitiesPage> createState() => _FacilitiesPageState();
+}
+
+class _FacilitiesPageState extends State<FacilitiesPage> {
+  @override
+  void initState() {
+    Provider.of<FacilitiesProvider>(context, listen: false).getFacilities();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final facilitiesProvider = Provider.of<FacilitiesProvider>(context);
     return Scaffold(
         appBar: AppBar(
           leading: const Icon(Icons.arrow_back),
@@ -20,48 +33,47 @@ class FacilitiesPage extends StatelessWidget {
                 color: AppColors.grey),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              ListView.builder(
+        body: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  itemCount: facilities.length,
+                
+                  itemCount: facilitiesProvider.facilities.length,
                   itemBuilder: (context, index) {
                     return FacilitiesWidget(
-                      facilitiesModel: facilities[index],
+                      facilitiesModel: facilitiesProvider.facilities[index],
                     );
                   }),
-              const SizedBox(
-                height: 10,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const AddFacilitiesPage()));
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.buttonColor,
-                  foregroundColor: AppColors.whiteColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  minimumSize: const Size(350, 50),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AddFacilitiesPage()));
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.buttonColor,
+                foregroundColor: AppColors.whiteColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                child: const Text(
-                  'ADD A FACILITY',
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w500,
-                  ),
+                minimumSize: const Size(350, 50),
+              ),
+              child: const Text(
+                'ADD A FACILITY',
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ));
   }
 }
-

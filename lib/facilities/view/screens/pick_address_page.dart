@@ -1,13 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mboacare/colors.dart';
-import 'package:mboacare/facilities/view/screens/search_facilties_page.dart';
+import 'package:mboacare/facilities/provider/facilities_provider.dart';
+import 'package:mboacare/facilities/view/screens/map_screen.dart';
+import 'package:provider/provider.dart';
 
-class PickAddressPage extends StatelessWidget {
+class PickAddressPage extends StatefulWidget {
   const PickAddressPage({super.key});
 
   @override
+  State<PickAddressPage> createState() => _PickAddressPageState();
+}
+
+class _PickAddressPageState extends State<PickAddressPage> {
+
+  @override
+  void initState() {
+    super.initState();
+    final facilitiesProvider =
+        Provider.of<FacilitiesProvider>(context, listen: false);
+    // facilitiesProvider.getPlace(query: 'Dubai');
+  }
+
+  final placeController = TextEditingController();
+
+  @override
   Widget build(BuildContext context) {
+    final facilitiesProvider = Provider.of<FacilitiesProvider>(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -28,6 +47,17 @@ class PickAddressPage extends StatelessWidget {
         child: Column(
           children: [
             TextFormField(
+              onChanged: (value) {
+                facilitiesProvider.getPlace(query: value);
+                // placeController.text = value;
+              },
+              // onTap: () {
+              //   if (placeController.text.isEmpty) {
+              //     placeController.text =
+              //         _previousQuery; // Restore previous query on click
+              //   }
+              // },
+              controller: placeController,
               decoration: const InputDecoration(
                 hintText: 'Search location.......',
                 hintStyle: TextStyle(color: AppColors.grey300),
@@ -48,10 +78,17 @@ class PickAddressPage extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
+                // facilitiesProvider.getPlace(query: 'Dubai');
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => const SearchFacilitiesPage()));
+
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const SearchFacilitiesPage()));
+
               },
               child: Row(
                 children: [
@@ -68,7 +105,31 @@ class PickAddressPage extends StatelessWidget {
                   )
                 ],
               ),
-            )
+            ),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: facilitiesProvider.place.length,
+                  itemBuilder: (context, index) {
+                    // facilitiesProvider.getGeometry(
+                    //     placeId: 'ChIJYa1Q9z-5woAR2EuC6RcSFZ8');
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const MapSample(
+                                        // geometryModel: facilitiesProvider
+                                        //     .geometry[index]
+                                            )));
+                          },
+                          child: Text(
+                              facilitiesProvider.place[index].description ??
+                                  '')),
+                    );
+                  }),
+            ),
           ],
         ),
       ),
