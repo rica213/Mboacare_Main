@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mboacare/facilities/provider/facilities_provider.dart';
 import 'package:mboacare/blog/add_blog_page.dart';
 import 'package:mboacare/blog/blog_page.dart';
 import 'package:mboacare/settingsPage/settings.dart';
@@ -28,6 +29,7 @@ void main() async {
       ChangeNotifierProvider(create: (_) => HospitalProvider()),
       ChangeNotifierProvider(create: (_) => LocaleProvider()),
       ChangeNotifierProvider(create: (_) => SignUpProvider()),
+       ChangeNotifierProvider(create: (context) => FacilitiesProvider()),
       ChangeNotifierProvider(create: (_) => LoginProvider()),
       ChangeNotifierProvider(create: (_) => AddHospitalProvider()),
       ChangeNotifierProvider(create: (_) => UserDataProvider()),
