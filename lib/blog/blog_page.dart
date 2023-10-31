@@ -51,7 +51,6 @@ class _BlogPageState extends State<BlogPage> {
           color: Colors.white,
         ),
       ),
-      appBar: _buildAppBar(context),
       body: Column(
         children: [
           const SizedBox(height: 18.0),
@@ -88,34 +87,6 @@ class _BlogPageState extends State<BlogPage> {
       ),
     );
   }
-}
-
-AppBar _buildAppBar(BuildContext context) {
-  return AppBar(
-    backgroundColor: const Color(0XFFecfded),
-    centerTitle: true,
-         title: Image.asset(
-    'lib/assests/images/logo.png',
-    width: 60,
-    height: 60,
-  ),
-
-  actions: [
-      InkWell(
-        onTap: (){
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const Notifications()));
-        },
-        child: Padding(
-          padding: const EdgeInsets.only(right: 15),
-          child: SvgPicture.asset('lib/assests/icons/notification.svg'),
-        ),
-      )
-
-    ],
-  );
 }
 
 Widget _buildSearchBar(BuildContext context) {

@@ -4,6 +4,7 @@ import 'package:mboacare/colors.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:iconsax/iconsax.dart';
 import 'blog_data.dart';
+
 class AddBlogPage extends StatefulWidget {
   const AddBlogPage({super.key});
 
@@ -34,17 +35,20 @@ class _AddBlogPageState extends State<AddBlogPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Row(
-            children: [
-              Expanded(
-                child: Center(
-                  child: Text(
-                    "New Blog",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-            ],
+          backgroundColor: AppColors.registerCard,
+          leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(
+                Icons.arrow_back,
+                color: AppColors.primaryColor,
+              )),
+          centerTitle: true,
+          title: const Text(
+            "New Blog",
+            style: TextStyle(
+                fontWeight: FontWeight.w500, color: AppColors.primaryColor),
           ),
         ),
         body: SingleChildScrollView(
