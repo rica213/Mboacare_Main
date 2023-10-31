@@ -13,36 +13,6 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.registerCard,
-        title: Image.asset(
-          'lib/assests/images/logo.png',
-          width: 60,
-          height: 60,
-        ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 15),
-            child: SvgPicture.asset('lib/assests/icons/notification.svg'),
-          )
-        ],
-        leading: Builder(
-          builder: (context) {
-            return GestureDetector(
-                onTap: () {
-                  Scaffold.of(context).openDrawer();
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 15),
-                  child: SvgPicture.asset(
-                    'lib/assests/icons/menu.svg',
-                    width: 20,
-                  ),
-                ));
-          },
-        ),
-      ),
       body: SafeArea(
         child: SingleChildScrollView(
           //physics: null,
