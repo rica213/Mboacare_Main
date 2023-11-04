@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mboacare/colors.dart';
+import 'package:mboacare/facilities/model/geometry_model.dart';
 import 'package:mboacare/facilities/provider/facilities_provider.dart';
 import 'package:mboacare/facilities/view/screens/map_screen.dart';
+import 'package:mboacare/facilities/view/screens/search_facilties_page.dart';
 import 'package:provider/provider.dart';
 
 class PickAddressPage extends StatefulWidget {
@@ -13,7 +15,6 @@ class PickAddressPage extends StatefulWidget {
 }
 
 class _PickAddressPageState extends State<PickAddressPage> {
-
   @override
   void initState() {
     super.initState();
@@ -87,8 +88,9 @@ class _PickAddressPageState extends State<PickAddressPage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const SearchFacilitiesPage()));
-
+                        builder: (context) => SearchFacilitiesPage(
+                              geometryModel: GeometryModel(),
+                            )));
               },
               child: Row(
                 children: [
@@ -122,7 +124,7 @@ class _PickAddressPageState extends State<PickAddressPage> {
                                     builder: (context) => const MapSample(
                                         // geometryModel: facilitiesProvider
                                         //     .geometry[index]
-                                            )));
+                                        )));
                           },
                           child: Text(
                               facilitiesProvider.place[index].description ??

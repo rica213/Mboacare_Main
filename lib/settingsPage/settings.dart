@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:mboacare/colors.dart';
 import 'package:mboacare/settingsPage/settings_widget.dart';
+import 'package:mboacare/sign_up/view_model/signup_provider.dart';
+//import 'package:mboacare/view_model/signup_view_model.dart';
+import 'package:provider/provider.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -9,38 +13,9 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 50,
-        actions: const <Widget>[
-          IconButton(
-              onPressed: null,
-              icon: Icon(Iconsax.notification,
-                  color: AppColors.textColor2, size: 30))
-        ],
-
-        title: Padding(
-          padding: const EdgeInsets.only(left: 95),
-          child: SizedBox(
-            width: 55,
-            height: 65,
-            child: Image.asset("lib/assests/images/logo.png"),
-          ),
-        ),
-
-        backgroundColor: AppColors.navbar,
-        leading: const IconButton(
-          icon: Icon(
-            Iconsax.menu_1,
-            size: 30,
-            color: AppColors.textColor2,
-          ),
-          onPressed: null,
-        ),
-        // Color.fromARGB(255, 232, 247, 215),
-      ),
       body: SafeArea(
         child: SingleChildScrollView(
-          physics: null,
+          //physics: null,
           child: Column(
             //mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -64,7 +39,7 @@ class SettingsPage extends StatelessWidget {
                           Text(
                             'Janet Dolittle',
                             style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 16,
                                 fontWeight: FontWeight.w500,
                                 color: AppColors.textColor2),
                           ),
@@ -72,7 +47,7 @@ class SettingsPage extends StatelessWidget {
                           Text(
                             'janetdolittle@mail.org',
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 15,
                             ),
                           ),
                         ],
@@ -86,7 +61,7 @@ class SettingsPage extends StatelessWidget {
               ),
               const Divider(
                 //height: 5,
-                color: Color(0xFFECEFF1),
+                color: AppColors.dividerColor,
                 endIndent: 2,
                 indent: 2,
               ),
@@ -107,16 +82,22 @@ class SettingsPage extends StatelessWidget {
                   onTap: () {
                     Navigator.pushNamed(context, '/profilePage');
                   }),
-              const SettingsPageListTiles(
-                  icon: Icon(
+              SettingsPageListTiles(
+                  icon: const Icon(
                     Iconsax.global_edit,
                     color: AppColors.textColor2,
                     size: 25,
                   ),
                   title: 'Language',
                   subtitle: 'English',
-                  trailingIcon: Icon(Icons.arrow_forward_ios_outlined),
-                  onTap: null),
+                  trailingIcon: const Icon(Icons.arrow_forward_ios_outlined),
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return const LanguageDialog();
+                        });
+                  }),
               SettingsPageListTiles(
                   icon: const Icon(
                     Iconsax.moon,
@@ -129,31 +110,42 @@ class SettingsPage extends StatelessWidget {
                   onTap: () {
                     Navigator.pushNamed(context, '/themeScreen');
                   }),
-              const SettingsPageListTiles(
-                  icon: Icon(
-                    Iconsax.hospital5,
+              SettingsPageListTiles(
+                  icon: SvgPicture.asset(
+                    'lib/assests/icons/hospital.svg',
+
                     color: AppColors.textColor2,
-                    size: 25,
+                    //size: 25,
                   ),
                   title: 'Facilities',
                   subtitle: 'Manage Facilities',
-                  trailingIcon: Icon(Icons.arrow_forward_ios_outlined),
-                  onTap: null),
-              const SettingsPageListTiles(
-                  icon: Icon(
-                    Iconsax.moon,
+                  trailingIcon: const Icon(Icons.arrow_forward_ios_outlined),
+                  onTap: () {
+                    Navigator.pushNamed(context, '/facilities');
+                  }),
+              SettingsPageListTiles(
+                  icon: const Icon(
+                    Iconsax.info_circle,
                     color: AppColors.textColor2,
                     size: 25,
                   ),
                   title: 'About Us',
                   subtitle: 'Contact us',
-                  trailingIcon: Icon(Icons.arrow_forward_ios_outlined),
-                  onTap: null),
-              const Signout(
-                  icon: Icon(Iconsax.logout,
+                  trailingIcon: const Icon(Icons.arrow_forward_ios_outlined),
+                  onTap: () {
+                    Navigator.pushNamed(context, '/aboutUs');
+                  }),
+              Signout(
+                  icon: const Icon(Iconsax.logout,
                       color: AppColors.textColor2, size: 25),
                   title: 'Signout',
-                  onTap: null),
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return const SignoutDialog();
+                        });
+                  }),
               DeleteAccount(
                   //iconColor: Colors.redAccent,
                   icon: const Icon(
@@ -171,6 +163,228 @@ class SettingsPage extends StatelessWidget {
                   }),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class LanguageDialog extends StatefulWidget {
+  const LanguageDialog({super.key});
+
+  @override
+  State<LanguageDialog> createState() => _LanguageDialogState();
+}
+
+class _LanguageDialogState extends State<LanguageDialog> {
+  int? clickedOption;
+
+  bool firstValue = false;
+  bool secondValue = false;
+  bool thirdValue = false;
+  bool fourthValue = false;
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+        child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.45,
+            //constraints: const BoxConstraints(maxHeight: 500, maxWidth: 500),
+            decoration: BoxDecoration(
+              color: AppColors.googleButtonColor,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+              //crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 15,
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(left: 30.0),
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Text('Select language',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 17)),
+                  ),
+                ),
+                const Divider(
+                  color: AppColors.dividerColor,
+                ),
+                // ListTile(
+                //   leading:
+                // Checkbox(
+                //       value: firstValue,
+                //       onChanged: (value) {
+                //         setState(() {
+                //           firstValue = value!;
+                //           print('hi');
+                //         });
+                //       }),
+                //   title: const Text('English',
+                //       style:
+                //           TextStyle(fontWeight: FontWeight.w400, fontSize: 17)),
+                // )
+
+                RadioTile(
+                    groupValue: clickedOption,
+                    value: 0,
+                    onchanged: (value) {
+                      setState(() {
+                        clickedOption = value!;
+                      });
+                    },
+                    text: 'English'),
+
+                RadioTile(
+                    value: 1,
+                    groupValue: clickedOption,
+                    onchanged: (value) {
+                      setState(() {
+                        clickedOption = value!;
+                      });
+                      //secondValue != value;
+                    },
+                    text: 'Hindi'),
+                RadioTile(
+                    value: 2,
+                    groupValue: clickedOption,
+                    onchanged: (value) {
+                      setState(() {
+                        clickedOption = value!;
+                      });
+                    },
+                    text: 'Espanol'),
+                RadioTile(
+                    value: 3,
+                    groupValue: clickedOption,
+                    onchanged: (value) {
+                      setState(() {
+                        clickedOption = value!;
+                      });
+                    },
+                    text: 'Francais'),
+
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 21.0),
+                    child: TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop;
+                        },
+                        child: const Text(
+                          'CANCEL',
+                          style: TextStyle(
+                              color: AppColors.deleteColor, fontSize: 17),
+                        )),
+                  ),
+                )
+              ],
+            )));
+  }
+}
+
+class SignoutDialog extends StatefulWidget {
+  const SignoutDialog({super.key});
+
+  @override
+  State<SignoutDialog> createState() => _SignoutDialogState();
+}
+
+class _SignoutDialogState extends State<SignoutDialog> {
+  @override
+  Widget build(BuildContext context) {
+    final provider = Provider.of<SignUpProvider>(context);
+    return Dialog(
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height * 0.4,
+        constraints: const BoxConstraints(maxHeight: 500, maxWidth: 500),
+        decoration: BoxDecoration(
+          color: AppColors.googleButtonColor,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Column(
+          //mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(
+              height: 15,
+            ),
+            GestureDetector(
+                onTap: Navigator.of(context).pop,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 20.0),
+                  child: Align(
+                      alignment: Alignment.topRight,
+                      child: SvgPicture.asset(
+                        'lib/assests/icons/x.svg',
+                        height: 18,
+                      )),
+                )),
+            const Padding(padding: EdgeInsets.fromLTRB(10, 0, 10, 15)),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                // borderRadius: BorderRadius.circular(13),
+                color: AppColors.navbar,
+              ),
+              child: const Icon(
+                Iconsax.logout,
+                color: AppColors.textColor2,
+                size: 30,
+              ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            const Text(
+              'Sign Out',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            const Padding(
+              padding: EdgeInsets.only(left: 20, right: 20),
+              child: Text(
+                'You are about to log out from the Mboacare app',
+                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+            InkWell(
+              onTap: () {
+                provider.signOut();
+                Navigator.pushNamed(context, '/home');
+              },
+              child: Container(
+                width: MediaQuery.of(context).size.height * 0.34,
+                height:
+                    //50,
+                    MediaQuery.of(context).size.height * 0.07,
+                decoration: BoxDecoration(
+                    color: AppColors.deleteColor,
+                    borderRadius: BorderRadius.circular(35)),
+                child: const Center(
+                  child: Text(
+                    'Sign out',
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white),
+                    //textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            )
+          ],
         ),
       ),
     );
@@ -195,7 +409,21 @@ class DeleteAccountDialog extends StatelessWidget {
           //mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Padding(padding: EdgeInsets.fromLTRB(10, 15, 10, 15)),
+            const SizedBox(
+              height: 15,
+            ),
+            GestureDetector(
+                onTap: Navigator.of(context).pop,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 20.0),
+                  child: Align(
+                      alignment: Alignment.topRight,
+                      child: SvgPicture.asset(
+                        'lib/assests/icons/x.svg',
+                        height: 18,
+                      )),
+                )),
+            const Padding(padding: EdgeInsets.fromLTRB(10, 0, 10, 15)),
             Container(
               padding: const EdgeInsets.all(12),
               decoration: const BoxDecoration(
@@ -210,7 +438,7 @@ class DeleteAccountDialog extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 10,
+              height: 15,
             ),
             const Text(
               'Delete account',

@@ -13,26 +13,16 @@ class FacilitiesPage extends StatefulWidget {
 }
 
 class _FacilitiesPageState extends State<FacilitiesPage> {
-  @override
-  void initState() {
-    Provider.of<FacilitiesProvider>(context, listen: false).getFacilities();
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   Provider.of<FacilitiesProvider>(context, listen: false).getFacilities();
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
     final facilitiesProvider = Provider.of<FacilitiesProvider>(context);
     return Scaffold(
-        appBar: AppBar(
-          leading: const Icon(Icons.arrow_back),
-          title: const Text(
-            'Manage facilities',
-            style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-                color: AppColors.grey),
-          ),
-        ),
         body: Column(
           children: [
             Expanded(

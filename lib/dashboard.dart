@@ -15,6 +15,7 @@ import 'facilities/view/screens/facilities_page.dart';
 import 'settingsPage/settings.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'hospitaldashboard.dart';
+import 'widgets/drawer_widget.dart';
 
 class DashboardScreen extends StatefulWidget {
   final String userName;
@@ -34,7 +35,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void initState() {
     super.initState();
     _initializeScreens(context); // Call the method to initialize _screens
-    _checkUserVerificationStatus(); // Check user verification status
+     _checkUserVerificationStatus(); // Check user verification status
   }
 
   void _checkUserVerificationStatus() async {
@@ -61,15 +62,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void _initializeScreens(BuildContext context) {
     _screens = [
       const DashboardContent(),
-
       const FacilitiesPage(),
-       const HospitalDashboard(),
-      
-
-      const HospitalDashboard(),
       const BlogPage(),
-
-      const ProfilePage(),
+      const SettingsPage(),
     ];
   }
 
@@ -96,6 +91,48 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.registerCard,
+        title: Image.asset(
+          'lib/assests/images/logo.png',
+          width: 30,
+          height: 30,
+        ),
+        centerTitle: true,
+        actions: [
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const Notifications()));
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(right: 15),
+              child: SvgPicture.asset('lib/assests/icons/notification.svg',
+                  height: 24.0, width: 24.0),
+            ),
+          )
+        ],
+        leading: Builder(
+          builder: (context) {
+            return GestureDetector(
+              onTap: () {
+                Scaffold.of(context).openDrawer();
+              },
+              child: const Padding(
+                padding: EdgeInsets.only(left: 15),
+                child: Icon(
+                  Icons.menu,
+                  color: AppColors.primaryColor,
+                  weight: 28.0,
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+      drawer: DrawerWidget(),
       body: _screens[_currentIndex],
       bottomNavigationBar: SizedBox(
         height: 80,
@@ -105,50 +142,59 @@ class _DashboardScreenState extends State<DashboardScreen> {
           currentIndex: _currentIndex,
           onTap: _onTabTapped,
           selectedItemColor: AppColors.buttonColor,
+          iconSize: 20.0,
           unselectedItemColor: AppColors.grey,
           selectedLabelStyle:
-              const TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+              const TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
           unselectedLabelStyle:
-              const TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+              const TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
           items: [
             BottomNavigationBarItem(
                 icon: SvgPicture.asset(
                   'lib/assests/icons/unselected_home.svg',
+                  width: 20.0,
+                  height: 20.0,
                 ),
                 label: 'Home',
                 activeIcon: SvgPicture.asset(
                   'lib/assests/icons/selected_home.svg',
-                  width: 35,
-                  height: 35,
+                  width: 20.0,
+                  height: 20.0,
                 )),
             BottomNavigationBarItem(
                 icon: SvgPicture.asset(
-                    'lib/assests/icons/unselected_hospital.svg'),
+                    'lib/assests/icons/unselected_hospital.svg',
+                    width: 20.0,
+                    height: 20.0),
                 label: 'Hospitals',
                 activeIcon: SvgPicture.asset(
                   'lib/assests/icons/selected_hospital.svg',
-                  width: 35,
-                  height: 35,
+                  width: 20.0,
+                  height: 20.0,
                 )),
             BottomNavigationBarItem(
                 icon: SvgPicture.asset(
                   'lib/assests/icons/unselected_blog.svg',
+                  width: 20.0,
+                  height: 20.0,
                 ),
                 label: 'Blogs',
                 activeIcon: SvgPicture.asset(
                   'lib/assests/icons/selected_blog.svg',
-                  width: 35,
-                  height: 35,
+                  width: 20.0,
+                  height: 20.0,
                 )),
             BottomNavigationBarItem(
                 icon: SvgPicture.asset(
                   'lib/assests/icons/unselected_user.svg',
+                  width: 20.0,
+                  height: 20.0,
                 ),
                 label: 'Account',
                 activeIcon: SvgPicture.asset(
                   'lib/assests/icons/selected_user.svg',
-                  width: 35,
-                  height: 35,
+                  width: 20.0,
+                  height: 20.0,
                 )),
           ],
         ),
@@ -166,252 +212,10 @@ class DashboardContent extends StatefulWidget {
 
 class _DashboardContentState extends State<DashboardContent> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: AppBar(
-        backgroundColor: AppColors.registerCard,
-        title: Image.asset(
-          'lib/assests/images/logo.png',
-          width: 60,
-          height: 60,
-        ),
-        centerTitle: true,
-        actions: [
-          InkWell(
-            onTap: (){
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const Notifications()));
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(right: 15),
-              child: SvgPicture.asset('lib/assests/icons/notification.svg'),
-            ),
-          )
-        ],
-        leading: Builder(
-          builder: (context) {
-            return GestureDetector(
-                onTap: () {
-                  Scaffold.of(context).openDrawer();
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 15),
-                  child: SvgPicture.asset(
-                    'lib/assests/icons/menu.svg',
-                    width: 20,
-                  ),
-                ));
-          },
-        ),
-      ),
-      drawer: Drawer(
-        backgroundColor: Colors.white,
-        child: ListView(
-          //  padding: EdgeInsets.zero,
-          children: [
-            const SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Image.asset(
-                    'lib/assests/images/user.png',
-                    width: 80,
-                    height: 80,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const Text(
-                    'Janet Dolittle',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  const Text(
-                    'janetdolittle@mail.com',
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.grey),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            const Divider(
-              thickness: 1.5,
-              color: AppColors.grey100,
-            ),
-            Container(
-              height: 50,
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: selectedIndex == 0
-                      ? AppColors.buttonColor
-                      : Colors.transparent),
-              child: ListTile(
-                leading: SvgPicture.asset(
-                  'lib/assests/icons/home.svg',
-                  color: selectedIndex == 0 ? Colors.white : Colors.black,
-                ),
-                title: Text(
-                  'Home',
-                  style: TextStyle(
-                      color: selectedIndex == 0 ? Colors.white : Colors.black,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 16),
-                ),
-                onTap: () {
-                  setState(() {
-                    selectedIndex = 0;
-                  });
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const DashboardContent()));
-                },
-              ),
-            ),
-            Container(
-              height: 50,
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: selectedIndex == 1
-                      ? AppColors.buttonColor
-                      : Colors.transparent),
-              child: ListTile(
-                leading: SvgPicture.asset(
-                  'lib/assests/icons/blog.svg',
-                  color: selectedIndex == 1 ? Colors.white : Colors.black,
-                ),
-                title: Text(
-                  'Blogs',
-                  style: TextStyle(
-                      color: selectedIndex == 1 ? Colors.white : Colors.black,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 16),
-                ),
-                onTap: () {
-                  setState(() {
-                    selectedIndex = 1;
-                  });
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SettingsPage()));
-                },
-              ),
-            ),
-            Container(
-              height: 50,
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: selectedIndex == 2
-                      ? AppColors.buttonColor
-                      : Colors.transparent),
-              child: ListTile(
-                leading: SvgPicture.asset(
-                  'lib/assests/icons/hospital.svg',
-                  color: selectedIndex == 2 ? Colors.white : Colors.black,
-                ),
-                title: Text(
-                  'Hospitals',
-                  style: TextStyle(
-                      color: selectedIndex == 2 ? Colors.white : Colors.black,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 16),
-                ),
-                onTap: () {
-                  setState(() {
-                    selectedIndex = 2;
-                  });
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HospitalDashboard()));
-                },
-              ),
-            ),
-            Container(
-              height: 50,
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: selectedIndex == 3
-                      ? AppColors.buttonColor
-                      : Colors.transparent),
-              child: ListTile(
-                leading: SvgPicture.asset(
-                  'lib/assests/icons/unselected_user.svg',
-                  color: selectedIndex == 3 ? Colors.white : Colors.black,
-                ),
-                title: Text(
-                  'Account',
-                  style: TextStyle(
-                      color: selectedIndex == 3 ? Colors.white : Colors.black,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 16),
-                ),
-                onTap: () {
-                  setState(() {
-                    selectedIndex = 3;
-                  });
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HospitalDashboard()));
-                },
-              ),
-            ),
-            const SizedBox(
-              height: 180,
-            ),
-            const Divider(
-              color: AppColors.grey100,
-              thickness: 1.5,
-            ),
-            const Center(
-              child: Text(
-                'Mboacare',
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.grey),
-              ),
-            ),
-            const Center(
-              child: Text(
-                'v0.0.1',
-                style: TextStyle(
-                  fontSize: 18,
-                  color: AppColors.buttonColor,
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
